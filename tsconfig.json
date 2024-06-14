@@ -33,7 +33,10 @@
 			"react-redux",
 			"vite/client",
 			"vitest/globals"
-		]
+		],
+		"paths": {
+			"@/*": ["./modules/*"]
+		}
 	},
 	"include": [
 		"src"

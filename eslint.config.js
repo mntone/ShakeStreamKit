@@ -14,7 +14,7 @@ const testFiles = ['**/*.test.[jt]s?(x)']
 
 export default ts.config(
 	{
-		ignores: ['./build/*'],
+		ignores: ['./dist/*'],
 		languageOptions: {
 			ecmaVersion: 2022,
 			globals: {
@@ -73,26 +73,31 @@ export default ts.config(
 		},
 		rules: {
 			'import/order': ['error', {
-				'groups': ['builtin', 'external', 'parent', 'sibling', 'index', 'object', 'type'],
+				'groups': [
+					'builtin',
+					'external',
+					'internal',
+					'unknown',
+					'parent',
+					'sibling',
+					'index',
+					'object',
+					'type',
+				],
 				'pathGroups': [
+					{
+						pattern: '{react,react-*}',
+						group: 'external',
+						position: 'before',
+					},
 					{
 						pattern: '{@heroicons/react/**,@radix-ui/**}',
 						group: 'external',
 						position: 'after',
 					},
 					{
-						pattern: 'utils/**',
-						group: 'parent',
-						position: 'before',
-					},
-					{
-						pattern: 'components/**',
-						group: 'parent',
-						position: 'before',
-					},
-					{
-						pattern: 'features/**',
-						group: 'parent',
+						pattern: '{@/**,modules/**}',
+						group: 'internal',
 						position: 'before',
 					},
 					{

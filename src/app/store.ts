@@ -2,19 +2,18 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
 import persistStore from 'redux-persist/es/persistStore'
 
-import telemetry from 'features/telemetry/telemetrySlice'
+import log from '@/notification/slicers'
+import overlay from '@/overlay/slicers'
+import config from '@/settings/slicers'
+import telemetry from '@/telemetry/slicers'
 
-import log from 'app/logSlice'
-
-import config from './configSlice'
-import overlay from './middlewares/overlay'
-import view from './viewSlice'
+import overlayMiddleware from './middlewares/overlay'
 
 const rootReducer = combineReducers({
 	config,
 	log,
+	overlay,
 	telemetry,
-	view,
 })
 
 // Infer the `RootState` types from the store itself
@@ -26,7 +25,7 @@ const store = configureStore({
 		serializableCheck: {
 			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 		},
-	}).concat(overlay as any),
+	}).concat(overlayMiddleware as any),
 })
 
 export const persistor = persistStore(store)

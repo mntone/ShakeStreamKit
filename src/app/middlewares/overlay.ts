@@ -1,11 +1,11 @@
 import { findLast, findLastIndex, last } from 'lodash'
 import { Dispatch, MiddlewareAPI, UnknownAction } from 'redux'
 
-import type { ShakeGameUpdateEvent } from 'features/telemetry/model'
-import { addTelemetry } from 'features/telemetry/telemetrySlice'
+import { hideOverlayDelayed, showOverlay, showPoweredby } from '@/overlay/slicers'
+import type { ShakeGameUpdateEvent } from '@/telemetry/model'
+import { addTelemetry } from '@/telemetry/slicers'
 
 import type { RootState } from 'app/store'
-import { hideOverlayDelayed, showOverlay, showPoweredby } from 'app/viewSlice'
 
 const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) => (action: UnknownAction) => {
 	const state = store.getState()
@@ -24,7 +24,7 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 		}
 	}
 
-	if (!state.view.overlay) {
+	if (!state.overlay.overlay) {
 		// Whether to notify upon quota met
 		const notifyOnQuotaMet = state.config.notifyOnQuotaMet === true
 
