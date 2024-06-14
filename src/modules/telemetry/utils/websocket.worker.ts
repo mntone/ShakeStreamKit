@@ -1,49 +1,46 @@
-import ReconnectingWebSocket, { UrlProvider } from 'reconnecting-websocket'
-import { CloseEvent, Event } from 'reconnecting-websocket/dist/events'
+import ReconnectingWebSocket, { type UrlProvider } from 'reconnecting-websocket'
 
-export interface WebSocketWorkerMessage {
-	event: 'connect' | 'disconnect'
-}
+import type { CloseEvent, Event } from 'reconnecting-websocket/dist/events'
 
-export interface ConnectWebSocketWorkerMessage extends WebSocketWorkerMessage {
-	event: 'connect'
-	url: UrlProvider
-	connectionTimeout?: number
-	minUptime?: number
-}
+export type WebSocketWorkerMessage =
+	| {
+		type: 'connect'
+		url: UrlProvider
+		connectionTimeout?: number
+		minUptime?: number
+	}
+	| { type: 'disconnect' }
 
-export type WebSocketWorkerEventType = 'connect' | 'disconnect' | 'message'
-
-export interface WebSocketWorkerEvent {
-	event: WebSocketWorkerEventType
-	retryCount?: number
-}
-
-export interface MessageWebSocketWorkerEvent<T> extends WebSocketWorkerEvent {
-	event: 'message'
-	data: T
-}
+export type WebSocketWorkerEvent<T> =
+	| { type: 'connect', timestamp: number }
+	| { type: 'disconnect', timestamp: number, retryCount: number }
+	| { type: 'message', timestamp: number, data: T }
 
 const worker: Worker = self as any
 
-const postMessage = <T extends WebSocketWorkerEvent>(message: T) => {
-	worker.postMessage(message)
+const postMessage = (event: WebSocketWorkerEvent<any>) => {
+	worker.postMessage(event)
 }
 
-const handleOpen = (_: Event) => postMessage<WebSocketWorkerEvent>({ event: 'connect' })
+const handleOpen = (_: Event) => postMessage({
+	type: 'connect',
+	timestamp: Date.now(),
+})
 
 const handleClose = (e: CloseEvent) => {
 	const socket = e.target as ReconnectingWebSocket
-	postMessage<WebSocketWorkerEvent>({
-		event: 'disconnect',
+	postMessage({
+		type: 'disconnect',
+		timestamp: Date.now(),
 		retryCount: socket.retryCount,
 	})
 }
 
 const handleMessage = (e: MessageEvent) => {
 	const json = JSON.parse(e.data)
-	postMessage<MessageWebSocketWorkerEvent<any>>({
-		event: 'message',
+	postMessage({
+		type: 'message',
+		timestamp: Date.now(),
 		data: json,
 	})
 }
@@ -61,14 +58,14 @@ const closeWebSocket = () => {
 }
 
 worker.addEventListener('message', (e: MessageEvent<WebSocketWorkerMessage>) => {
-	switch (e.data.event) {
+	const message = e.data
+	switch (message.type) {
 	case 'connect': {
 		closeWebSocket()
 
-		const connectEvent = e.data as ConnectWebSocketWorkerMessage
-		const ws = new ReconnectingWebSocket(connectEvent.url, undefined, {
-			connectionTimeout: connectEvent.connectionTimeout ?? 5000,
-			minUptime: connectEvent.minUptime ?? 5000,
+		const ws = new ReconnectingWebSocket(message.url, undefined, {
+			connectionTimeout: message.connectionTimeout ?? 5000,
+			minUptime: message.minUptime ?? 5000,
 		})
 		ws.addEventListener('open', handleOpen)
 		ws.addEventListener('close', handleClose)

@@ -11,10 +11,11 @@ interface WebSocketContextType {
 
 export const WebSocketContext = createContext<WebSocketContextType | null>(null)
 
+const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://'
+
 const WebSocketProvider: FC<PropsWithChildren> = ({ children }) => {
 	const server = useAppSelector(state => state.config.server)
-	const secure = window.location.protocol === 'https:'
-	const url = (secure ? 'wss://' : 'ws://') + (server ?? import.meta.env.VITE_WS_SERVER)
+	const url = protocol + (server ?? import.meta.env.VITE_WS_SERVER)
 
 	const isConnect = useWebsocketTelemetry(url)
 	return (

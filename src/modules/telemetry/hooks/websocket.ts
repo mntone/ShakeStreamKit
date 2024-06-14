@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Dispatch, UnknownAction } from 'redux'
+import { type Log, addLog } from '@/notification/slicers'
 
-import { Log, addLog } from '@/notification/slicers'
-
-import { ShakeEvent } from '../model'
 import { addTelemetry } from '../slicers'
-import { ConnectWebSocketWorkerMessage, MessageWebSocketWorkerEvent, WebSocketWorkerEvent, WebSocketWorkerMessage } from '../utils/websocket.worker'
+import WebSocketWorker from '../utils/websocket.worker?worker'
+
+import type { ShakeEvent } from '../model'
+import type { WebSocketWorkerEvent, WebSocketWorkerMessage } from '../utils/websocket.worker'
+import type { Dispatch, UnknownAction } from 'redux'
 
 export interface WebSocketLog extends Log {
 	type: 'websocket_connect' | 'websocket_disconnect'
@@ -23,47 +24,43 @@ const useWebsocketTelemetry = (url: string) => {
 	const dispatchWebSocketLog = handleWebSocketLog.bind(null, dispatch)
 
 	useEffect(() => {
-		const worker = new Worker(new URL('../utils/websocket.worker.ts', import.meta.url), {
-			type: 'module',
-		})
-		worker.onmessage = (e: MessageEvent<WebSocketWorkerEvent>) => {
+		const worker = new WebSocketWorker()
+		worker.onmessage = (e: MessageEvent<WebSocketWorkerEvent<ShakeEvent>>) => {
 			const event = e.data
-			switch (event.event) {
+			switch (event.type) {
 			case 'connect':
 				setIsConnect(true)
 				dispatchWebSocketLog({
 					type: 'websocket_connect',
-					timestamp: Date.now(),
+					timestamp: event.timestamp,
 					url,
 				})
 				break
 			case 'disconnect':
 				dispatchWebSocketLog({
 					type: 'websocket_disconnect',
-					timestamp: Date.now(),
+					timestamp: event.timestamp,
 					url,
-					retryCount: event.retryCount!,
+					retryCount: event.retryCount,
 				})
 				setIsConnect(false)
 				break
-			case 'message': {
-				const telemetry = (event as MessageWebSocketWorkerEvent<ShakeEvent>).data
-				dispatch(addTelemetry(telemetry))
+			case 'message':
+				dispatch(addTelemetry(event.data))
 				break
-			}
 			}
 		}
 
 		worker.postMessage({
-			event: 'connect',
+			type: 'connect',
 			url,
 			connectionTimeout: 15000,
 			minUptime: 30000,
-		} as ConnectWebSocketWorkerMessage)
+		} as WebSocketWorkerMessage)
 
 		return () => {
 			worker.postMessage({
-				event: 'disconnect',
+				type: 'disconnect',
 			} as WebSocketWorkerMessage)
 			worker.terminate()
 		}
