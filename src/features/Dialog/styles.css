@@ -1,0 +1,148 @@
+@keyframes contentShow {
+	from {
+		opacity: 0;
+		transform: translateY(2%) scale(0.96);
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.Dialog-content {
+	contain: strict;
+	box-sizing: border-box;
+	position: fixed;
+	left: 12px;
+	bottom: min(10vh, calc(100vh - 56.25vw + 12px));
+
+	border: 1px solid var(--wnd-st);
+	border-radius: var(--wnd-radius);
+
+	width: calc(100% - 20px);
+	max-width: 540px;
+	height: min(400px, 90vh);
+	max-height: calc(90vh - 24px);
+
+	background-color: var(--wnd-bg);
+	backdrop-filter: var(--wnd-backdrop);
+	-webkit-backdrop-filter: var(--wnd-backdrop);
+
+	animation: contentShow 167ms ease-in-out;
+}
+
+.Dialog-tab {
+	display: flex;
+	height: 100%;
+}
+
+.Dialog-tablist {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	gap: 2px;
+
+	padding: calc(20px + 3.5em) 8px 20px 8px;
+
+	width: 25%;
+	max-width: 140px;
+
+	background-color: #FFFFFF09;
+}
+
+.Dialog-tabitem {
+	box-sizing: border-box;
+
+	border-radius: var(--ctl-radius-sm);
+	border-style: none;
+	padding: .25em .75em;
+
+	font-family: inherit;
+	font-size: 87.5%;
+	text-align: left;
+
+	color: inherit;
+	background-color: transparent;
+	transition: var(--ctl-transition);
+
+	&[data-state=active] {
+		background-color: var(--ctl-bg);
+	}
+	&:hover {
+		background-color: var(--ctl-bg--hover);
+	}
+}
+
+@keyframes tabContentShow {
+	from {
+		opacity: 0;
+		transform: translateY(2%);
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+.Dialog-tabcontent {
+	contain: content;
+	overflow: clip auto;
+	flex-grow: 1;
+
+	padding: 20px;
+
+	animation: tabContentShow 167ms ease-in-out;
+}
+
+.Form-title {
+	margin: 0;
+
+	user-select: none;
+}
+
+.Form-group {
+	display: block;
+	margin: 1.25em 0 0;
+
+	user-select: none;
+}
+
+.Form-group h3 {
+	margin: 0 0 .5em;
+	font-size: 1em;
+}
+
+.Form-group h4 {
+	margin: 0 0 .25em;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+.Form-group > p {
+	margin: -.25em 0 .5em;
+	font-size: .875em;
+	color: #FFFFFFE6;
+}
+
+.StatusText {
+	font-size: .875em;
+}
+.StatusText-positive {
+	color: var(--fg-pos);
+}
+.StatusText-negative {
+	color: var(--fg-neg);
+}
+.StatusText > .Icon16:first-child {
+	margin-right: .125em;
+}
+
+.SettingsDialog-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	width: 64px;
+	height: 36px;
+
+	border-radius: 0 var(--ctl-radius) 0 0 !important;
+}

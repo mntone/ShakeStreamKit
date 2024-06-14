@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "Abrir configuración",
+
+	"Dialog.data": "Datos",
+	"Dialog.dataSource": "Fuente de datos",
+	"Dialog.dataSource.serverAddress": "Dirección del servidor",
+	"Dialog.dataSource.save": "Guardar",
+	"Dialog.dataSource.connected": "Conectado a {url}",
+	"Dialog.dataSource.notConnected": "No conectado",
+	"Dialog.dataSource.fileInput": "Entrada de archivo",
+	
+	"Dialog.development": "Desarrollo",
+	"Dialog.development.preview": "Vista previa",
+	"Dialog.development.useCameraAsBackground": "Usar cámara como fondo",
+	"Dialog.development.none": "Ninguno",
+	"Dialog.development.notification": "Notificación",
+	"Dialog.development.testNotifications": "Enviar notificación de prueba",
+	"Dialog.development.environment": "Ambiente",
+	"Dialog.development.broadcastMode": "Modo de difusión: {status}",
+	"Dialog.development.broadcastMode.disabled": "Desactivado",
+	"Dialog.development.broadcastMode.enabled": "Activado",
+	"Dialog.development.broadcastSoftware": "Software de difusión: {software}",
+
+	"Dialog.settings": "Configuración",
+	"Dialog.settings.overlay": "Superposición",
+	"Dialog.settings.autoHide": "Cerrar superposición automáticamente",
+	"Dialog.settings.showOverlayOn": "Mostrar superposición en:",
+	"Dialog.settings.showOverlayOn.quotaMet": "Conseguido",
+	"Dialog.settings.showOverlayOn.waveFinished": "Oleada finalizada",
+	"Dialog.settings.language": "Idioma",
+
+	"EggGraph.quota": "Cupo",
+	"EggGraph.wave": "Oleada <big>{wave}</big>",
+	"EggGraph.extraWave": "Oleada extra",
+	"EggGraph.clear": " ✓",
+	"EggGraph.fail": " ✘",
+
+	"Dialog.log": "Registro",
+
+	"Notification.notificationTest": "Notificación de prueba",
+	"Notification.succeedToTestNotification": "La notificación de prueba se envió correctamente.",
+	"Notification.webSocketConnected": "Conectado al servidor WebSocket",
+	"Notification.webSocketDisconnected": "No se pudo conectar al servidor WebSocket",
+
+	"OverlayController.hideOverlay": "Cerrar superposición",
+	"OverlayController.showOverlay": "Abrir superposición",
+	"OverlayController.showOverlayWithWave": "Abrir wave {wave}",
+
+	"Result.clear": "¡Victoria!",
+	"Result.defeat": "Derrota...",
+	"Result.timeout": "¡Tiempo!",
+	"Result.wipeout": "Derrota...",
+
+	"WaveSelector.selectWave": "Select Wave"
+}

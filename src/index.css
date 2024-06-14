@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+:root {
+	--accent: #FF4F4B; /* #FF5033 */
+	--animation-enter: 167ms cubic-bezier(.1, .9, .2, 1);
+
+	--ctl-bg: #FFFFFF26;
+	--ctl-bg--hover: #FFF3;
+	--ctl-bg--disable: #FFFFFF09;
+	--ctl-bg-active: #FF8265CC;
+	--ctl-bg-active--hover: #FF8265;
+	--ctl-radius: 8px;
+	--ctl-radius-sm: 6px;
+	--ctl-st: #FFF3;
+	--ctl-st-secondary: #FFFFFF1A;
+	--ctl-st--focus: #FF8265; /* #DC3418 */
+	--ctl-transition: background-color 123ms ease-in-out;
+
+	--fg: #FFF;
+	--fg-secondary: #FFF9;
+	--fg-tertiary: #FFF6;
+	--fg-pos: #6AF6CD;
+	--fg-neg: #FF5033;
+	--overlay-bg: #1A1A1A;
+
+	--wnd-bg: #272727CC;
+	--wnd-st: #FF8265;
+	--wnd-backdrop: blur(32px);
+	--wnd-radius: 12px;
+}
+
+html {
+	scrollbar-color: #FFF3 #FFFFFF09;
+}
+
+body {
+	overflow: clip;
+	margin: 0;
+	color: var(--fg);
+	font-family: Oswald, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+}
+
+html:lang(ja) body, span:lang(ja) {
+	font-family: Oswald, 'BIZ UDPゴシック',Gulim, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+}
+html:lang(ko) body, span:lang(ko) {
+	font-family: Oswald, 'Apple SD Gothic Neo', 'Malgun Gothic', Gulim, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+}
+
+html:lang(zh-CN) body, span:lang(zh-CN) {
+	font-family: Oswald, 'PingFang SC', STHeitiSC, 'Heiti SC', '黒体-簡', 'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+}
+
+html:lang(zh-TW) body, span:lang(zh-TW) {
+	font-family: Oswald, 'PingFang TC', STHeitiTC, 'Heiti TC', '黒体-繁', 'Microsoft JhengHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+}
+
+input, input::-webkit-file-upload-button, button {
+	appearance: none;
+	font-family: inherit;
+	font-size: inherit;
+	user-select: none;
+}
+
+footer {
+	margin: 1em 0 0;
+
+	font-size: 75%;
+	text-align: right;
+
+	color: var(--fg-secondary);
+}
+
+.Overlay {
+	contain: content;
+	overflow: clip;
+	position: absolute;
+
+	background-color: var(--overlay-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	user-select: none;
+}
+
+.Icon16 {
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+
+.Button, .File::-webkit-file-upload-button {
+	box-sizing: border-box;
+	border-radius: var(--ctl-radius);
+	border-width: 0;
+	padding: .375em .75em;
+	outline: 2px solid transparent;
+
+	color: var(--fg);
+	background-color: var(--ctl-bg);
+	transition: var(--ctl-transition);
+}
+.Button:hover, .File::-webkit-file-upload-button:hover {
+	background-color: var(--ctl-bg--hover);
+}
+.Button:focus-visible {
+	outline-color: #FFFC;
+}
+.Button[disabled], .File[disabled]::-webkit-file-upload-button {
+	color: var(--fg-secondary);
+	background-color: var(--ctl-bg--disable);
+}
+
+.TextBox {
+	box-sizing: border-box;
+	border: 1px solid var(--ctl-st);
+	border-radius: var(--ctl-radius);
+	padding: .375em .75em;
+	outline: 0 none transparent;
+
+	width: -webkit-fill-available;
+
+	color: var(--fg);
+	background-color: transparent;
+	transition: border-color 123ms ease-in-out;
+}
+.TextBox:focus {
+	border-color: var(--ctl-st--focus);
+}
+.TextBox:invalid {
+	border-color: red;
+}
+.TextBox::placeholder {
+	color: var(--fg-tertiary);
+}
+
+.InputFlex-appendix {
+	flex-shrink: 0;
+	box-sizing: border-box;
+	border: 1px solid var(--ctl-st);
+	border-left-width: 0;
+	border-right-width: 0;
+	border-radius: var(--ctl-radius);
+	padding: .375em .75em;
+
+	color: var(--fg-secondary);
+	background-color: var(--ctl-bg--disable);
+}
+.InputFlex-appendix:first-child {
+	border-left-width: 1px;
+}
+.InputFlex-appendix:last-child {
+	border-right-width: 1px;
+}
+
+.InputFlex {
+	box-sizing: border-box;
+	display: flex;
+}
+.InputFlex > button {
+	flex-shrink: 0;
+}
+.InputFlex > .InputFlex-appendix:not(:first-child),
+.InputFlex > button:not(:first-child),
+.InputFlex > input:not(:first-child) {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding-left: .625em;
+}
+.InputFlex > .InputFlex-appendix:not(:last-child),
+.InputFlex > button:not(:last-child),
+.InputFlex > input:not(:last-child) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	padding-right: .625em;
+}
+
+/* .InputFlex {
+	box-sizing: border-box;
+	border: 1px solid var(--ctl-st);
+	border-radius: var(--ctl-radius);
+
+	transition: border-color 123ms ease-in-out;
+}
+.InputFlex:focus-within {
+	border-color: var(--ctl-st--focus);
+}
+.InputFlex:has(> .TextBox:invalid) {
+	border-color: red;
+}
+.InputFlex >.TextBox {
+	border-width: 0;
+} */
+
+.File:focus-visible {
+	border-radius: var(--ctl-radius);
+	outline: 2px solid #FFFC;
+}

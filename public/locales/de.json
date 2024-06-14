@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "Einstellungen Öffnen",
+
+	"Dialog.data": "Daten",
+	"Dialog.dataSource": "Datenquelle",
+	"Dialog.dataSource.serverAddress": "Serveradresse",
+	"Dialog.dataSource.save": "Speichern",
+	"Dialog.dataSource.connected": "Verbunden mit {url}",
+	"Dialog.dataSource.notConnected": "Nicht verbunden",
+	"Dialog.dataSource.fileInput": "Dateieingabe",
+
+	"Dialog.development": "Entwicklung",
+	"Dialog.development.preview": "Vorschau",
+	"Dialog.development.useCameraAsBackground": "Kamera als Hintergrund verwenden",
+	"Dialog.development.none": "Ohne",
+	"Dialog.development.notification": "Benachrichtigung",
+	"Dialog.development.testNotifications": "Benachrichtigungen testen",
+	"Dialog.development.environment": "Umfeld",
+	"Dialog.development.broadcastMode": "Broadcast-Modus: {status}",
+	"Dialog.development.broadcastMode.disabled": "Deaktivieren",
+	"Dialog.development.broadcastMode.enabled": "Aktivieren",
+	"Dialog.development.broadcastSoftware": "Broadcast-Software: {software}",
+
+	"Dialog.settings": "Einstellungen",
+	"Dialog.settings.overlay": "Overlay",
+	"Dialog.settings.autoHide": "Overlay automatisch ausblenden",
+	"Dialog.settings.showOverlayOn": "Overlay anzeigen auf:",
+	"Dialog.settings.showOverlayOn.quotaMet": "Quote erfüllt",
+	"Dialog.settings.showOverlayOn.waveFinished": "Welle beendet",
+	"Dialog.settings.language": "Sprache",
+
+	"EggGraph.quota": "Quote",
+	"EggGraph.wave": "Welle <big>{wave}</big>",
+	"EggGraph.extraWave": "Extra-Welle",
+	"EggGraph.clear": " ✓",
+	"EggGraph.fail": " ✘",
+
+	"Dialog.log": "Protokoll",
+
+	"Notification.notificationTest": "Testbenachrichtigung",
+	"Notification.succeedToTestNotification": "Die Testbenachrichtigung wurde erfolgreich gesendet.",
+	"Notification.webSocketConnected": "Mit WebSocket-Server verbunden",
+	"Notification.webSocketDisconnected": "Verbindung zum WebSocket-Server fehlgeschlagen",
+
+	"OverlayController.hideOverlay": "Overlay Ausblenden",
+	"OverlayController.showOverlay": "Overlay Anzeigen",
+	"OverlayController.showOverlayWithWave": "Welle {wave} Anzeigen",
+
+	"Result.clear": "Geschafft!",
+	"Result.defeat": "Schade...",
+	"Result.timeout": "Zeit um!",
+	"Result.wipeout": "Verloren...",
+
+	"WaveSelector.selectWave": "Welle Auswählen"
+}

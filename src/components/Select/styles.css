@@ -1,0 +1,90 @@
+.Select {
+	position: relative;
+	border-radius: var(--ctl-radius);
+	border-style: none;
+	padding: .375em .75em;
+
+	min-width: 240px;
+	max-width: 100%;
+
+	font-family: inherit;
+	font-size: inherit;
+	text-align: left;
+
+	color: inherit;
+	background-color: var(--ctl-bg);
+	transition: var(--ctl-transition);
+
+	user-select: none;
+
+	&:hover {
+		background-color: var(--ctl-bg--hover);
+	}
+	&:focus-visible {
+		outline: 2px solid #FFFC;
+	}
+	&[disabled] {
+		color: #FFF9;
+		background-color: var(--ctl-bg--disable);
+	}
+}
+
+.Select-icon {
+	position: absolute;
+	right: .75em;
+	width: 16px;height: 16px;
+}
+
+.Select-content {
+	overflow: clip;
+	box-sizing: border-box;
+
+	border: 1px solid var(--wnd-st);
+	border-radius: var(--wnd-radius);
+
+	background-color: var(--wnd-bg);
+	backdrop-filter: var(--wnd-backdrop);
+	-webkit-backdrop-filter: var(--wnd-backdrop);
+}
+
+.Select-viewport {
+	padding: 4px;
+}
+
+.Select-button {
+	margin: 0 auto;
+	padding: 4px 0;
+	width: 16px;
+	height: 16px;
+}
+
+.SelectItem {
+	margin-bottom: 4px;
+	padding: .2em 1em .2em calc(.75em + 16px);
+	border-radius: 6px;
+
+	user-select: none;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&[data-highlighted] {
+		color: #000;
+		background-color: #F8E1DD;
+	}
+}
+
+@media (any-pointer: coarse) {
+	.SelectItem {
+		padding-top: .375em;
+		padding-bottom: .375em;
+	}
+}
+
+.SelectItem-icon {
+	position: absolute;
+	left: calc(4px + .375em);
+	width: 16px;
+	height: 16px;
+}

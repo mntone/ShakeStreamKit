@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "開啟設定",
+
+	"Dialog.data": "資料",
+	"Dialog.dataSource": "資料來源",
+	"Dialog.dataSource.serverAddress": "伺服器位址",
+	"Dialog.dataSource.save": "保存",
+	"Dialog.dataSource.connected": "已連接到 {url}",
+	"Dialog.dataSource.notConnected": "未連接",
+	"Dialog.dataSource.fileInput": "文件輸入",
+
+	"Dialog.development": "開發",
+	"Dialog.development.preview": "預覽",
+	"Dialog.development.useCameraAsBackground": "使用相機作為背景",
+	"Dialog.development.none": "無",
+	"Dialog.development.notification": "通知",
+	"Dialog.development.testNotifications": "發送測試通知",
+	"Dialog.development.environment": "環境",
+	"Dialog.development.broadcastMode": "廣播模式：{status}",
+	"Dialog.development.broadcastMode.disabled": "停用",
+	"Dialog.development.broadcastMode.enabled": "啟用",
+	"Dialog.development.broadcastSoftware": "廣播軟體：{software}",
+
+	"Dialog.settings": "設定",
+	"Dialog.settings.overlay": "疊加",
+	"Dialog.settings.autoHide": "自動隱藏疊加層",
+	"Dialog.settings.showOverlayOn": "在以下情況下顯示疊加：",
+	"Dialog.settings.showOverlayOn.quotaMet": "目標配額達成",
+	"Dialog.settings.showOverlayOn.waveFinished": "WAVE結束",
+	"Dialog.settings.language": "語言",
+
+	"EggGraph.quota": "目標配額",
+	"EggGraph.wave": "WAVE<big>{wave}</big> ",
+	"EggGraph.extraWave": "EXTRA WAVE",
+	"EggGraph.clear": " GJ！",
+	"EggGraph.fail": " NG",
+
+	"Dialog.log": "日誌",
+
+	"Notification.notificationTest": "測試通知",
+	"Notification.succeedToTestNotification": "測試通知已成功發送。",
+	"Notification.webSocketConnected": "已連接到WebSocket伺服器",
+	"Notification.webSocketDisconnected": "連接WebSocket伺服器失敗",
+
+	"OverlayController.hideOverlay": "隱藏疊加",
+	"OverlayController.showOverlay": "顯示疊加",
+	"OverlayController.showOverlayWithWave": "顯示WAVE {wave}",
+
+	"Result.clear": "Clear！！",
+	"Result.defeat": "Failure",
+	"Result.timeout": "時間到",
+	"Result.wipeout": "全軍覆沒！",
+
+	"WaveSelector.selectWave": "Select WAVE"
+}

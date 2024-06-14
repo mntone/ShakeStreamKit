@@ -1,0 +1,52 @@
+.CheckBox {
+	display: flex;
+
+	margin: .25em 0;
+
+	user-select: none;
+}
+
+.CheckBox-mark {
+	position: relative;
+	top: 1px;
+	flex-shrink: 0;
+
+	border: 0 none transparent;
+	border-radius: var(--ctl-radius);
+	padding: 0;
+
+	width: 24px;
+	height: 24px;
+
+	line-height: 16px;
+	
+	background-color: var(--ctl-bg);
+	transition: var(--ctl-transition);
+
+	&:hover {
+		background-color: var(--ctl-bg--hover);
+	}
+	&[data-state=checked] {
+		background-color: var(--ctl-bg-active);
+	}
+	&[data-state=checked]:hover {
+		background-color: var(--ctl-bg-active--hover);
+	}
+	&:focus-visible {
+		outline: 2px solid #FFFC;
+	}
+	&[disabled] {
+		background-color: var(--ctl-bg--disable);
+	}
+}
+
+.CheckBox-icon {
+	display: block;
+	height: 16px;
+	color: #FFF;
+}
+
+.CheckBox-label {
+	margin-left: .375em;
+	user-select: none;
+}

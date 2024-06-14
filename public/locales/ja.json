@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "設定を開く",
+
+	"Dialog.data": "データ",
+	"Dialog.dataSource": "データソース",
+	"Dialog.dataSource.serverAddress": "サーバーアドレス",
+	"Dialog.dataSource.save": "保存",
+	"Dialog.dataSource.connected": "{url}に接続済み",
+	"Dialog.dataSource.notConnected": "未接続",
+	"Dialog.dataSource.fileInput": "ファイル入力",
+
+	"Dialog.development": "開発",
+	"Dialog.development.preview": "プレビュー",
+	"Dialog.development.useCameraAsBackground": "背景にカメラ映像を使用する",
+	"Dialog.development.none": "なし",
+	"Dialog.development.notification": "通知",
+	"Dialog.development.testNotifications": "通知テストを送信",
+	"Dialog.development.environment": "環境",
+	"Dialog.development.broadcastMode": "配信モード: {status}",
+	"Dialog.development.broadcastMode.disabled": "無効",
+	"Dialog.development.broadcastMode.enabled": "有効",
+	"Dialog.development.broadcastSoftware": "配信ソフト: {software}",
+
+	"Dialog.settings": "設定",
+	"Dialog.settings.overlay": "オーバーレイ",
+	"Dialog.settings.autoHide": "オーバーレイを自動で非表示にする",
+	"Dialog.settings.showOverlayOn": "次の状態でオーバーレイを表示する",
+	"Dialog.settings.showOverlayOn.quotaMet": "ノルマクリア",
+	"Dialog.settings.showOverlayOn.waveFinished": "WAVE終了",
+	"Dialog.settings.language": "言語",
+
+	"EggGraph.quota": "ノルマ",
+	"EggGraph.wave": "WAVE<big>{wave}</big> ",
+	"EggGraph.extraWave": "EXTRA WAVE",
+	"EggGraph.clear": " GJ!",
+	"EggGraph.fail": " NG",
+
+	"Dialog.log": "ログ",
+
+	"Notification.notificationTest": "通知テスト",
+	"Notification.succeedToTestNotification": "通知テストに成功しました",
+	"Notification.webSocketConnected": "WebSocketサーバーに接続しました",
+	"Notification.webSocketDisconnected": "WebSocketサーバーに接続できませんでした",
+
+	"OverlayController.hideOverlay": "オーバーレイを非表示",
+	"OverlayController.showOverlay": "オーバーレイを表示",
+	"OverlayController.showOverlayWithWave": "WAVE{wave}を表示",
+
+	"Result.clear": "Clear!!",
+	"Result.defeat": "Failure",
+	"Result.timeout": "時間切れ",
+	"Result.wipeout": "ゼンメツ！",
+
+	"WaveSelector.selectWave": "WAVEを選択"
+}

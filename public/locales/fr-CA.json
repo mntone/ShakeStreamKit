@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "Ouvrir les réglages",
+
+	"Dialog.data": "Données",
+	"Dialog.dataSource": "Source de données",
+	"Dialog.dataSource.serverAddress": "Adresse du serveur",
+	"Dialog.dataSource.save": "Enregistrer",
+	"Dialog.dataSource.connected": "Connecté à {url}",
+	"Dialog.dataSource.notConnected": "Non connecté",
+	"Dialog.dataSource.fileInput": "Entrée de fichier",
+
+	"Dialog.development": "Développement",
+	"Dialog.development.preview": "Aperçu",
+	"Dialog.development.useCameraAsBackground": "Utiliser la caméra comme arrière-plan",
+	"Dialog.development.none": "Aucun",
+	"Dialog.development.notification": "Notification",
+	"Dialog.development.testNotifications": "Envoyer une notification de test",
+	"Dialog.development.environment": "Environnement",
+	"Dialog.development.broadcastMode": "Mode de diffusion : {status}",
+	"Dialog.development.broadcastMode.disabled": "Désactivé",
+	"Dialog.development.broadcastMode.enabled": "Activé",
+	"Dialog.development.broadcastSoftware": "Logiciel de diffusion : {software}",
+
+	"Dialog.settings": "Réglages",
+	"Dialog.settings.overlay": "Superposition",
+	"Dialog.settings.autoHide": "Masquer la superposition automatiquement",
+	"Dialog.settings.showOverlayOn": "Afficher la superposition lors de : ",
+	"Dialog.settings.showOverlayOn.quotaMet": "Quota atteint",
+	"Dialog.settings.showOverlayOn.waveFinished": "Vague terminée",
+	"Dialog.settings.language": "Langue",
+
+	"EggGraph.quota": "Quota",
+	"EggGraph.wave": "Vague <big>{wave}</big>",
+	"EggGraph.extraWave": "VAGUE +",
+	"EggGraph.clear": " ✓",
+	"EggGraph.fail": " ✘",
+
+	"Dialog.log": "Journal",
+
+	"Notification.notificationTest": "Notification de test",
+	"Notification.succeedToTestNotification": "La notification de test a été envoyée avec succès.",
+	"Notification.webSocketConnected": "Connecté au serveur WebSocket",
+	"Notification.webSocketDisconnected": "Échec de la connexion au serveur WebSocket",
+
+	"OverlayController.hideOverlay": "Masquer la superposition",
+	"OverlayController.showOverlay": "Afficher la superposition",
+	"OverlayController.showOverlayWithWave": "Afficher la Vague {wave}",
+
+	"Result.clear": "Réussite!",
+	"Result.defeat": "Échec...",
+	"Result.timeout": "Temps écoulé",
+	"Result.wipeout": "Équipe K.-O.",
+
+	"WaveSelector.selectWave": "Sélectionner la vague"
+}

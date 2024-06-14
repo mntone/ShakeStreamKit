@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;800&display=swap');
+
+.ProductLogo {
+	bottom: .5em;
+	right: -.5em;
+
+	padding: 1em 3em 1em 1.5em;
+
+	border-radius: 1.5em 0 0 1.5em;
+	transform: rotate(3deg);
+}
+
+.ProductLogo p {
+	margin: 0;
+}
+
+.ProductLogo-poweredby {
+	font-family: Kanit, sans-serif !important;
+	font-size: .75em;
+	line-height: 1;
+
+	color: #FFFFFF;
+}
+
+.ProductLogo-shake,
+.ProductLogo-streamkit {
+	font-family: Kanit, sans-serif !important;
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: .9;
+
+	color: #FFFFFF;
+}

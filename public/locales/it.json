@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "Apri impostazioni",
+
+	"Dialog.data": "Dati",
+	"Dialog.dataSource": "Fonte di dati",
+	"Dialog.dataSource.serverAddress": "Indirizzo del server",
+	"Dialog.dataSource.save": "Salva",
+	"Dialog.dataSource.connected": "Connesso a {url}",
+	"Dialog.dataSource.notConnected": "Non connesso",
+	"Dialog.dataSource.fileInput": "Ingresso file",
+
+	"Dialog.development": "Sviluppo",
+	"Dialog.development.preview": "Anteprima",
+	"Dialog.development.useCameraAsBackground": "Usa fotocamera come sfondo",
+	"Dialog.development.none": "Nessuno",
+	"Dialog.development.notification": "Notifica",
+	"Dialog.development.testNotifications": "Invia notifica di prova",
+	"Dialog.development.environment": "Ambiente",
+	"Dialog.development.broadcastMode": "Modalità trasmissione: {status}",
+	"Dialog.development.broadcastMode.disabled": "Disabilitata",
+	"Dialog.development.broadcastMode.enabled": "Abilitata",
+	"Dialog.development.broadcastSoftware": "Software trasmissione: {software}",
+
+	"Dialog.settings": "Impostazioni",
+	"Dialog.settings.overlay": "Sovrapposizione",
+	"Dialog.settings.autoHide": "Nascondi automaticamente la sovrapposizione",
+	"Dialog.settings.showOverlayOn": "Mostra sovrapposizione su:",
+	"Dialog.settings.showOverlayOn.quotaMet": "Quota OK",
+	"Dialog.settings.showOverlayOn.waveFinished": "Ondata finita",
+	"Dialog.settings.language": "Lingua",
+
+	"EggGraph.quota": "Quota",
+	"EggGraph.wave": "Ondata <big>{wave}</big>",
+	"EggGraph.extraWave": "Ondata extra",
+	"EggGraph.clear": " ✓",
+	"EggGraph.fail": " ✘",
+
+	"Dialog.log": "Registro",
+
+	"Notification.notificationTest": "Notifica di prova",
+	"Notification.succeedToTestNotification": "La notifica di prova è stata inviata con successo.",
+	"Notification.webSocketConnected": "Connesso al server WebSocket",
+	"Notification.webSocketDisconnected": "Connessione al server WebSocket fallita",
+
+	"OverlayController.hideOverlay": "Nascondi sovrapposizione",
+	"OverlayController.showOverlay": "Mostra sovrapposizione",
+	"OverlayController.showOverlayWithWave": "Mostra Ondata {wave}",
+
+	"Result.clear": "Ce l'hai fatta!",
+	"Result.defeat": "Peccato...",
+	"Result.timeout": "Tempo scaduto!",
+	"Result.wipeout": "Sconfitta...",
+
+	"WaveSelector.selectWave": "Seleziona Ondata"
+}

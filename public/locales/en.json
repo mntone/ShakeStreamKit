@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "Open Settings",
+
+	"Dialog.data": "Data",
+	"Dialog.dataSource": "Data Source",
+	"Dialog.dataSource.serverAddress": "Server Address",
+	"Dialog.dataSource.save": "Save",
+	"Dialog.dataSource.connected": "Connected to {url}",
+	"Dialog.dataSource.notConnected": "Not Connected",
+	"Dialog.dataSource.fileInput": "File Input",
+
+	"Dialog.development": "Development",
+	"Dialog.development.preview": "Preview",
+	"Dialog.development.useCameraAsBackground": "Use camera as background",
+	"Dialog.development.none": "None",
+	"Dialog.development.notification": "Notification",
+	"Dialog.development.testNotifications": "Test Notifications",
+	"Dialog.development.environment": "Environment",
+	"Dialog.development.broadcastMode": "Broadcast Mode: {status}",
+	"Dialog.development.broadcastMode.disabled": "Disabled",
+	"Dialog.development.broadcastMode.enabled": "Enabled",
+	"Dialog.development.broadcastSoftware": "Broadcast Software: {software}",
+
+	"Dialog.settings": "Settings",
+	"Dialog.settings.overlay": "Overlay",
+	"Dialog.settings.autoHide": "Hide overlay automatically",
+	"Dialog.settings.showOverlayOn": "Show Overlay on:",
+	"Dialog.settings.showOverlayOn.quotaMet": "Quota Met",
+	"Dialog.settings.showOverlayOn.waveFinished": "Wave Finished",
+	"Dialog.settings.language": "Language",
+
+	"EggGraph.quota": "Quota",
+	"EggGraph.wave": "Wave <big>{wave}</big>",
+	"EggGraph.extraWave": "XTRAWAVE",
+	"EggGraph.clear": " ✓",
+	"EggGraph.fail": " ✘",
+
+	"Dialog.log": "Log",
+
+	"Notification.notificationTest": "Testing Notification",
+	"Notification.succeedToTestNotification": "The testing notification was sent successfully.",
+	"Notification.webSocketConnected": "Connected to WebSocket Server",
+	"Notification.webSocketDisconnected": "Failed to Connect to WebSocket Server",
+
+	"OverlayController.hideOverlay": "Hide Overlay",
+	"OverlayController.showOverlay": "Show Overlay",
+	"OverlayController.showOverlayWithWave": "Show Wave {wave}",
+
+	"Result.clear": "Clear!!",
+	"Result.defeat": "Defeat",
+	"Result.timeout": "Time Up!",
+	"Result.wipeout": "DEFEAT!",
+
+	"WaveSelector.selectWave": "Select Wave"
+}

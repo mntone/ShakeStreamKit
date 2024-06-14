@@ -1,0 +1,55 @@
+{
+	"Dialog.openSettings": "Open instellingen",
+
+	"Dialog.data": "Gegevens",
+	"Dialog.dataSource": "Gegevensbron",
+	"Dialog.dataSource.serverAddress": "Server adres",
+	"Dialog.dataSource.save": "Opslaan",
+	"Dialog.dataSource.connected": "Verbonden met {url}",
+	"Dialog.dataSource.notConnected": "Niet verbonden",
+	"Dialog.dataSource.fileInput": "Bestandsinvoer",
+
+	"Dialog.development": "Ontwikkeling",
+	"Dialog.development.preview": "Voorbeeld",
+	"Dialog.development.useCameraAsBackground": "Gebruik camera als achtergrond",
+	"Dialog.development.none": "Geen",
+	"Dialog.development.notification": "Melding",
+	"Dialog.development.testNotifications": "Testmelding verzenden",
+	"Dialog.development.environment": "Omgeving",
+	"Dialog.development.broadcastMode": "Uitzendmodus: {status}",
+	"Dialog.development.broadcastMode.disabled": "Uitgeschakeld",
+	"Dialog.development.broadcastMode.enabled": "Ingeschakeld",
+	"Dialog.development.broadcastSoftware": "Uitzendsoftware: {software}",
+
+	"Dialog.settings": "Instellingen",
+	"Dialog.settings.overlay": "Overlay",
+	"Dialog.settings.autoHide": "Verberg overlay automatisch",
+	"Dialog.settings.showOverlayOn": "Toon overlay bij:",
+	"Dialog.settings.showOverlayOn.quotaMet": "Doel bereikt",
+	"Dialog.settings.showOverlayOn.waveFinished": "Golf voltooid",
+	"Dialog.settings.language": "Taal",
+
+	"EggGraph.quota": "Doelstelling",
+	"EggGraph.wave": "<big>{wave}</big>e golf",
+	"EggGraph.extraWave": "Extra golf",
+	"EggGraph.clear": " ✓",
+	"EggGraph.fail": " ✘",
+
+	"Dialog.log": "Logboek",
+
+	"Notification.notificationTest": "Testmelding",
+	"Notification.succeedToTestNotification": "De testmelding is succesvol verzonden.",
+	"Notification.webSocketConnected": "Verbonden met WebSocket-server",
+	"Notification.webSocketDisconnected": "Verbinding met WebSocket-server mislukt",
+
+	"OverlayController.hideOverlay": "Verberg overlay",
+	"OverlayController.showOverlay": "Toon overlay",
+	"OverlayController.showOverlayWithWave": "Toon {wave}e golf",
+
+	"Result.clear": "Gelukt!!",
+	"Result.defeat": "Helaas...",
+	"Result.timeout": "Tijd is om!",
+	"Result.wipeout": "Verloren...",
+
+	"WaveSelector.selectWave": "Selecteer golf"
+}

@@ -1,0 +1,41 @@
+{
+	"compilerOptions": {
+		"target": "es2022",
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"es2022",
+			"webworker"
+		],
+		"allowJs": true,
+		"baseUrl": "src",
+		"jsx": "react-jsx",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+
+		"strict": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+
+		"types": [
+			"lodash",
+			"react",
+			"react-dom",
+			"react-redux",
+			"vite/client",
+			"vitest/globals"
+		]
+	},
+	"include": [
+		"src"
+	]
+}
