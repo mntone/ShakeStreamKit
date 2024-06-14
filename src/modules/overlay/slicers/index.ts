@@ -1,10 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { BroadcastSoftwareInfo, detectBroadcast } from '../../core/utils/broadcast'
-
 // State
 interface OverlayState {
-	broadcast: BroadcastSoftwareInfo
 	overlay: boolean
 	poweredby: boolean
 	server?: string
@@ -12,7 +9,6 @@ interface OverlayState {
 }
 
 const initialState: OverlayState = {
-	broadcast: detectBroadcast(),
 	overlay: false,
 	poweredby: false,
 }

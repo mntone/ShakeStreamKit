@@ -1,5 +1,7 @@
 import { FC, PropsWithChildren, createContext } from 'react'
 
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
+
 import { useAppSelector } from 'app/hooks'
 
 import useWebsocketTelemetry from '../hooks/websocket'
@@ -11,9 +13,8 @@ interface WebSocketContextType {
 
 export const WebSocketContext = createContext<WebSocketContextType | null>(null)
 
-const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://'
-
 const WebSocketProvider: FC<PropsWithChildren> = ({ children }) => {
+	const protocol = useEnvironment()?.secure === true ? 'wss://' : 'ws://'
 	const server = useAppSelector(state => state.config.server)
 	const url = protocol + (server ?? import.meta.env.VITE_WS_SERVER)
 

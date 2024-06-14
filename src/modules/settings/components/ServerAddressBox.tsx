@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDispatch } from 'react-redux'
 
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
 import { setServer as setServerForView } from '@/overlay/slicers'
 
 import { useAppSelector } from 'app/hooks'
@@ -10,10 +11,11 @@ import DialogMessages from '../messages'
 import { setServer as setServerToConfig } from '../slicers'
 import { hostport } from '../utils/regex'
 
-const secure = window.location.protocol === 'https:'
 const defaultServer = import.meta.env.VITE_WS_SERVER
 
 const ServerAddressBox = () => {
+	const protocol = useEnvironment()?.secure === true ? 'wss://' : 'ws://'
+
 	const [isValid, setIsValid] = useState(true)
 	const [serverOnConfig, setServerOnConfig] = useState<string | undefined>(useAppSelector(state => state.config.server))
 	const [serverInBox, setServerInBox] = useState<string | undefined>(useAppSelector(state => state.overlay.server) ?? serverOnConfig)
@@ -40,7 +42,7 @@ const ServerAddressBox = () => {
 	return (
 		<div className='ServerAddressBox InputFlex'>
 			<span className='InputFlex-appendix'>
-				{secure ? 'wss://' : 'ws://'}
+				{protocol}
 			</span>
 			<input
 				className='TextBox ServerAddressBox-input'

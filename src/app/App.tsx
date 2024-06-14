@@ -3,7 +3,6 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
-import CameraPreview from '@/core/components/CameraPreview'
 import { getPreferredLocale, loadLocale } from '@/core/utils/language'
 import NotificationController from '@/notification/components/NotificationController'
 import OverlayController from '@/overlay/components/OverlayController'
@@ -31,9 +30,7 @@ const App = () => {
 
 	return (
 		<IntlProvider defaultLocale='en' locale={lang} messages={messages as any}>
-			<OverlayHost>
-				<CameraPreview />
-			</OverlayHost>
+			<OverlayHost />
 
 			<NotificationController />
 

@@ -7,10 +7,6 @@ import { useAppSelector } from 'app/hooks'
 const CameraPreview = () => {
 	const refVideo = useRef<HTMLVideoElement>(null)
 	const cameraId = useAppSelector(state => state.config.cameraId)
-	const broadcastEnabled = useAppSelector(state => state.overlay.broadcast.enabled)
-	if (broadcastEnabled) {
-		return null
-	}
 
 	useEffect(() => {
 		if (cameraId) {

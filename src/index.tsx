@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { createRoot } from 'react-dom/client'
 import { PersistGate } from 'redux-persist/integration/react'
 
+import EnvironmentProvider from '@/core/components/EnvironmentProvider'
 import WebSocketProvider from '@/telemetry/components/WebSocketProvider'
 
 import App from 'app/App'
@@ -21,9 +22,11 @@ if (element) {
 					loading={null}
 					persistor={persistor}
 				>
-					<WebSocketProvider>
-						<App />
-					</WebSocketProvider>
+					<EnvironmentProvider>
+						<WebSocketProvider>
+							<App />
+						</WebSocketProvider>
+					</EnvironmentProvider>
 				</PersistGate>
 			</Provider>
 		</React.StrictMode>,

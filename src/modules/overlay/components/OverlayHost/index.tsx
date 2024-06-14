@@ -1,18 +1,20 @@
 import './styles.css'
 
-import { FC, PropsWithChildren } from 'react'
-
 import { clsx } from 'clsx'
+
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
 
 import { useAppSelector } from 'app/hooks'
 
 import { selectWave, selectOverlay } from '../../selectors'
+import CameraPreview from '../CameraPreview'
 import EggGraph from '../EggGraph'
 import ProductLogo from '../ProductLogo'
 import { RightSlideAnimation } from '../SlideAnimation'
 
-const OverlayHost: FC<PropsWithChildren> = ({ children }) => {
-	const broadcastEnabled = useAppSelector(state => state.overlay.broadcast.enabled)
+const OverlayHost = () => {
+	const environment = useEnvironment()
+	const broadcastEnabled = environment && 'broadcast' in environment
 
 	const currentWave = useAppSelector(selectWave)
 	const currentOverlay = useAppSelector(selectOverlay)
@@ -30,7 +32,9 @@ const OverlayHost: FC<PropsWithChildren> = ({ children }) => {
 				<ProductLogo />
 			</RightSlideAnimation>
 
-			{children}
+			{!broadcastEnabled && (
+				<CameraPreview />
+			)}
 		</div>
 	)
 }

@@ -2,13 +2,9 @@ import './styles.css'
 
 import { FormattedMessage } from 'react-intl'
 
-import { clsx } from 'clsx'
-
 import { XMarkIcon } from '@heroicons/react/16/solid'
 import * as Dialog from '@radix-ui/react-dialog'
 import * as Tabs from '@radix-ui/react-tabs'
-
-import { useAppSelector } from 'app/hooks'
 
 import DialogMessages from './messages'
 import DataSourcePage from './pages/DataSourcePage'
@@ -17,8 +13,6 @@ import LogPage from './pages/LogPage'
 import SettingsPage from './pages/SettingsPage'
 
 const SettingsWindow = () => {
-	const broadcastEnabled = useAppSelector(state => state.overlay.broadcast.enabled)
-
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger asChild>
@@ -28,10 +22,7 @@ const SettingsWindow = () => {
 			</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className='Dialog-overlay' />
-				<Dialog.Content className={clsx(
-					'Dialog-content',
-					broadcastEnabled && 'Dialog-content--broadcast',
-				)}>
+				<Dialog.Content className='Dialog-content'>
 					<Tabs.Root className='Dialog-tab' defaultValue='settings'>
 						<Tabs.List className='Dialog-tablist'>
 							<Tabs.Trigger className='Dialog-tabitem' value='settings'>

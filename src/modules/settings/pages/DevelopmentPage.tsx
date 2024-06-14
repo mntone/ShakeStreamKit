@@ -1,18 +1,18 @@
 import { FormattedMessage } from 'react-intl'
 import { useDispatch } from 'react-redux'
 
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
 import { getBroadcastFriendlyName } from '@/core/utils/broadcast'
 import { addLog } from '@/notification/slicers'
-
-import { useAppSelector } from 'app/hooks'
 
 import CameraSelector from '../components/CameraSelector'
 import DialogMessages from '../messages'
 
 const DevelopmentPage = () => {
-	const broadcast = useAppSelector(state => state.overlay.broadcast)
-	const dispatch = useDispatch()
+	const environment = useEnvironment()
+	const broadcastEnabled = environment && 'broadcast' in environment
 
+	const dispatch = useDispatch()
 	const notifyTest = () => {
 		dispatch(addLog({
 			type: 'test',
@@ -26,7 +26,7 @@ const DevelopmentPage = () => {
 				<FormattedMessage {...DialogMessages.development} />
 			</h2>
 
-			{!broadcast.enabled && (
+			{!broadcastEnabled && (
 				<section className='Form-group'>
 					<h3>
 						<FormattedMessage {...DialogMessages.developmentPreview} />
@@ -60,17 +60,17 @@ const DevelopmentPage = () => {
 				<p>
 					<FormattedMessage
 						values={{
-							status: broadcast.enabled
+							status: broadcastEnabled
 								? <FormattedMessage {...DialogMessages.developmentBroadcastModeEnabled} />
 								: <FormattedMessage {...DialogMessages.developmentBroadcastModeDisabled} />,
 						}}
 						{...DialogMessages.developmentBroadcastMode}
 					/>
 				</p>
-				{broadcast.enabled && (
+				{environment?.broadcast && (
 					<p>
 						<FormattedMessage
-							values={{ software: getBroadcastFriendlyName(broadcast.name) + ' ' + broadcast.version }}
+							values={{ software: getBroadcastFriendlyName(environment.broadcast.name) + ' ' + environment.broadcast.version }}
 							{...DialogMessages.developmentBroadcastSoftware}
 						/>
 					</p>
