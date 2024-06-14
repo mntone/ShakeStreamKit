@@ -62,15 +62,6 @@ input, input::-webkit-file-upload-button, button {
 	user-select: none;
 }
 
-footer {
-	margin: 1em 0 0;
-
-	font-size: 75%;
-	text-align: right;
-
-	color: var(--fg-secondary);
-}
-
 .Overlay {
 	contain: content;
 	overflow: clip;

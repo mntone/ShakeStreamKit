@@ -1,20 +1,23 @@
 .App-buttons {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: end;
 	gap: 8px;
 }
 
 .App-ui {
-	position: relative;
 	padding: 4px 12px;
 
 	color: #FFF;
-	/* background: linear-gradient(120deg, #490008, #490A00); */
 	background: linear-gradient(120deg, #4B0024, #4B2800);
 }
 
 .App-footer {
-	position: absolute;
-	right: 12px;
-	bottom: 4px;
+	display: inline;
+	margin-left: auto;
+
+	font-size: 75%;
+	text-align: right;
+
+	color: var(--fg-secondary);
 }

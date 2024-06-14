@@ -31,23 +31,19 @@ const App = () => {
 
 	return (
 		<IntlProvider defaultLocale='en' locale={lang} messages={messages as any}>
-			<div className='App'>
-				<OverlayHost>
-					<CameraPreview />
-				</OverlayHost>
+			<OverlayHost>
+				<CameraPreview />
+			</OverlayHost>
 
-				<NotificationController />
+			<NotificationController />
 
-				<div className='App-ui'>
-					<div className='App-buttons'>
-						<SettingsWindow />
-						<OverlayController />
-					</div>
+			<div className='App-ui App-buttons'>
+				<SettingsWindow />
+				<OverlayController />
 
-					<footer className='App-footer'>
-						ShakeStreamKit. Copyright © 2024 mntone. Licensed under the GPLv3 license.
-					</footer>
-				</div>
+				<footer className='App-footer'>
+					ShakeStreamKit. Copyright © 2024 mntone. Licensed under the GPLv3 license.
+				</footer>
 			</div>
 		</IntlProvider>
 	)
