@@ -1,22 +1,16 @@
 import { useDispatch } from 'react-redux'
 
-import { createSelector } from '@reduxjs/toolkit'
-
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
 import { Select, SelectItem } from '@/core/components/Select'
-import { LANGUAGES, getPreferredLocale } from '@/core/utils/language'
+import { LANGUAGES } from '@/core/utils/language'
 
 import { useAppSelector } from 'app/hooks'
-import type { RootState } from 'app/store'
 
 import { setLanguage } from '../slicers'
 
-const selectPreferredLocale = createSelector(
-	(state: RootState) => state.config.language,
-	getPreferredLocale,
-)
-
 const LanguageSelector = () => {
-	const lang = useAppSelector(selectPreferredLocale)
+	const userLanguage = useEnvironment()?.lang ?? 'en'
+	const lang = useAppSelector(state => state.config.language) ?? userLanguage
 
 	const dispatch = useDispatch()
 	const handleSelectLanguage = (lang: string) => {

@@ -3,7 +3,8 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
-import { getPreferredLocale, loadLocale } from '@/core/utils/language'
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
+import { loadLocale } from '@/core/utils/language'
 import NotificationController from '@/notification/components/NotificationController'
 import OverlayController from '@/overlay/components/OverlayController'
 import OverlayHost from '@/overlay/components/OverlayHost'
@@ -14,7 +15,8 @@ import { useAppSelector } from './hooks'
 const App = () => {
 	const [messages, setMessages] = useState(null)
 
-	const lang = useAppSelector(state => getPreferredLocale(state.config.language))
+	const userLanguage = useEnvironment()?.lang ?? 'en'
+	const lang = useAppSelector(state => state.config.language) ?? userLanguage
 	useEffect(() => {
 		const fetchMessages = async () => {
 			const messages = await loadLocale(lang)

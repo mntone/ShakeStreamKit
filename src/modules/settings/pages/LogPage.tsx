@@ -1,13 +1,14 @@
 import { FormattedMessage } from 'react-intl'
 
-import { getPreferredLocale } from '@/core/utils/language'
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
 
 import { useAppSelector } from 'app/hooks'
 
 import DialogMessages from '../messages'
 
 const LogPage = () => {
-	const lang = useAppSelector(state => getPreferredLocale(state.config.language))
+	const userLanguage = useEnvironment()?.lang ?? 'en'
+	const lang = useAppSelector(state => state.config.language) ?? userLanguage
 	const logs = useAppSelector(state => state.log.logs)
 
 	const formatter = new Intl.DateTimeFormat(lang, {

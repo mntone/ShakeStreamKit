@@ -20,14 +20,11 @@ export const LANGUAGES: readonly LanguageInfo[] = [
 	{ code: 'zh-TW', name: '繁體中文' },
 ]
 
-export const getPreferredLocale = (requestedLanguage: string | undefined) => {
-	const requestedLanguages = requestedLanguage
-		? [requestedLanguage]
-		: navigator.languages
+const availableLanguages = LANGUAGES.map(langInfo => langInfo.code)
 
-	const targetLanguages = LANGUAGES.map(langInfo => langInfo.code)
-	const preferredLanguage = match(requestedLanguages, targetLanguages, 'en')
-	return preferredLanguage
+export const detectLanguage = () => {
+	const language = match(navigator.languages, availableLanguages, 'en')
+	return language
 }
 
 export const loadLocale = async (locale: string) => {
