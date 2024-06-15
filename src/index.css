@@ -23,6 +23,7 @@
 	--fg-neg: #FF5033;
 
 	--wnd-bg: #272727CC;
+	--wnd-bg-nonblur: #272727E6;
 	--wnd-st: #FF8265;
 	--wnd-backdrop: blur(32px);
 	--wnd-radius: 12px;

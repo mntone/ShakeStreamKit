@@ -24,11 +24,14 @@
 	height: 400px;
 	max-height: calc(90vh - 24px);
 
+	background-color: var(--wnd-bg-nonblur);
+
+	animation: contentShow 167ms ease-in-out;
+}
+body:not(.env-nonblur) .Dialog-content {
 	background-color: var(--wnd-bg);
 	backdrop-filter: var(--wnd-backdrop);
 	-webkit-backdrop-filter: var(--wnd-backdrop);
-
-	animation: contentShow 167ms ease-in-out;
 }
 
 .Dialog-tab {

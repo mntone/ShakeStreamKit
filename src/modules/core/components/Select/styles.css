@@ -44,6 +44,9 @@
 	border: 1px solid var(--wnd-st);
 	border-radius: var(--wnd-radius);
 
+	background-color: var(--wnd-bg-nonblur);
+}
+body:not(.env-nonblur) .Select-content {
 	background-color: var(--wnd-bg);
 	backdrop-filter: var(--wnd-backdrop);
 	-webkit-backdrop-filter: var(--wnd-backdrop);

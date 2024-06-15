@@ -61,11 +61,15 @@
 	border-radius: 12px;
 
 	color: var(--fg);
-	background-color: var(--wnd-bg);
-	/* backdrop-filter: var(--ctl-backdrop);
-	-webkit-backdrop-filter: var(--ctl-backdrop);*/
+	background-color: var(--wnd-bg-nonblur);
 
 	list-style: none;
+
+	body:not(.env-nonblur) & {
+		background-color: var(--wnd-bg);
+		backdrop-filter: var(--wnd-backdrop);
+		-webkit-backdrop-filter: var(--wnd-backdrop);
+	}
 
 	&[data-state=open] {
 		animation: slideIn var(--animation-enter);
