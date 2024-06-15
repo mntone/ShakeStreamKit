@@ -1,12 +1,16 @@
 import './style.css'
 
 import { useEffect, useRef } from 'react'
+import { connect } from 'react-redux'
 
-import { useAppSelector } from 'app/hooks'
+import type { RootState } from 'app/store'
 
-const CameraPreview = () => {
+export interface CameraPreviewProps {
+	cameraId?: string
+}
+
+export const CameraPreview = ({ cameraId }: CameraPreviewProps) => {
 	const refVideo = useRef<HTMLVideoElement>(null)
-	const cameraId = useAppSelector(state => state.config.cameraId)
 
 	useEffect(() => {
 		if (cameraId) {
@@ -37,4 +41,15 @@ const CameraPreview = () => {
 	)
 }
 
-export default CameraPreview
+const mapStateToProps: ((state: RootState) => CameraPreviewProps) = state => {
+	const cameraId = state.config.cameraId
+	if (cameraId) {
+		return {
+			cameraId,
+		}
+	}
+
+	return {}
+}
+
+export default connect(mapStateToProps)(CameraPreview)
