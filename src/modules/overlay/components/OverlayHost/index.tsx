@@ -24,7 +24,10 @@ const OverlayHost = () => {
 			'OverlayHost',
 			broadcastEnabled && 'OverlayHost--broadcast',
 		)}>
-			<RightSlideAnimation visible={currentOverlay}>
+			<RightSlideAnimation
+				rich
+				visible={currentOverlay}
+			>
 				<EggGraph wave={currentWave} />
 			</RightSlideAnimation>
 

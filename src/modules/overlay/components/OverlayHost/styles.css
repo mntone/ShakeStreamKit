@@ -1,3 +1,9 @@
+:root {
+	--ol-bg: #1A1A1A;
+	--ol-width: calc(min(100vw, 16 * (100vh - 2.25rem - 8px) / 9));
+	--ol-height: calc(9 * var(--ol-width) / 16);
+}
+
 .OverlayHost {
 	contain: content;
 	position: relative;
@@ -7,12 +13,56 @@
 
 	margin: 0 auto;
 
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	font-size: 1.25vw;
 
-	color: #FFFFFF;
+	color: #FFF;
 	background: linear-gradient(to right, #2b5876, #4e4376);
+
+	user-select: none;
 }
 
 .OverlayHost--broadcast {
 	background: transparent;
+}
+
+.Overlay {
+	contain: content;
+	position: absolute;
+
+	background-color: var(--ol-bg);
+	transition: transform var(--animation-enter);
+}
+
+.Overlay-left,
+.Overlay-left--slide-enter {
+	transform: rotate(-3deg) translateX(-100%);
+}
+.Overlay-left--slide-enter-active,
+.Overlay-left--slide-enter-done {
+	transform: rotate(-3deg);
+}
+.Overlay-left--slide-exit {
+	transform: rotate(-3deg);
+}
+.Overlay-left--slide-exit-active,
+.Overlay-left--slide-exit-done {
+	transform: rotate(-3deg) translateX(-100%);
+}
+
+.Overlay-right,
+.Overlay-right--slide-enter {
+	transform: rotate(3deg) translateX(100%);
+}
+.Overlay-right--slide-enter-active,
+.Overlay-right--slide-enter-done {
+	transform: rotate(3deg);
+}
+.Overlay-right--slide-exit {
+	transform: rotate(3deg);
+}
+.Overlay-right--slide-exit-active,
+.Overlay-right--slide-exit-done {
+	transform: rotate(3deg) translateX(100%);
 }

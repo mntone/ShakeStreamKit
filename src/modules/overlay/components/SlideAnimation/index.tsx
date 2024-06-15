@@ -1,44 +1,39 @@
-import './styles.css'
-
-import { FC, PropsWithChildren } from 'react'
-
-import { AnimatePresence, motion } from 'framer-motion'
+import type { PropsWithChildren } from 'react'
+import { CSSTransition } from 'react-transition-group'
 
 export interface SlideAnimationProps {
-	duration?: number
+	rich?: boolean
 	visible: boolean
 }
 
-export const RightSlideAnimation: FC<PropsWithChildren<SlideAnimationProps>> = ({ children, duration = .15, visible }) => {
+export const LeftSlideAnimation = ({ children, rich, visible }: PropsWithChildren<SlideAnimationProps>) => {
+	const timeout = rich
+		? { appear: 300, enter: 167, exit: 168 }
+		: 168
 	return (
-		<AnimatePresence>
-			{visible && (
-				<motion.div
-					className='SlideAnimation SlideAnimation-right'
-					initial={{ transform: 'translateX(100%)' }}
-					animate={{ transform: 'none' }}
-					exit={{ transform: 'translateX(100%)' }}
-					transition={{ duration }}>
-					{children}
-				</motion.div>
-			)}
-		</AnimatePresence>
+		<CSSTransition
+			in={visible}
+			classNames='Overlay-left--slide'
+			timeout={timeout}
+			unmountOnExit={rich}
+		>
+			{children}
+		</CSSTransition>
 	)
 }
 
-export const LeftSlideAnimation: FC<PropsWithChildren<SlideAnimationProps>> = ({ children, duration = .15, visible }) => {
+export const RightSlideAnimation = ({ children, rich, visible }: PropsWithChildren<SlideAnimationProps>) => {
+	const timeout = rich
+		? { appear: 300, enter: 167, exit: 168 }
+		: 168
 	return (
-		<AnimatePresence>
-			{visible && (
-				<motion.div
-					className='AnimatedEggGraph SlideAnimation-left'
-					initial={{ transform: 'translateX(-100%)' }}
-					animate={{ transform: 'none' }}
-					exit={{ transform: 'translateX(-100%)' }}
-					transition={{ duration }}>
-					{children}
-				</motion.div>
-			)}
-		</AnimatePresence>
+		<CSSTransition
+			in={visible}
+			classNames='Overlay-right--slide'
+			timeout={timeout}
+			unmountOnExit={rich}
+		>
+			{children}
+		</CSSTransition>
 	)
 }

@@ -98,7 +98,7 @@ const EggGraph = ({ wave }: EggGraphProps) => {
 
 	return (
 		<div
-			className={`Overlay EggGraph EggGraph-wave${telemetry.wave}`}
+			className={`Overlay Overlay-right EggGraph EggGraph-wave${telemetry.wave}`}
 			ref={parentRef}
 		>
 			<header>
