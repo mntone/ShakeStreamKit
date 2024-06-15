@@ -1,7 +1,7 @@
 const alphabet = 'A-Za-z'
 const alphanum = `${alphabet}0-9`
 const domainLabel = `[${alphanum}](?:[${alphanum}\\-]{0,61}[${alphanum}])?`
-const topLabel = `[${alphabet}](?:[${alphanum}\\-]{0,61}\\w)?`
+const topLabel = `[${alphabet}](?:[${alphanum}\\-]{0,61}[${alphanum}])?`
 export const hostname = `(?:${domainLabel}\\.)*${topLabel}`
 
 const ipv4Part = '(?:25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)'
