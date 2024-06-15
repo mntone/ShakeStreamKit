@@ -1,7 +1,7 @@
 import { findLast, findLastIndex, last } from 'lodash'
 import { Dispatch, MiddlewareAPI, UnknownAction } from 'redux'
 
-import { hideOverlayDelayed, showOverlay, showPoweredby } from '@/overlay/slicers'
+import { hideEggGraphDelayed, showEggGraph, showPoweredby } from '@/overlay/slicers'
 import type { ShakeGameUpdateEvent } from '@/telemetry/model'
 import { addTelemetry } from '@/telemetry/slicers'
 
@@ -24,7 +24,7 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 		}
 	}
 
-	if (!state.overlay.overlay) {
+	if (!state.overlay.wave) {
 		// Whether to notify upon quota met
 		const notifyOnQuotaMet = state.config.notifyOnQuotaMet === true
 
@@ -47,13 +47,13 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 				}
 
 				if (waveFinished || quotaMet) {
-					store.dispatch(showOverlay(latest.wave))
+					store.dispatch(showEggGraph(latest.wave))
 
 					// Whether to hide overlay automatically
 					const autoHide = state.config.autoHide !== false
 					if (autoHide) {
 						const delayInSeconds = waveFinished ? 12 : 3
-						store.dispatch(hideOverlayDelayed(delayInSeconds) as any)
+						store.dispatch(hideEggGraphDelayed(delayInSeconds) as any)
 					}
 				}
 			}

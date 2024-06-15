@@ -6,7 +6,7 @@ import { useEnvironment } from '@/core/components/EnvironmentProvider'
 
 import { useAppSelector } from 'app/hooks'
 
-import { selectWave, selectOverlay } from '../../selectors'
+import { selectWave } from '../../selectors'
 import CameraPreview from '../CameraPreview'
 import EggGraph from '../EggGraph'
 import ProductLogo from '../ProductLogo'
@@ -16,8 +16,7 @@ const OverlayHost = () => {
 	const environment = useEnvironment()
 	const broadcastEnabled = environment && 'broadcast' in environment
 
-	const currentWave = useAppSelector(selectWave)
-	const currentOverlay = useAppSelector(selectOverlay)
+	const selectedWave = useAppSelector(selectWave)
 	const currentPoweredby = useAppSelector(state => state.overlay.poweredby)
 	return (
 		<div className={clsx(
@@ -26,9 +25,9 @@ const OverlayHost = () => {
 		)}>
 			<RightSlideAnimation
 				rich
-				visible={currentOverlay}
+				visible={selectedWave !== undefined}
 			>
-				<EggGraph wave={currentWave} />
+				<EggGraph wave={selectedWave} />
 			</RightSlideAnimation>
 
 			<RightSlideAnimation visible={currentPoweredby}>

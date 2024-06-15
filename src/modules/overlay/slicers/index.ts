@@ -2,14 +2,12 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 // State
 interface OverlayState {
-	overlay: boolean
 	poweredby: boolean
 	server?: string
 	wave?: number | 'extra'
 }
 
 const initialState: OverlayState = {
-	overlay: false,
 	poweredby: false,
 }
 
@@ -34,8 +32,8 @@ const clearTimer = () => {
 		window.clearTimeout(timerId)
 	}
 }
-export const hideOverlayDelayed = createAsyncThunk(
-	'overlay/hideOverlayDelayed',
+export const hideEggGraphDelayed = createAsyncThunk(
+	'overlay/hideEggGraphDelayed',
 	async (delayInSeconds: number) => {
 		clearTimer()
 		await new Promise(resolve => {
@@ -49,20 +47,13 @@ const overlaySlice = createSlice({
 	name: 'overlay',
 	initialState,
 	reducers: {
-		hideOverlay(state) {
+		hideEggGraph(state) {
 			clearTimer()
-			state.overlay = false
+			delete state.wave
 		},
-		showOverlay(state, action: PayloadAction<number | 'extra' | undefined>) {
-			const wave = action.payload
-			if (wave) {
-				if (wave !== 'extra' && (1 <= wave && wave <= 5)) {
-					state.wave = action.payload
-				}
-			}
-
+		showEggGraph(state, action: PayloadAction<number | 'extra' | undefined>) {
 			clearTimer()
-			state.overlay = true
+			state.wave = action.payload
 		},
 		setServer(state, action: PayloadAction<string | undefined>) {
 			state.server = action.payload
@@ -76,15 +67,15 @@ const overlaySlice = createSlice({
 			.addCase(showPoweredby.fulfilled, state => {
 				state.poweredby = false
 			})
-			.addCase(hideOverlayDelayed.fulfilled, state => {
-				state.overlay = false
+			.addCase(hideEggGraphDelayed.fulfilled, state => {
+				delete state.wave
 			})
 	},
 })
 
 export const {
-	hideOverlay,
-	showOverlay,
+	hideEggGraph,
+	showEggGraph,
 	setServer,
 } = overlaySlice.actions
 export default overlaySlice.reducer
