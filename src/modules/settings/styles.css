@@ -13,14 +13,14 @@
 	box-sizing: border-box;
 	position: fixed;
 	left: 12px;
-	bottom: min(10vh, calc(100vh - 56.25vw + 12px));
+	bottom: min(12px, calc(var(--ol-height) - 12px));
 
 	border: 1px solid var(--wnd-st);
 	border-radius: var(--wnd-radius);
 
 	width: calc(100% - 20px);
 	max-width: 540px;
-	height: min(400px, 90vh);
+	height: 400px;
 	max-height: calc(90vh - 24px);
 
 	background-color: var(--wnd-bg);

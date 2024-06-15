@@ -21,7 +21,10 @@
 	--fg-tertiary: #FFF6;
 	--fg-pos: #6AF6CD;
 	--fg-neg: #FF5033;
-	--overlay-bg: #1A1A1A;
+
+	--ol-bg: #1A1A1A;
+	--ol-width: calc(min(100vw, 16 * (100vh - 2.25rem - 8px) / 9));
+	--ol-height: calc(9 * var(--ol-width) / 16);
 
 	--wnd-bg: #272727CC;
 	--wnd-st: #FF8265;
@@ -67,7 +70,7 @@ input, input::-webkit-file-upload-button, button {
 	overflow: clip;
 	position: absolute;
 
-	background-color: var(--overlay-bg);
+	background-color: var(--ol-bg);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
