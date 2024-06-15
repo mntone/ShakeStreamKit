@@ -1,0 +1,66 @@
+.EggGraph-clear {
+	color: #6AF6CD;
+}
+.EggGraph-failure {
+	color: #FF5033;
+}
+
+.EggGraph header {
+	margin: .25em 3.5em 0 1.25em;
+	font-size: 1.25em;
+	font-weight: bold;
+	line-height: 1.6;
+	color: #FFF;
+}
+
+/* Base */
+.EggGraph svg {
+	margin-top: -2em;
+	font-family: inherit;
+	font-size: inherit;
+	vertical-align: middle;
+}
+.EggGraph line {
+	shape-rendering: geometricPrecision !important;
+}
+
+.EggGraph-background {
+	fill: #FFFFFF09;
+}
+
+/* Grid */
+.EggGraph-grid line {
+	stroke: #FFFFFF40;
+	stroke-width: 1px;
+}
+
+/* Axis */
+.EggGraph-axis {
+	font-size: .8em;
+}
+.EggGraph-axis line {
+	stroke: #808080;
+	stroke-width: 2px;
+}
+.EggGraph-axis text {
+	fill: #CCC;
+}
+
+/* Line */
+.EggGraph-lines-quota line {
+	stroke: #EDFB3B;
+	stroke-dasharray: 6 3;
+	stroke-width: 2px;
+}
+.EggGraph-lines-quota text {
+	fill: #EDFB3B;
+	font-size: .8em;
+	font-weight: bold;
+	text-anchor: start;
+}
+
+/* Item */
+.EggGraph-item-line {
+	stroke: var(--accent);
+	stroke-width: 3px;
+}

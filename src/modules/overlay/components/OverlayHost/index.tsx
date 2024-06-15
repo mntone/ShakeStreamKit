@@ -8,7 +8,7 @@ import { useAppSelector } from 'app/hooks'
 
 import { selectWave } from '../../selectors'
 import CameraPreview from '../CameraPreview'
-import EggGraph from '../EggGraph'
+import OverlayEggGraph from '../OverlayEggGraph'
 import ProductLogo from '../ProductLogo'
 import { RightSlideAnimation } from '../SlideAnimation'
 
@@ -25,9 +25,9 @@ const OverlayHost = () => {
 		)}>
 			<RightSlideAnimation
 				rich
-				visible={selectedWave !== undefined}
+				visible={selectedWave !== undefined && selectedWave != 'extra'}
 			>
-				<EggGraph wave={selectedWave} />
+				<OverlayEggGraph wave={selectedWave as number} />
 			</RightSlideAnimation>
 
 			<RightSlideAnimation visible={currentPoweredby}>

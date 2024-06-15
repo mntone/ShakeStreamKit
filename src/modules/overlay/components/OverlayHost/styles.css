@@ -5,7 +5,7 @@
 }
 
 .OverlayHost {
-	contain: content;
+	contain: strict;
 	position: relative;
 	overflow: clip;
 	width: var(--ol-width);
@@ -15,7 +15,7 @@
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-size: 1.25vw;
+	font-size: calc(0.0125 * var(--ol-width));
 
 	color: #FFF;
 	background: linear-gradient(to right, #2b5876, #4e4376);
@@ -35,6 +35,9 @@
 	transition: transform var(--animation-enter);
 }
 
+.Overlay-left {
+	border-radius: 0 1.5em 1.5em 0;
+}
 .Overlay-left,
 .Overlay-left--slide-enter {
 	transform: rotate(-3deg) translateX(-100%);
@@ -51,6 +54,9 @@
 	transform: rotate(-3deg) translateX(-100%);
 }
 
+.Overlay-right {
+	border-radius: 1.5em 0 0 1.5em;
+}
 .Overlay-right,
 .Overlay-right--slide-enter {
 	transform: rotate(3deg) translateX(100%);
