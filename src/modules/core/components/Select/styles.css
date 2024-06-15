@@ -32,12 +32,14 @@
 .Select-icon {
 	position: absolute;
 	right: .75em;
-	width: 16px;height: 16px;
+	width: 16px;
+	height: 16px;
 }
 
 .Select-content {
-	overflow: clip;
+	contain: content;
 	box-sizing: border-box;
+	z-index: 99999;
 
 	border: 1px solid var(--wnd-st);
 	border-radius: var(--wnd-radius);

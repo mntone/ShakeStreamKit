@@ -6,7 +6,7 @@
 	scrollbar-gutter: always;
 	right: 0;
 	bottom: calc(100vh - 56.25vw);
-	z-index: 999;
+	z-index: 99;
 
 	display: flex;
 	flex-direction: column;
