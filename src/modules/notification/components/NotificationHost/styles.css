@@ -4,8 +4,8 @@
 	overflow: clip auto;
 	position: fixed;
 	scrollbar-gutter: always;
-	right: 0;
-	bottom: calc(100vh - 56.25vw);
+	right: calc(50vw - 0.5 * var(--ol-width));
+	bottom: calc(100vh - var(--ol-height));
 	z-index: 99;
 
 	display: flex;
@@ -15,7 +15,7 @@
 	width: 100%;
 	max-width: 332px;
 	height: max-content;
-	max-height: 56.25vw;
+	max-height: var(--ol-height);
 
 	margin: 0 auto;
 	padding: 8px 12px 8px 8px;
@@ -60,8 +60,8 @@
 	
 	border-radius: 12px;
 
-	color: #FFF;
-	background-color: #272727CC;
+	color: var(--fg);
+	background-color: var(--wnd-bg);
 	/* backdrop-filter: var(--ctl-backdrop);
 	-webkit-backdrop-filter: var(--ctl-backdrop);*/
 
@@ -108,7 +108,7 @@
 	width: 48px;
 	height: 32px;
 
-	color: #FFF;
+	color: var(--fg);
 	background-color: transparent;
 	opacity: 0;
 	transition: opacity 67ms ease-in-out;
@@ -124,7 +124,7 @@
 		outline: 2px solid #FFFC;
 	}
 	&[disabled] {
-		color: #FFF9;
+		color: var(--fg-secondary);
 		background-color: var(--ctl-bg--disable);
 	}
 }

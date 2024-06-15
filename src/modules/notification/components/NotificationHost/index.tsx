@@ -1,9 +1,10 @@
 import './styles.css'
 
-import { UIEvent, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { UIEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 
-import { XMarkIcon } from '@heroicons/react/16/solid'
 import * as ToastPrimitive from '@radix-ui/react-toast'
+
+import Notification from './Notification'
 
 export interface NotificationHandle {
 	publish(notification: NotificationMessage): void
@@ -20,7 +21,7 @@ export interface NotificationHostProps {
 	maxCount?: number
 }
 
-export const NotificationHost = forwardRef<NotificationHandle, NotificationHostProps>(function NotificationHost({ maxCount, ...props }, forwardedRef) {
+export const NotificationHost = forwardRef<NotificationHandle, NotificationHostProps>(function NotificationHost({ maxCount }, forwardedRef) {
 	const ref = useRef<HTMLOListElement>(null)
 	const [isBottom, setIsBottom] = useState(true)
 	const [notifications, setNotifications] = useState<NotificationMessage[]>([])
@@ -51,39 +52,21 @@ export const NotificationHost = forwardRef<NotificationHandle, NotificationHostP
 		setIsBottom(target.scrollTop === availableTop)
 	}
 
-	const handleOpen = (timestamp: number, open: boolean) => {
-		if (!open) {
-			const index = notifications.findIndex(n => n.timestamp === timestamp)
-			notifications.splice(index, 1)
-		}
-	}
+	const handleClose = useCallback((timestamp: number) => {
+		const index = notifications.findIndex(n => n.timestamp === timestamp)
+		notifications.splice(index, 1)
+	}, [])
 
 	return (
 		<ToastPrimitive.Provider swipeDirection='right'>
 			<>
 				{notifications.map(notification => {
 					return (
-						<ToastPrimitive.Root
+						<Notification
 							key={notification.timestamp}
-							className='Notification'
-							duration={notification.duration ?? 5000}
-							onOpenChange={handleOpen.bind(null, notification.timestamp)}
-							{...props}
-						>
-							<ToastPrimitive.Title className='ToastTitle'>
-								{notification.title}
-							</ToastPrimitive.Title>
-							<ToastPrimitive.Description className='Notification-description'>
-								{notification.description}
-							</ToastPrimitive.Description>
-							<ToastPrimitive.Close
-								aria-label='Close'
-								className='Notification-close'
-								tabIndex={-1}
-							>
-								<XMarkIcon className='Icon16' />
-							</ToastPrimitive.Close>
-						</ToastPrimitive.Root>
+							onClose={handleClose}
+							{...notification}
+						/>
 					)
 				})}
 			</>
