@@ -40,6 +40,8 @@ const getLargeTextNode = (chunks: ReactNode[]) => {
 export interface EggGraphSizeProps {
 	containerWidth: number
 	containerHeight: number
+	graphWidth?: number
+	graphHeight?: number
 
 	marginTop: number
 	marginLeft: number
@@ -65,11 +67,34 @@ const countLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, nev
 	fill: undefined,
 }
 
+const getSvgProps = (props: {
+	containerWidth: number
+	containerHeight: number
+	graphWidth?: number
+	graphHeight?: number
+}): {
+	width: number | string
+	height: number | string
+	viewBox?: string
+	preserveAspectRatio?: string
+} => {
+	if (!props.graphWidth || !props.graphHeight) {
+		return {
+			width: props.containerWidth,
+			height: props.containerHeight,
+		}
+	}
+
+	return {
+		width: '100%',
+		height: '100%',
+		preserveAspectRatio: 'xMinYMax meet',
+		viewBox: `0 0 ${props.graphWidth} ${props.graphHeight}`,
+	}
+}
+
 const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 	const {
-		containerWidth,
-		containerHeight,
-
 		marginTop,
 		marginLeft,
 		marginRight,
@@ -129,23 +154,18 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 		return null
 	}
 
-	const width = containerWidth - marginLeft - marginRight
-	const height = containerHeight - marginTop - marginBottom
+	const svgProps = getSvgProps(props)
+	const width = (props.graphWidth ?? props.containerWidth) - marginLeft - marginRight
+	const height = (props.graphHeight ?? props.containerHeight) - marginTop - marginBottom
 	const positionProps = {
 		left: marginLeft,
 		top: marginTop,
-	}
-	const sizeProps = {
-		left: marginLeft,
-		top: marginTop,
-		width,
-		height,
 	}
 
 	const quota = telemetry.quota
 	const lastAmount = telemetry.events[telemetry.events.length - 1].amount
 	const amountScale = scaleLinear<number>({
-		domain: [Math.max(quota, lastAmount), 0],
+		domain: [Math.max(5 * Math.ceil(0.2 * quota), lastAmount), 0],
 		range: [0, height],
 		nice: true,
 	})
@@ -182,7 +202,7 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 				}
 			</header>
 
-			<svg width={containerWidth} height={containerHeight}>
+			<svg {...svgProps}>
 				<rect
 					className='EggGraph-background'
 					x={marginLeft}
@@ -195,7 +215,9 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 					className='EggGraph-grid EggGraph-grid-y'
 					scale={amountScale}
 					numTicks={2}
-					{...sizeProps}
+					{...positionProps}
+					width={width}
+					height={height}
 				/>
 
 				<Group className='EggGraph-lines-quota' {...positionProps}>
