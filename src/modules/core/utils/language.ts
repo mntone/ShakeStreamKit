@@ -5,7 +5,7 @@ interface LanguageInfo {
 	name: string
 }
 
-export const LANGUAGES: readonly LanguageInfo[] = [
+export const LANGUAGES: readonly LanguageInfo[] = Object.freeze([
 	{ code: 'de', name: 'Deutsch' },
 	{ code: 'en', name: 'English' },
 	{ code: 'es', name: 'Español (España)' },
@@ -18,9 +18,9 @@ export const LANGUAGES: readonly LanguageInfo[] = [
 	{ code: 'nl', name: 'Nederlands' },
 	{ code: 'zh-CN', name: '简体中文' },
 	{ code: 'zh-TW', name: '繁體中文' },
-]
+])
 
-const availableLanguages = LANGUAGES.map(langInfo => langInfo.code)
+const availableLanguages = Object.freeze(LANGUAGES.map(langInfo => langInfo.code))
 
 export const detectLanguage = () => {
 	const language = match(navigator.languages, availableLanguages, 'en')

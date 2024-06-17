@@ -38,7 +38,7 @@ const configSlice = createSlice({
 		setServer(state, action: PayloadAction<string | undefined>) {
 			const server = action.payload
 			if (server && server != import.meta.env.VITE_WS_SERVER) {
-				state.server = action.payload
+				state.server = server
 			} else {
 				delete state.server
 			}

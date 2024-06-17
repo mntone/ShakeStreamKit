@@ -1,11 +1,11 @@
 import './styles.css'
 
-import { FC } from 'react'
+import { memo } from 'react'
 
 import { CheckIcon } from '@heroicons/react/16/solid'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 
-const CheckBox: FC<CheckboxPrimitive.CheckboxProps> = ({ children, ...props }) => {
+const CheckBox = ({ children, ...props }: CheckboxPrimitive.CheckboxProps) => {
 	return (
 		<div className='CheckBox'>
 			<CheckboxPrimitive.Root
@@ -27,4 +27,4 @@ const CheckBox: FC<CheckboxPrimitive.CheckboxProps> = ({ children, ...props }) =
 	)
 }
 
-export default CheckBox
+export default memo(CheckBox)

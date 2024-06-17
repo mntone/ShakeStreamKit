@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDispatch } from 'react-redux'
 
@@ -97,4 +97,4 @@ const CameraSelector = () => {
 	)
 }
 
-export default CameraSelector
+export default memo(CameraSelector)

@@ -1,14 +1,14 @@
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 import { useDispatch } from 'react-redux'
 
 import { useEnvironment } from '@/core/components/EnvironmentProvider'
-import { getBroadcastFriendlyName } from '@/core/utils/broadcast'
 import { addLog } from '@/notification/slicers'
 
 import CameraSelector from '../components/CameraSelector'
 import DialogMessages from '../messages'
 
 const DevelopmentPage = () => {
+	const intl = useIntl()
 	const environment = useEnvironment()
 	const broadcastEnabled = environment && 'broadcast' in environment
 
@@ -23,16 +23,16 @@ const DevelopmentPage = () => {
 	return (
 		<>
 			<h2 className='Form-title'>
-				<FormattedMessage {...DialogMessages.development} />
+				{intl.formatMessage(DialogMessages.development)}
 			</h2>
 
 			{!broadcastEnabled && (
 				<section className='Form-group'>
 					<h3>
-						<FormattedMessage {...DialogMessages.developmentPreview} />
+						{intl.formatMessage(DialogMessages.developmentPreview)}
 					</h3>
 					<p>
-						<FormattedMessage {...DialogMessages.developmentUseCamera} />
+						{intl.formatMessage(DialogMessages.developmentUseCamera)}
 					</p>
 					<CameraSelector />
 				</section>
@@ -41,38 +41,37 @@ const DevelopmentPage = () => {
 			{import.meta.env.DEV && (
 				<section className='Form-group'>
 					<h3>
-						<FormattedMessage {...DialogMessages.developmentNotification} />
+						{intl.formatMessage(DialogMessages.developmentNotification)}
 					</h3>
 					<button
 						type='button'
 						className='Button'
 						onClick={notifyTest}
 					>
-						<FormattedMessage {...DialogMessages.developmentTestNotifications} />
+						{intl.formatMessage(DialogMessages.developmentTestNotifications)}
 					</button>
 				</section>
 			)}
 
 			<section className='Form-group'>
 				<h3>
-					<FormattedMessage {...DialogMessages.developmentEnvironment} />
+					{intl.formatMessage(DialogMessages.developmentEnvironment)}
 				</h3>
 				<p>
-					<FormattedMessage
-						values={{
-							status: broadcastEnabled
-								? <FormattedMessage {...DialogMessages.developmentBroadcastModeEnabled} />
-								: <FormattedMessage {...DialogMessages.developmentBroadcastModeDisabled} />,
-						}}
-						{...DialogMessages.developmentBroadcastMode}
-					/>
+					{intl.formatMessage(
+						DialogMessages.developmentBroadcastMode,
+						{ status: broadcastEnabled
+							? intl.formatMessage(DialogMessages.developmentBroadcastModeEnabled)
+							: intl.formatMessage(DialogMessages.developmentBroadcastModeDisabled),
+						},
+					)}
 				</p>
 				{environment?.broadcast && (
 					<p>
-						<FormattedMessage
-							values={{ software: getBroadcastFriendlyName(environment.broadcast.name) + ' ' + environment.broadcast.version }}
-							{...DialogMessages.developmentBroadcastSoftware}
-						/>
+						{intl.formatMessage(
+							DialogMessages.developmentBroadcastSoftware,
+							{ software: environment.broadcast.friendlyName + ' ' + environment.broadcast.version },
+						)}
 					</p>
 				)}
 			</section>

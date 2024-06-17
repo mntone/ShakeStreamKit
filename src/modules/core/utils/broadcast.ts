@@ -4,32 +4,27 @@ export type BroadcastSoftware =
 	| 'twitch'
 
 export interface BroadcastSoftwareInfo {
-	name: BroadcastSoftware
-	version: string | undefined
+	readonly name: BroadcastSoftware
+	readonly friendlyName: string
+	readonly version: string
 }
 
 const pattern = /(OBS|XSplitChromeSource|TwitchStudio)\/([\d.]+)/
-const dict: Record<string, BroadcastSoftware> = {
-	OBS: 'obs',
-	XSplitChromeSource: 'xsplit',
-	TwitchStudio: 'twitch',
-}
-
-const friendlyName: Record<BroadcastSoftware, string> = {
-	obs: 'OBS Studio',
-	xsplit: 'XSplit',
-	twitch: 'Twitch Studio',
-}
-
-export const getBroadcastFriendlyName = (name: BroadcastSoftware) => friendlyName[name]
+const dict: Readonly<Record<string, readonly [BroadcastSoftware, string]>> = Object.freeze({
+	OBS: Object.freeze(['obs', 'OBS Studio']),
+	XSplitChromeSource: Object.freeze(['xsplit', 'XSplit']),
+	TwitchStudio: Object.freeze(['twitch', 'Twitch Studio']),
+} satisfies Readonly<Record<string, readonly [BroadcastSoftware, string]>>)
 
 export const detectBroadcast = (): BroadcastSoftwareInfo | undefined => {
 	const match = pattern.exec(navigator.userAgent)
 	if (match !== null) {
-		return {
-			name: dict[match[1]],
+		const [name, friendlyName] = dict[match[1]]
+		return Object.freeze({
+			name,
+			friendlyName,
 			version: match[2],
-		}
+		})
 	}
 
 	return undefined

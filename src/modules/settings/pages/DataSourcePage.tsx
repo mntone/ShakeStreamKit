@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid'
 
@@ -10,16 +10,17 @@ import ServerAddressBox from '../components/ServerAddressBox'
 import DialogMessages from '../messages'
 
 const DataSourcePage = () => {
+	const intl = useIntl()
 	const wsConnect = useContext(WebSocketContext)
 	return (
 		<>
 			<h2 className='Form-title'>
-				<FormattedMessage {...DialogMessages.dataSource} />
+				{intl.formatMessage(DialogMessages.dataSource)}
 			</h2>
 
 			<section className='Form-group'>
 				<h3>
-					<FormattedMessage {...DialogMessages.dataSourceServerAddress} />
+					{intl.formatMessage(DialogMessages.dataSourceServerAddress)}
 				</h3>
 				<ServerAddressBox />
 
@@ -28,16 +29,16 @@ const DataSourcePage = () => {
 						? (
 							<span className='StatusText StatusText-positive'>
 								<CheckIcon className='Icon16' />
-								<FormattedMessage
-									values={{ url: wsConnect.url }}
-									{...DialogMessages.dataSourceConnected}
-								/>
+								{intl.formatMessage(
+									DialogMessages.dataSourceConnected,
+									{ url: wsConnect.url },
+								)}
 							</span>
 						)
 						: (
 							<span className='StatusText StatusText-negative'>
 								<XMarkIcon className='Icon16' />
-								<FormattedMessage {...DialogMessages.dataSourceNotConnected} />
+								{intl.formatMessage(DialogMessages.dataSourceNotConnected)}
 							</span>
 						)
 				}
@@ -45,7 +46,7 @@ const DataSourcePage = () => {
 
 			<section className='Form-group'>
 				<h3>
-					<FormattedMessage {...DialogMessages.dataSourceFileInput} />
+					{intl.formatMessage(DialogMessages.dataSourceFileInput)}
 				</h3>
 				<FileInput />
 			</section>

@@ -1,35 +1,32 @@
-import { FormattedMessage } from 'react-intl'
-
-import { useEnvironment } from '@/core/components/EnvironmentProvider'
+import { FormatDateOptions, useIntl } from 'react-intl'
 
 import { useAppSelector } from 'app/hooks'
 
 import DialogMessages from '../messages'
 
-const LogPage = () => {
-	const userLanguage = useEnvironment()?.lang ?? 'en'
-	const lang = useAppSelector(state => state.config.language) ?? userLanguage
-	const logs = useAppSelector(state => state.log.logs)
+const opts: FormatDateOptions = {
+	month: 'short',
+	day: 'numeric',
+	hour: '2-digit',
+	minute: '2-digit',
+	second: '2-digit',
+}
 
-	const formatter = new Intl.DateTimeFormat(lang, {
-		month: 'short',
-		day: 'numeric',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit',
-	})
+const LogPage = () => {
+	const intl = useIntl()
+	const logs = useAppSelector(state => state.log.logs)
 
 	return (
 		<>
 			<h2 className='Form-title'>
-				<FormattedMessage {...DialogMessages.log} />
+				{intl.formatMessage(DialogMessages.log)}
 			</h2>
 
 			<ul>
 				{logs.map((log, index) => {
 					return (
 						<li key={index}>
-							{`${formatter.format(log.timestamp)}: ${log.type}`}
+							{`${intl.formatDate(log.timestamp, opts)}: ${log.type}`}
 						</li>
 					)
 				})}

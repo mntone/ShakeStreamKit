@@ -1,28 +1,20 @@
-import { useDispatch } from 'react-redux'
+import { memo } from 'react'
 
-import { useEnvironment } from '@/core/components/EnvironmentProvider'
 import { Select, SelectItem } from '@/core/components/Select'
 import { LANGUAGES } from '@/core/utils/language'
 
-import { useAppSelector } from 'app/hooks'
+interface LanguageSelectorProps {
+	language?: string
+	onLanguageChange?(language: string): void
+}
 
-import { setLanguage } from '../slicers'
-
-const LanguageSelector = () => {
-	const userLanguage = useEnvironment()?.lang ?? 'en'
-	const lang = useAppSelector(state => state.config.language) ?? userLanguage
-
-	const dispatch = useDispatch()
-	const handleSelectLanguage = (lang: string) => {
-		dispatch(setLanguage(lang))
-	}
-
+const LanguageSelector = ({ language, onLanguageChange }: LanguageSelectorProps) => {
 	return (
 		<div className='LanguageSelector'>
 			<Select
-				value={lang}
+				value={language}
 				placeholder='Select Language'
-				onValueChange={handleSelectLanguage}
+				onValueChange={onLanguageChange}
 			>
 				{LANGUAGES.map(lang => (
 					<SelectItem
@@ -38,4 +30,4 @@ const LanguageSelector = () => {
 	)
 }
 
-export default LanguageSelector
+export default memo(LanguageSelector)
