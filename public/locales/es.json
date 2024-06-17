@@ -32,8 +32,8 @@
 	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Ofensiva <big>{wave}</big>",
 	"EggGraph.extraWave": "Ofensiva extra",
-	"EggGraph.clear": " ✓",
-	"EggGraph.fail": " ✘",
+	"EggGraph.clear": "✓",
+	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Registro",
 

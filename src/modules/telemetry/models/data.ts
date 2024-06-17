@@ -17,6 +17,7 @@ interface ShakeBaseWave {
 
 export interface ShakeDefaultWave extends ShakeBaseWave {
 	readonly wave: DefaultWaveType
+	amount: number
 	quota: number
 	readonly updates: Readonly<ShakeUpdate>[]
 }

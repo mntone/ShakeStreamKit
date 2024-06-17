@@ -97,6 +97,7 @@ export class TelemetryProcessor {
 			const newWaveData: ShakeDefaultWave = {
 				wave: currentWave as DefaultWaveType,
 				startTimestamp: ev.timestamp,
+				amount: ev.amount,
 				quota: this.#quotaCounter.mode,
 				updates: [
 					{
@@ -137,6 +138,7 @@ export class TelemetryProcessor {
 			}
 			break
 		}
+		currentWaveData.amount = ev.amount
 		currentWaveData.quota = this.#quotaCounter.add(ev.quota).mode
 
 		// Check diff >= 0

@@ -15,6 +15,7 @@
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-optical-sizing: none;
 	font-size: calc(0.0125 * var(--ol-width));
 
 	color: #FFF;

@@ -32,8 +32,8 @@
 	"EggGraph.quota": "Quota",
 	"EggGraph.wave": "Ondata <big>{wave}</big>",
 	"EggGraph.extraWave": "Ondata extra",
-	"EggGraph.clear": " ✓",
-	"EggGraph.fail": " ✘",
+	"EggGraph.clear": "✓",
+	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Registro",
 

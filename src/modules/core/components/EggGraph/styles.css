@@ -1,3 +1,40 @@
+.EggGraph header {
+	display: flex;
+	align-items: baseline;
+	gap: .25em;
+
+	margin: .25em 3.5em 0 1.25em;
+	line-height: 2.5em;
+	color: #FFF;
+}
+
+.EggGraph-wave {
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+@keyframes showStatus {
+	0% {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	20% {
+		opacity: 0.5;
+		transform: scale(1.8);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.EggGraph-status {
+	flex-shrink: 0;
+	font-size: 1.375em;
+	font-weight: bold;
+	transform-origin: center;
+	animation: showStatus 300ms 84ms ease-in-out;
+}
 .EggGraph-clear {
 	color: #6AF6CD;
 }
@@ -5,12 +42,11 @@
 	color: #FF5033;
 }
 
-.EggGraph header {
-	margin: .25em 3.5em 0 1.25em;
-	font-size: 1.25em;
-	font-weight: bold;
-	line-height: 1.6;
-	color: #FFF;
+.EggGraph-quota {
+	flex-grow: 1;
+	flex-shrink: 0;
+	color: #CCC;
+	text-align: right;
 }
 
 /* Base */

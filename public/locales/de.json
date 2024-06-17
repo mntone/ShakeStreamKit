@@ -32,8 +32,8 @@
 	"EggGraph.quota": "Quote",
 	"EggGraph.wave": "Welle <big>{wave}</big>",
 	"EggGraph.extraWave": "Extra-Welle",
-	"EggGraph.clear": " ✓",
-	"EggGraph.fail": " ✘",
+	"EggGraph.clear": "✓",
+	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Protokoll",
 

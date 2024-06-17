@@ -32,8 +32,8 @@
 	"EggGraph.quota": "할당량",
 	"EggGraph.wave": "WAVE <big>{wave}</big>",
 	"EggGraph.extraWave": "EXTRA WAVE",
-	"EggGraph.clear": " GJ!",
-	"EggGraph.failure": " NG",
+	"EggGraph.clear": "GJ!",
+	"EggGraph.failure": "NG",
 
 	"Dialog.log": "로그",
 

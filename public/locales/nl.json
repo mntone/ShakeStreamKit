@@ -32,8 +32,8 @@
 	"EggGraph.quota": "Doelstelling",
 	"EggGraph.wave": "<big>{wave}</big>e golf",
 	"EggGraph.extraWave": "Extra golf",
-	"EggGraph.clear": " ✓",
-	"EggGraph.fail": " ✘",
+	"EggGraph.clear": "✓",
+	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Logboek",
 

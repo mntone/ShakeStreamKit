@@ -1,7 +1,7 @@
 import './styles.css'
 
 import { ReactNode, useMemo } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { AxisBottom, AxisLeft, type TickLabelProps } from '@visx/axis'
 import { curveLinear } from '@visx/curve'
@@ -91,6 +91,8 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 		wave,
 	} = props
 
+	const intl = useIntl()
+
 	const waveData: ShakeDefaultWave | undefined = useMemo(() => {
 		const targetWave = telemetry?.waves.find(w => w.wave === wave)
 		if (!targetWave || targetWave.wave === 'extra') {
@@ -134,28 +136,33 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 	return (
 		<div className={`EggGraph EggGraph-wave${waveData.wave}`}>
 			<header>
-				<FormattedMessage
-					values={{
-						big: getLargeTextNode,
-						wave: waveData.wave,
-					}}
-					{...EggGraphMessages.wave}
-				/>
+				<span className='EggGraph-wave'>
+					{intl.formatMessage(
+						EggGraphMessages.wave,
+						{
+							big: getLargeTextNode,
+							wave: waveData.wave,
+						},
+					)}
+				</span>
 				{
 					status
 						? (
-							<span className='EggGraph-clear'>
-								<FormattedMessage {...EggGraphMessages.clear} />
+							<span className='EggGraph-status EggGraph-clear'>
+								{intl.formatMessage(EggGraphMessages.clear)}
 							</span>
 						)
 						: status === false
 							? (
-								<span className='EggGraph-failure'>
-									<FormattedMessage {...EggGraphMessages.fail} />
+								<span className='EggGraph-status EggGraph-failure'>
+									{intl.formatMessage(EggGraphMessages.fail)}
 								</span>
 							)
 							: null
 				}
+				<span className='EggGraph-quota'>
+					{`${waveData.amount}/${waveData.quota}`}
+				</span>
 			</header>
 
 			<svg {...svgProps}>
@@ -187,7 +194,7 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 						dx='.2em'
 						dy='-.333em'
 					>
-						<FormattedMessage {...EggGraphMessages.quota} />
+						{intl.formatMessage(EggGraphMessages.quota)}
 					</text>
 				</Group>
 

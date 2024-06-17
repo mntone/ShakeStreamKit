@@ -32,8 +32,8 @@
 	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Oleada <big>{wave}</big>",
 	"EggGraph.extraWave": "Oleada extra",
-	"EggGraph.clear": " ✓",
-	"EggGraph.fail": " ✘",
+	"EggGraph.clear": "✓",
+	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Registro",
 
