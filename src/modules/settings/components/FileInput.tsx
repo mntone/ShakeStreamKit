@@ -1,7 +1,8 @@
 import { ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { ShakeEvent } from '@/telemetry/model'
+import { setMatch } from '@/overlay/slicers'
+import { ShakeEvent } from '@/telemetry/models/telemetry'
 import { setTelemetry } from '@/telemetry/slicers'
 
 const FileInput = () => {
@@ -13,8 +14,11 @@ const FileInput = () => {
 			reader.onload = () => {
 				const data = reader.result as string
 				const lineArray = data.split('\n').filter(line => line.trim() !== '')
-				const events: ShakeEvent[] = lineArray.map(line => JSON.parse(line) as ShakeEvent)
-				dispatch(setTelemetry(events))
+				const events = lineArray.map(line => JSON.parse(line) as ShakeEvent)
+				if (events.length !== 0) {
+					dispatch(setTelemetry(events))
+					dispatch(setMatch(events[0].session))
+				}
 			}
 			reader.readAsText(file)
 		}

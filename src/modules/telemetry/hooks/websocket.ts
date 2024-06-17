@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { type Log, addLog } from '@/notification/slicers'
+import { setMatch } from '@/overlay/slicers'
 
 import { addTelemetry } from '../slicers'
 import WebSocketWorker from '../utils/websocket.worker?worker'
 
-import type { ShakeEvent } from '../model'
+import type { ShakeEvent } from '../models/telemetry'
 import type { WebSocketWorkerEvent, WebSocketWorkerMessage } from '../utils/websocket.worker'
 import type { Dispatch, UnknownAction } from 'redux'
 
@@ -47,6 +48,9 @@ const useWebsocketTelemetry = (url: string) => {
 				break
 			case 'message':
 				dispatch(addTelemetry(event.data))
+				if (event.data.event === 'matchmaking') {
+					dispatch(setMatch(event.data.session))
+				}
 				break
 			}
 		}

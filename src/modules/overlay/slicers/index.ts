@@ -1,10 +1,13 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
+import { WaveType } from '@/core/utils/wave'
+
 // State
 interface OverlayState {
 	poweredby: boolean
+	match?: string
 	server?: string
-	wave?: number | 'extra'
+	wave?: WaveType
 }
 
 const initialState: OverlayState = {
@@ -47,16 +50,27 @@ const overlaySlice = createSlice({
 	name: 'overlay',
 	initialState,
 	reducers: {
-		hideEggGraph(state) {
-			clearTimer()
-			delete state.wave
-		},
-		showEggGraph(state, action: PayloadAction<number | 'extra' | undefined>) {
-			clearTimer()
-			state.wave = action.payload
+		setMatch(state, action: PayloadAction<string | undefined>) {
+			if (state.wave !== undefined) {
+				clearTimer()
+				delete state.wave
+			}
+			state.match = action.payload
 		},
 		setServer(state, action: PayloadAction<string | undefined>) {
 			state.server = action.payload
+		},
+		hideEggGraph(state) {
+			if (state.wave !== undefined) {
+				clearTimer()
+				delete state.wave
+			}
+		},
+		showEggGraph(state, action: PayloadAction<WaveType | undefined>) {
+			if (state.wave !== action.payload) {
+				clearTimer()
+				state.wave = action.payload
+			}
 		},
 	},
 	extraReducers: builder => {
@@ -74,6 +88,7 @@ const overlaySlice = createSlice({
 })
 
 export const {
+	setMatch,
 	hideEggGraph,
 	showEggGraph,
 	setServer,

@@ -7,7 +7,7 @@ import overlay from '@/overlay/slicers'
 import config from '@/settings/slicers'
 import telemetry from '@/telemetry/slicers'
 
-import overlayMiddleware from './middlewares/overlay'
+import overlayMiddleware from '../modules/overlay/middlewares'
 
 const rootReducer = combineReducers({
 	config,

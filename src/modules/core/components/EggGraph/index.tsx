@@ -1,6 +1,6 @@
 import './styles.css'
 
-import { ReactNode } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { AxisBottom, AxisLeft, type TickLabelProps } from '@visx/axis'
@@ -9,27 +9,13 @@ import { GridRows } from '@visx/grid'
 import { Group } from '@visx/group'
 import { scaleLinear, type ScaleInput } from '@visx/scale'
 import { LinePath } from '@visx/shape'
-import { concat, findLastIndex } from 'lodash'
 
-import type { ShakeGameUpdateEvent } from '@/telemetry/model'
-
-import { useAppSelector } from 'app/hooks'
+import { forceLast } from '@/core/utils/collection'
+import type { ShakeDefaultWave, ShakeTelemetry } from '@/telemetry/models/data'
 
 import EggGraphMessages from './messages'
 
 import type { ScaleLinear } from 'd3-scale'
-
-const EMPTY_TELEMETRY = {
-	wave: 0,
-	amount: 0,
-	quota: 0,
-	status: undefined,
-	events: [],
-}
-
-const zip = <T,>(arr1: T[], arr2: T[]): T[][] => {
-	return arr1.slice(0, -1).map((item, index) => [item, arr2[index]])
-}
 
 const getLargeTextNode = (chunks: ReactNode[]) => {
 	return (
@@ -50,6 +36,7 @@ export interface EggGraphSizeProps {
 }
 
 export interface EggGraphProps {
+	telemetry?: Readonly<ShakeTelemetry>
 	wave?: number
 }
 
@@ -100,57 +87,19 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 		marginRight,
 		marginBottom,
 
+		telemetry,
 		wave,
 	} = props
 
-	const telemetry = useAppSelector(state => {
-		if (wave === undefined) {
-			return EMPTY_TELEMETRY
+	const waveData: ShakeDefaultWave | undefined = useMemo(() => {
+		const targetWave = telemetry?.waves.find(w => w.wave === wave)
+		if (!targetWave || targetWave.wave === 'extra') {
+			return undefined
 		}
 
-		const telemetry = state.telemetry.payload.filter(t => t.event === 'game_update' && t.wave === wave) as ShakeGameUpdateEvent[]
-		if (telemetry.length === 0) {
-			return EMPTY_TELEMETRY
-		}
-
-		const latestCount = telemetry[telemetry.length - 1].count
-		const lastEvent = telemetry.find(t => t.count === latestCount)
-		if (lastEvent === undefined) {
-			return EMPTY_TELEMETRY
-		}
-
-		const startTime = lastEvent.timestamp + latestCount - 100
-		const firstEvent = {
-			timeOffset: 0,
-			amount: 0,
-		}
-
-		const firstIndex = Math.max(0, findLastIndex(telemetry, t => t.count === 100) - 1)
-		const paired = zip(telemetry.slice(firstIndex, -1), telemetry.slice(firstIndex + 1))
-		const newEventData = paired.flatMap(p => {
-			const a0 = p[0].amount
-			const a1 = p[1].amount
-			const diff = a1 - a0
-			if (diff >= 0 && diff < 5) {
-				return [{
-					timeOffset: p[1].timestamp - startTime,
-					amount: p[1].amount,
-				}]
-			}
-			return []
-		})
-
-		const quota = telemetry[0].quota
-		return {
-			wave,
-			amount: lastEvent.amount,
-			quota,
-			status: lastEvent.amount >= quota ? true : latestCount === 0 ? false : undefined,
-			events: concat([firstEvent], newEventData),
-		}
-	})
-
-	if (telemetry.events.length === 0) {
+		return targetWave
+	}, [telemetry, wave])
+	if (waveData === undefined) {
 		return null
 	}
 
@@ -162,37 +111,44 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 		top: marginTop,
 	}
 
-	const quota = telemetry.quota
-	const lastAmount = telemetry.events[telemetry.events.length - 1].amount
+	const lastUpdate = forceLast(waveData.updates)
+	const status = waveData.quota <= lastUpdate.amount
+		? true
+		: lastUpdate.count === 0
+			? false
+			: telemetry?.closed
+				? false
+				: undefined
 	const amountScale = scaleLinear<number>({
-		domain: [Math.max(5 * Math.ceil(0.2 * quota), lastAmount), 0],
+		domain: [Math.max(5 * Math.ceil(0.2 * waveData.quota), lastUpdate.amount), 0],
 		range: [0, height],
 		nice: true,
 	})
 	const countScale = scaleLinear<number>({
 		domain: [0, 100],
 		range: [0, width],
+		clamp: true,
 	})
-	const quotaY = amountScale(quota)
+	const quotaY = amountScale(waveData.quota)
 
 	return (
-		<div className={`EggGraph EggGraph-wave${telemetry.wave}`}>
+		<div className={`EggGraph EggGraph-wave${waveData.wave}`}>
 			<header>
 				<FormattedMessage
 					values={{
 						big: getLargeTextNode,
-						wave: telemetry.wave,
+						wave: waveData.wave,
 					}}
 					{...EggGraphMessages.wave}
 				/>
 				{
-					telemetry.status
+					status
 						? (
 							<span className='EggGraph-clear'>
 								<FormattedMessage {...EggGraphMessages.clear} />
 							</span>
 						)
-						: telemetry.status === false
+						: status === false
 							? (
 								<span className='EggGraph-failure'>
 									<FormattedMessage {...EggGraphMessages.fail} />
@@ -257,10 +213,10 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 				<Group {...positionProps}>
 					<LinePath
 						className='EggGraph-item EggGraph-item-line EggGraph-item-amount'
-						data={telemetry.events}
+						data={waveData.updates}
 						curve={curveLinear}
 						y={d => amountScale(d.amount)}
-						x={d => countScale(d.timeOffset)}
+						x={d => countScale(d.timestamp - waveData.startTimestamp)}
 					/>
 				</Group>
 			</svg>

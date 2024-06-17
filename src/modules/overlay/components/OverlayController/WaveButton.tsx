@@ -1,24 +1,26 @@
-import { MouseEvent, memo } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { MouseEvent } from 'react'
+import { useIntl } from 'react-intl'
+
+import { WaveType } from '@/core/utils/wave'
 
 import OverlayControllerMessages from './messages'
 
-export type WaveData = number | 'extra'
-
 interface WaveButtonProps {
 	disabled: boolean
-	wave: WaveData
-	onWaveChange(value: WaveData): void
+	wave: WaveType
+	onWaveChange(value: WaveType): void
 }
 
 const WaveButton = ({ wave, disabled, onWaveChange }: WaveButtonProps) => {
+	const intl = useIntl()
+
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const waveText = e.currentTarget.value
 		if (waveText === 'extra') {
 			onWaveChange(waveText)
 		} else {
 			const wave = Number(waveText)
-			onWaveChange(wave)
+			onWaveChange(wave as WaveType)
 		}
 	}
 
@@ -30,12 +32,12 @@ const WaveButton = ({ wave, disabled, onWaveChange }: WaveButtonProps) => {
 			value={wave}
 			onClick={handleClick}
 		>
-			<FormattedMessage
-				values={{ wave }}
-				{...OverlayControllerMessages.showOverlayWithWave}
-			/>
+			{intl.formatMessage(
+				OverlayControllerMessages.showOverlayWithWave,
+				{ wave },
+			)}
 		</button>
 	)
 }
 
-export default memo(WaveButton)
+export default WaveButton

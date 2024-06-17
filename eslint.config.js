@@ -42,6 +42,7 @@ export default ts.config(
 			'camelcase': 'error',
 			'no-else-return': ['error', { allowElseIf: false }],
 			'no-promise-executor-return': 'error',
+			'no-useless-return': 'error',
 			'no-var': 'error',
 			'object-shorthand': ['error', 'always', { avoidQuotes: true }],
 			'prefer-const': 'error',

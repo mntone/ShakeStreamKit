@@ -13,7 +13,7 @@ config({ path: '.env.local', override: true })
 
 export default defineConfig({
 	build: {
-		target: ['es2022', 'chrome103', 'safari16'],
+		target: ['esnext', 'chrome103', 'safari16'],
 		assetsDir: 'a',
 		cssMinify: 'lightningcss',
 		rollupOptions: {
@@ -27,7 +27,7 @@ export default defineConfig({
 	},
 	plugins: [
 		tsconfigPaths(),
-		react({ devTarget: 'es2022' }),
+		react({ devTarget: 'esnext' }),
 		html({
 			minify: true,
 		}),

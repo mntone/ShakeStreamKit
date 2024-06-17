@@ -1,34 +1,74 @@
-import { FormattedMessage } from 'react-intl'
+import { FormatDateOptions, useIntl } from 'react-intl'
 import { connect } from 'react-redux'
 
 import { createSelector } from '@reduxjs/toolkit'
 
-import type { ShakeEvent, ShakeGameUpdateEvent } from '@/telemetry/model'
+import { Select, SelectItem } from '@/core/components/Select'
+import { type WaveType, isDefaultWave } from '@/core/utils/wave'
 
 import type { AppDispatch, RootState } from 'app/store'
 
-import { hideEggGraph, showEggGraph } from '../../slicers'
+import { hideEggGraph, setMatch, showEggGraph } from '../../slicers'
 
-import WaveButton, { type WaveData } from './WaveButton'
+import WaveButton from './WaveButton'
 import OverlayControllerMessages from './messages'
 
+const opts: FormatDateOptions = Object.freeze({
+	year: 'numeric',
+	month: 'short',
+	day: 'numeric',
+	hour: '2-digit',
+	minute: '2-digit',
+})
+
 interface OverlayControllerProps {
-	wave?: WaveData
-	waves: WaveData[]
+	readonly matches: readonly {
+		readonly id: string
+		readonly timestamp: number
+	}[]
+	readonly match?: string
+	changeMatch(id: string): void
+
+	readonly waves: readonly WaveType[]
+	readonly wave?: WaveType
 	hide(): void
-	show(wave: WaveData): void
+	show(wave: WaveType): void
 }
 
-export const OverlayController = ({ wave: selectedWave, waves, hide, show }: OverlayControllerProps) => {
+export const OverlayController = (props: OverlayControllerProps) => {
+	const {
+		matches,
+		match: selectedMatch,
+		waves,
+		wave: selectedWave,
+
+		changeMatch,
+		hide,
+		show,
+	} = props
+
+	const intl = useIntl()
+
 	return (
 		<>
+			<Select
+				value={selectedMatch}
+				placeholder='Select Match'
+				onValueChange={changeMatch}
+			>
+				{matches.map(({ id, timestamp }) => (
+					<SelectItem key={id} value={id}>
+						{intl.formatDate(timestamp, opts)}
+					</SelectItem>
+				))}
+			</Select>
 			<button
 				type='button'
 				className='Button'
 				disabled={selectedWave === undefined}
 				onClick={hide}
 			>
-				<FormattedMessage {...OverlayControllerMessages.hideOverlay} />
+				{intl.formatMessage(OverlayControllerMessages.hideOverlay)}
 			</button>
 			{waves.map(wave => (
 				<WaveButton
@@ -42,29 +82,53 @@ export const OverlayController = ({ wave: selectedWave, waves, hide, show }: Ove
 	)
 }
 
+const selectMatches = createSelector(
+	(state: RootState) => state.telemetry,
+	telemetry => {
+		const matches = Object.values(telemetry).map(t => {
+			return Object.freeze({
+				id: t.id,
+				timestamp: 1000 * t.timestamp,
+			})
+		})
+		return Object.freeze(matches)
+	},
+)
+
 const selectWaves = createSelector(
-	(state: RootState) => state.telemetry.payload,
-	(t: ShakeEvent[]) => {
-		const telemetry = t.filter(t => t.event === 'game_update' && t.wave !== 'extra' && t.wave > 0) as ShakeGameUpdateEvent[]
-		return telemetry.length !== 0
-			? Array.from({ length: telemetry[telemetry.length - 1].wave as number }, (_, i) => i + 1)
-			: []
+	(state: RootState) => state.overlay.match,
+	(state: RootState) => state.telemetry,
+	(matchId, telemetry) => {
+		if (matchId === undefined) {
+			return []
+		}
+
+		const waves = telemetry[matchId].waves
+			.map(wave => wave.wave)
+			.filter(isDefaultWave)
+			.sort()
+		return Object.freeze(waves)
 	},
 )
 
 const mapStateToProps = (state: RootState) => {
 	return {
-		wave: state.overlay.wave,
+		matches: selectMatches(state),
+		match: state.overlay.match,
 		waves: selectWaves(state),
+		wave: state.overlay.wave,
 	}
 }
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
 	return {
+		changeMatch(session: string) {
+			dispatch(setMatch(session))
+		},
 		hide() {
 			dispatch(hideEggGraph())
 		},
-		show(wave: WaveData) {
+		show(wave: WaveType) {
 			dispatch(showEggGraph(wave))
 		},
 	}
