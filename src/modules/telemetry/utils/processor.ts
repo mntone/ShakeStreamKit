@@ -11,23 +11,17 @@ export class TelemetryProcessor {
 	// New context flag
 	#newContext: boolean = true
 
-	// Current session ID
-	#session: string = undefined as any
+	// Quota mode counter
+	readonly #quotaCounter: FrequencyCounter<number> = new FrequencyCounter()
 
-	// Reset count
+	// Base count; use this value as base of this.#waveData.startTimestamp
 	#baseCount: number = 110
-
-	// Base count from base timestamp
-	#startCount: number = 0
 
 	// Current wave
 	#currentWave: number = 0
 
-	// Quota mode counter
-	#quotaCounter: FrequencyCounter<number> = new FrequencyCounter()
-
 	// Raw event storage
-	#storage: ShakeEvent[] = undefined as any
+	readonly #storage: ShakeEvent[] = []
 
 	// Telemetry data
 	#data: ShakeTelemetry = undefined as any
@@ -50,11 +44,12 @@ export class TelemetryProcessor {
 
 		// Reset initial state
 		this.#newContext = true
-		this.#session = ev.session
+
+		this.#quotaCounter.reset()
 		this.#baseCount = 110
-		this.#startCount = 0
 		this.#currentWave = 0
-		this.#storage = []
+
+		this.#storage.length = 0
 		this.#data = {
 			id: ev.session,
 			timestamp: ev.timestamp,
@@ -79,19 +74,21 @@ export class TelemetryProcessor {
 		if (this.#currentWave !== currentWave && this.#waveData !== undefined) {
 			// N sec have not elapsed since base time
 			const diffTimestamp = ev.timestamp - this.#waveData.startTimestamp
-			if (diffTimestamp <= this.#startCount) {
+			if (diffTimestamp <= this.#baseCount) {
 				currentWave = this.#currentWave  // Restore
 			} else {
 				// The "wave" is clearly strange
-				if (ev.wave < 1 || ev.wave > 5) {
+				const nextWave = this.#currentWave + Math.min(5, Math.floor(diffTimestamp / 108))
+				if (ev.wave < this.#currentWave || ev.wave > nextWave) {
 					return // DISPOSE!!
 				}
 			}
 		}
 
 		if (this.#currentWave !== currentWave) {
-			// Detect new wave
-			this.#quotaCounter = new FrequencyCounter(ev.quota)
+			this.#quotaCounter.reset(ev.quota)
+			this.#baseCount = ev.count
+			this.#currentWave = currentWave
 
 			// Create new wave data
 			const newWaveData: ShakeDefaultWave = {
@@ -108,10 +105,6 @@ export class TelemetryProcessor {
 					},
 				],
 			} as const
-
-			this.#baseCount = 0
-			this.#startCount = ev.count
-			this.#currentWave = currentWave
 			this.#data.waves.push(newWaveData)
 			this.#waveData = newWaveData
 			return
@@ -120,10 +113,6 @@ export class TelemetryProcessor {
 		// Update wave
 		const currentWaveData = this.#waveData
 		switch (ev.count) {
-		case 100:
-			this.#baseCount = 100
-			currentWaveData.startTimestamp = ev.timestamp
-			break
 		case 0:
 			if (currentWaveData.endTimestamp === undefined) {
 				this.#baseCount = 0
@@ -138,7 +127,6 @@ export class TelemetryProcessor {
 			}
 			break
 		}
-		currentWaveData.amount = ev.amount
 		currentWaveData.quota = this.#quotaCounter.add(ev.quota).mode
 
 		// Check diff >= 0
@@ -159,6 +147,9 @@ export class TelemetryProcessor {
 			return // DISPOSE!!
 		}
 
+		// Update amount to wave data
+		currentWaveData.amount = ev.amount
+
 		// Create new update data
 		const newUpdateData: ShakeUpdate = {
 			timestamp: ev.timestamp,
@@ -171,7 +162,7 @@ export class TelemetryProcessor {
 
 	process(ev: Readonly<ShakeEvent>) {
 		// Reset context when matchmaking or different session ID
-		if (ev.event === 'matchmaking' || ev.session !== this.#session) {
+		if (ev.event === 'matchmaking' || ev.session !== this.#data?.id) {
 			this.resetContext(ev)
 		}
 

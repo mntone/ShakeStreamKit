@@ -30,6 +30,17 @@ export class FrequencyCounter<T> {
 		return this
 	}
 
+	reset(initialValue?: T) {
+		this.#frequencyMap.clear()
+		if (initialValue) {
+			this.#mode = initialValue
+			this.#maxFrequency = 1
+		} else {
+			this.#mode = undefined
+			this.#maxFrequency = 0
+		}
+	}
+
 	get mode(): T {
 		if (this.#mode === undefined) {
 			throw Error('Mode value is undefined.')
