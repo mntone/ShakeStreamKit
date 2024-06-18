@@ -12,10 +12,12 @@ config()
 config({ path: '.env.local', override: true })
 
 export default defineConfig({
+	base: '/shake-streamkit/',
 	build: {
 		target: ['esnext', 'chrome103', 'safari16'],
 		assetsDir: 'a',
 		cssMinify: 'lightningcss',
+		reportCompressedSize: false,
 		rollupOptions: {
 			output: {
 				generatedCode: {
