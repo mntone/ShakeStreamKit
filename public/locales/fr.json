@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "Réglages",
 	"Dialog.openSettings": "Ouvrir les réglages",
+
+	"Dialog.advanced": "Avancé",
+	"Dialog.advanced.displayDuration": "Durée d'affichage pour la superposition",
+	"Dialog.advanced.displayDurationUnit": "sec",
 
 	"Dialog.data": "Données",
 	"Dialog.dataSource": "Source de données",
@@ -22,13 +27,13 @@
 	"Dialog.development.broadcastMode.enabled": "Activé",
 	"Dialog.development.broadcastSoftware": "Logiciel de diffusion : {software}",
 
-	"Dialog.settings": "Réglages",
-	"Dialog.settings.overlay": "Superposition",
-	"Dialog.settings.autoHide": "Masquer la superposition automatiquement",
-	"Dialog.settings.showOverlayOn": "Afficher la superposition lors de : ",
-	"Dialog.settings.showOverlayOn.quotaMet": "Quota atteint",
-	"Dialog.settings.showOverlayOn.waveFinished": "Vague terminée",
-	"Dialog.settings.language": "Langue",
+	"Dialog.general": "Général",
+	"Dialog.general.overlay": "Superposition",
+	"Dialog.general.autoHide": "Masquer la superposition automatiquement",
+	"Dialog.general.showOverlayOn": "Afficher la superposition lors de : ",
+	"Dialog.general.showOverlayOn.quotaMet": "Quota atteint",
+	"Dialog.general.showOverlayOn.waveFinished": "Vague terminée",
+	"Dialog.general.language": "Langue",
 
 	"EggGraph.quota": "Quota",
 	"EggGraph.wave": "Vague <big>{wave}</big>",

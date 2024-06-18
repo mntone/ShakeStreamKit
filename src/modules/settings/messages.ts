@@ -1,9 +1,26 @@
 import { defineMessages } from 'react-intl'
 
 const DialogMessages = defineMessages({
+	settings: {
+		id: 'Dialog.settings',
+		defaultMessage: 'Settings',
+	},
 	openSettings: {
 		id: 'Dialog.openSettings',
 		defaultMessage: 'Open Settings',
+	},
+
+	advanced: {
+		id: 'Dialog.advanced',
+		defaultMessage: 'Advanced',
+	},
+	advancedDisplayDuration: {
+		id: 'Dialog.advanced.displayDuration',
+		defaultMessage: 'Display Duration for Overlay',
+	},
+	advancedDisplayDurationUnit: {
+		id: 'Dialog.advanced.displayDurationUnit',
+		defaultMessage: 'sec',
 	},
 
 	dataSource: {
@@ -83,32 +100,32 @@ const DialogMessages = defineMessages({
 		defaultMessage: 'Log',
 	},
 
-	settings: {
-		id: 'Dialog.settings',
-		defaultMessage: 'Settings',
+	general: {
+		id: 'Dialog.general',
+		defaultMessage: 'General',
 	},
-	settingsOverlay: {
-		id: 'Dialog.settings.overlay',
+	generalOverlay: {
+		id: 'Dialog.general.overlay',
 		defaultMessage: 'Overlay',
 	},
-	settingsAutoHide: {
-		id: 'Dialog.settings.autoHide',
+	generalAutoHide: {
+		id: 'Dialog.general.autoHide',
 		defaultMessage: 'Hide overlay automatically',
 	},
-	settingsShowOverlayOn: {
-		id: 'Dialog.settings.showOverlayOn',
+	generalShowOverlayOn: {
+		id: 'Dialog.general.showOverlayOn',
 		defaultMessage: 'Show Overlay on:',
 	},
-	settingsShowOverlayOnQuotaMet: {
-		id: 'Dialog.settings.showOverlayOn.quotaMet',
+	generalShowOverlayOnQuotaMet: {
+		id: 'Dialog.general.showOverlayOn.quotaMet',
 		defaultMessage: 'Quota Met',
 	},
-	settingsShowOverlayOnWaveFinished: {
-		id: 'Dialog.settings.showOverlayOn.waveFinished',
+	generalShowOverlayOnWaveFinished: {
+		id: 'Dialog.general.showOverlayOn.waveFinished',
 		defaultMessage: 'Wave Finished',
 	},
-	settingsLanguage: {
-		id: 'Dialog.settings.language',
+	generalLanguage: {
+		id: 'Dialog.general.language',
 		defaultMessage: 'Language',
 	},
 })

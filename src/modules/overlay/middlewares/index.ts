@@ -71,7 +71,9 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 					// Whether to hide overlay automatically
 					const autoHide = state.config.autoHide !== false
 					if (autoHide) {
-						const delayInSeconds = waveFinished ? 12 : 3
+						const delayInSeconds = waveFinished
+							? state.config.notifyOnWaveFinishedDuration ?? 12
+							: state.config.notifyOnQuotaMetDuration ?? 3
 						store.dispatch(hideEggGraphDelayed(delayInSeconds) as any)
 					}
 				}

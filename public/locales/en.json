@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "Settings",
 	"Dialog.openSettings": "Open Settings",
+
+	"Dialog.advanced": "Advanced",
+	"Dialog.advanced.displayDuration": "Display Duration for Overlay",
+	"Dialog.advanced.displayDurationUnit": "sec",
 
 	"Dialog.data": "Data",
 	"Dialog.dataSource": "Data Source",
@@ -21,13 +26,13 @@
 	"Dialog.development.broadcastMode.enabled": "Enabled",
 	"Dialog.development.broadcastSoftware": "Broadcast Software: {software}",
 
-	"Dialog.settings": "Settings",
-	"Dialog.settings.overlay": "Overlay",
-	"Dialog.settings.autoHide": "Hide overlay automatically",
-	"Dialog.settings.showOverlayOn": "Show Overlay on:",
-	"Dialog.settings.showOverlayOn.quotaMet": "Quota Met",
-	"Dialog.settings.showOverlayOn.waveFinished": "Wave Finished",
-	"Dialog.settings.language": "Language",
+	"Dialog.general": "General",
+	"Dialog.general.overlay": "Overlay",
+	"Dialog.general.autoHide": "Hide overlay automatically",
+	"Dialog.general.showOverlayOn": "Show Overlay on:",
+	"Dialog.general.showOverlayOn.quotaMet": "Quota Met",
+	"Dialog.general.showOverlayOn.waveFinished": "Wave Finished",
+	"Dialog.general.language": "Language",
 
 	"EggGraph.quota": "Quota",
 	"EggGraph.wave": "Wave <big>{wave}</big>",

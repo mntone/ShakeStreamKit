@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "設定",
 	"Dialog.openSettings": "設定を開く",
+
+	"Dialog.advanced": "詳細",
+	"Dialog.advanced.displayDuration": "オーバーレイの表示時間",
+	"Dialog.advanced.displayDurationUnit": "秒",
 
 	"Dialog.data": "データ",
 	"Dialog.dataSource": "データソース",
@@ -21,13 +26,13 @@
 	"Dialog.development.broadcastMode.enabled": "有効",
 	"Dialog.development.broadcastSoftware": "配信ソフト: {software}",
 
-	"Dialog.settings": "設定",
-	"Dialog.settings.overlay": "オーバーレイ",
-	"Dialog.settings.autoHide": "オーバーレイを自動で非表示にする",
-	"Dialog.settings.showOverlayOn": "次の状態でオーバーレイを表示する",
-	"Dialog.settings.showOverlayOn.quotaMet": "ノルマクリア",
-	"Dialog.settings.showOverlayOn.waveFinished": "WAVE終了",
-	"Dialog.settings.language": "言語",
+	"Dialog.general": "一般",
+	"Dialog.general.overlay": "オーバーレイ",
+	"Dialog.general.autoHide": "オーバーレイを自動で非表示にする",
+	"Dialog.general.showOverlayOn": "次の状態でオーバーレイを表示する",
+	"Dialog.general.showOverlayOn.quotaMet": "ノルマクリア",
+	"Dialog.general.showOverlayOn.waveFinished": "WAVE終了",
+	"Dialog.general.language": "言語",
 
 	"EggGraph.quota": "ノルマ",
 	"EggGraph.wave": "WAVE<big>{wave}</big> ",

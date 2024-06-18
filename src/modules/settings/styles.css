@@ -46,7 +46,7 @@ body:not(.env-nonblur) .Dialog-content {
 	flex-shrink: 0;
 	gap: 2px;
 
-	padding: calc(20px + 3.5em) 8px 20px 8px;
+	padding: calc(40px + 1.875em) 8px;
 
 	width: 25%;
 	max-width: 140px;
@@ -100,12 +100,16 @@ body:not(.env-nonblur) .Dialog-content {
 .Form-title {
 	margin: 0;
 
+	font-size: 1.5em;
+	font-weight: normal;
+	line-height: 1.25;
+
 	user-select: none;
 }
 
 .Form-group {
 	display: block;
-	margin: 1.25em 0 0;
+	margin: 20px 0 0;
 
 	user-select: none;
 }

@@ -8,7 +8,9 @@ interface ConfigState {
 	cameraId?: string
 	language?: string
 	notifyOnQuotaMet?: boolean
+	notifyOnQuotaMetDuration?: number
 	notifyOnWaveFinished?: boolean
+	notifyOnWaveFinishedDuration?: number
 	server?: string
 }
 
@@ -32,8 +34,14 @@ const configSlice = createSlice({
 		setNotifyOnQuotaMet(state, action: PayloadAction<boolean | undefined>) {
 			state.notifyOnQuotaMet = action.payload
 		},
+		setNotifyOnQuotaMetDuration(state, action: PayloadAction<number | undefined>) {
+			state.notifyOnQuotaMetDuration = action.payload
+		},
 		setNotifyOnWaveFinished(state, action: PayloadAction<boolean | undefined>) {
 			state.notifyOnWaveFinished = action.payload
+		},
+		setNotifyOnWaveFinishedDuration(state, action: PayloadAction<number | undefined>) {
+			state.notifyOnWaveFinishedDuration = action.payload
 		},
 		setServer(state, action: PayloadAction<string | undefined>) {
 			const server = action.payload
@@ -59,7 +67,9 @@ export const {
 	setCameraId,
 	setLanguage,
 	setNotifyOnQuotaMet,
+	setNotifyOnQuotaMetDuration,
 	setNotifyOnWaveFinished,
+	setNotifyOnWaveFinishedDuration,
 	setServer,
 } = configSlice.actions
 export default persistConfigReducer

@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "Ajustes",
 	"Dialog.openSettings": "Abrir ajustes",
+
+	"Dialog.advanced": "Avanzado",
+	"Dialog.advanced.displayDuration": "Duración de visualización para la superposición",
+	"Dialog.advanced.displayDurationUnit": "seg",
 
 	"Dialog.data": "Datos",
 	"Dialog.dataSource": "Fuente de datos",
@@ -21,13 +26,13 @@
 	"Dialog.development.broadcastMode.enabled": "Activado",
 	"Dialog.development.broadcastSoftware": "Software de difusión: {software}",
 
-	"Dialog.settings": "Ajustes",
-	"Dialog.settings.overlay": "Superposición",
-	"Dialog.settings.autoHide": "Cerrar superposición automáticamente",
-	"Dialog.settings.showOverlayOn": "Mostrar superposición en:",
-	"Dialog.settings.showOverlayOn.quotaMet": "Cupo completo",
-	"Dialog.settings.showOverlayOn.waveFinished": "Ofensiva finalizada",
-	"Dialog.settings.language": "Idioma",
+	"Dialog.general": "General",
+	"Dialog.general.overlay": "Superposición",
+	"Dialog.general.autoHide": "Cerrar superposición automáticamente",
+	"Dialog.general.showOverlayOn": "Mostrar superposición en:",
+	"Dialog.general.showOverlayOn.quotaMet": "Cupo completo",
+	"Dialog.general.showOverlayOn.waveFinished": "Ofensiva finalizada",
+	"Dialog.general.language": "Idioma",
 
 	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Ofensiva <big>{wave}</big>",

@@ -4,13 +4,13 @@ import { useAppSelector } from 'app/hooks'
 
 import DialogMessages from '../messages'
 
-const opts: FormatDateOptions = {
+const opts: FormatDateOptions = Object.freeze({
 	month: 'short',
 	day: 'numeric',
 	hour: '2-digit',
 	minute: '2-digit',
 	second: '2-digit',
-}
+})
 
 const LogPage = () => {
 	const intl = useIntl()

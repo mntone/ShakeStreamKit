@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "설정",
 	"Dialog.openSettings": "설정 열기",
+
+	"Dialog.advanced": "고급",
+	"Dialog.advanced.displayDuration": "오버레이 표시 시간",
+	"Dialog.advanced.displayDurationUnit": "초",
 
 	"Dialog.data": "데이터",
 	"Dialog.dataSource": "데이터 소스",
@@ -21,13 +26,13 @@
 	"Dialog.development.broadcastMode.enabled": "켜기",
 	"Dialog.development.broadcastSoftware": "방송 소프트웨어: {software}",
 
-	"Dialog.settings": "설정",
-	"Dialog.settings.overlay": "오버레이",
-	"Dialog.settings.autoHide": "오버레이 자동으로 끄기",
-	"Dialog.settings.showOverlayOn": "다음 상태에서 오버레이 표시하기:",
-	"Dialog.settings.showOverlayOn.quotaMet": "할당량 클리어",
-	"Dialog.settings.showOverlayOn.waveFinished": "WAVE 완료",
-	"Dialog.settings.language": "언어",
+	"Dialog.general": "일반",
+	"Dialog.general.overlay": "오버레이",
+	"Dialog.general.autoHide": "오버레이 자동으로 끄기",
+	"Dialog.general.showOverlayOn": "다음 상태에서 오버레이 표시하기:",
+	"Dialog.general.showOverlayOn.quotaMet": "할당량 클리어",
+	"Dialog.general.showOverlayOn.waveFinished": "WAVE 완료",
+	"Dialog.general.language": "언어",
 
 	"EggGraph.quota": "할당량",
 	"EggGraph.wave": "WAVE <big>{wave}</big>",

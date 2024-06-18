@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "設定",
 	"Dialog.openSettings": "開啟設定",
+
+	"Dialog.advanced": "高級",
+	"Dialog.advanced.displayDuration": "疊加顯示時長",
+	"Dialog.advanced.displayDurationUnit": "秒",
 
 	"Dialog.data": "資料",
 	"Dialog.dataSource": "資料來源",
@@ -21,13 +26,13 @@
 	"Dialog.development.broadcastMode.enabled": "啟用",
 	"Dialog.development.broadcastSoftware": "廣播軟體：{software}",
 
-	"Dialog.settings": "設定",
-	"Dialog.settings.overlay": "疊加",
-	"Dialog.settings.autoHide": "自動隱藏疊加層",
-	"Dialog.settings.showOverlayOn": "在以下情況下顯示疊加：",
-	"Dialog.settings.showOverlayOn.quotaMet": "目標配額達成",
-	"Dialog.settings.showOverlayOn.waveFinished": "WAVE結束",
-	"Dialog.settings.language": "語言",
+	"Dialog.general": "一般",
+	"Dialog.general.overlay": "疊加",
+	"Dialog.general.autoHide": "自動隱藏疊加層",
+	"Dialog.general.showOverlayOn": "在以下情況下顯示疊加：",
+	"Dialog.general.showOverlayOn.quotaMet": "目標配額達成",
+	"Dialog.general.showOverlayOn.waveFinished": "WAVE結束",
+	"Dialog.general.language": "語言",
 
 	"EggGraph.quota": "目標配額",
 	"EggGraph.wave": "WAVE<big>{wave}</big> ",

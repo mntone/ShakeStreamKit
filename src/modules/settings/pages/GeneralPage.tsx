@@ -16,7 +16,7 @@ import {
 	setNotifyOnWaveFinished,
 } from '../slicers'
 
-const SettingsPage = () => {
+const GeneralPage = () => {
 	const intl = useIntl()
 	const autoHide = useAppSelector(state => state.config.autoHide)
 	const notifyOnQuotaMet = useAppSelector(state => state.config.notifyOnQuotaMet)
@@ -42,45 +42,46 @@ const SettingsPage = () => {
 	return (
 		<>
 			<h2 className='Form-title'>
-				{intl.formatMessage(DialogMessages.settings)}
+				{intl.formatMessage(DialogMessages.general)}
 			</h2>
 
 			<section className='Form-group'>
 				<h3>
-					{intl.formatMessage(DialogMessages.settingsOverlay)}
+					{intl.formatMessage(DialogMessages.generalOverlay)}
 				</h3>
 				<CheckBox
 					id='autoHide'
 					checked={autoHide !== false}
 					onCheckedChange={handleAutoHide}
 				>
-					{intl.formatMessage(DialogMessages.settingsAutoHide)}
+					{intl.formatMessage(DialogMessages.generalAutoHide)}
 				</CheckBox>
 			</section>
 
 			<section className='Form-group'>
 				<h4>
-					{intl.formatMessage(DialogMessages.settingsShowOverlayOn)}
+					{intl.formatMessage(DialogMessages.generalShowOverlayOn)}
 				</h4>
 				<CheckBox
 					id='quotaMet'
 					checked={notifyOnQuotaMet === true}
 					onCheckedChange={handleNotifyOnQuotaMet}
 				>
-					{intl.formatMessage(DialogMessages.settingsShowOverlayOnQuotaMet)}
+					{intl.formatMessage(DialogMessages.generalShowOverlayOnQuotaMet)}
 				</CheckBox>
+
 				<CheckBox
 					id='waveFinished'
 					checked={notifyOnWaveFinished !== false}
 					onCheckedChange={handleNotifyOnWaveFinished}
 				>
-					{intl.formatMessage(DialogMessages.settingsShowOverlayOnWaveFinished)}
+					{intl.formatMessage(DialogMessages.generalShowOverlayOnWaveFinished)}
 				</CheckBox>
 			</section>
 
 			<section className='Form-group'>
 				<h3>
-					{intl.formatMessage(DialogMessages.settingsLanguage)}
+					{intl.formatMessage(DialogMessages.generalLanguage)}
 				</h3>
 				<LanguageSelector
 					language={language}
@@ -91,4 +92,4 @@ const SettingsPage = () => {
 	)
 }
 
-export default SettingsPage
+export default GeneralPage

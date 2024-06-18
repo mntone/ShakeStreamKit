@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "设置",
 	"Dialog.openSettings": "打开设置",
+
+	"Dialog.advanced": "高级",
+	"Dialog.advanced.displayDuration": "叠加显示时长",
+	"Dialog.advanced.displayDurationUnit": "秒",
 
 	"Dialog.data": "数据",
 	"Dialog.dataSource": "数据源",
@@ -20,14 +25,14 @@
 	"Dialog.development.broadcastMode.disabled": "禁用",
 	"Dialog.development.broadcastMode.enabled": "启用",
 	"Dialog.development.broadcastSoftware": "广播软件：{software}",
-	
-	"Dialog.settings": "设置",
-	"Dialog.settings.overlay": "叠加",
-	"Dialog.settings.autoHide": "自动隐藏叠加层",
-	"Dialog.settings.showOverlayOn": "在以下情况下显示叠加：",
-	"Dialog.settings.showOverlayOn.quotaMet": "达成目标配额",
-	"Dialog.settings.showOverlayOn.waveFinished": "WAVE结束",
-	"Dialog.settings.language": "语言",
+
+	"Dialog.general": "常规",
+	"Dialog.general.overlay": "叠加",
+	"Dialog.general.autoHide": "自动隐藏叠加层",
+	"Dialog.general.showOverlayOn": "在以下情况下显示叠加：",
+	"Dialog.general.showOverlayOn.quotaMet": "达成目标配额",
+	"Dialog.general.showOverlayOn.waveFinished": "WAVE结束",
+	"Dialog.general.language": "语言",
 
 	"EggGraph.quota": "目标配额",
 	"EggGraph.wave": "WAVE<big>{wave}</big> ",

@@ -7,6 +7,9 @@
 	--ctl-bg: #FFFFFF26;
 	--ctl-bg--hover: #FFF3;
 	--ctl-bg--disable: #FFFFFF09;
+	--ctl-bg-opaque-l2: #A9A9A9;
+	--ctl-bg-opaque-l2--hover: #BFBFBF;
+	--ctl-bg-opaque-l2--disable: #5D5D5D;
 	--ctl-bg-active: #FF8265CC;
 	--ctl-bg-active--hover: #FF8265;
 	--ctl-radius: 8px;
@@ -55,7 +58,10 @@ html:lang(zh-TW) body, span:lang(zh-TW) {
 	font-family: Oswald, 'PingFang TC', STHeitiTC, 'Heiti TC', '黒体-繁', 'Microsoft JhengHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 
-input, input::-webkit-file-upload-button, button {
+input,
+input::-webkit-file-upload-button,
+input::-webkit-slider-thumb,
+button {
 	appearance: none;
 	font-family: inherit;
 	font-size: inherit;
@@ -112,6 +118,52 @@ input, input::-webkit-file-upload-button, button {
 .TextBox::placeholder {
 	color: var(--fg-tertiary);
 }
+.TextBox[disabled] {
+	border-color: var(--ctl-st-secondary);
+	color: var(--fg-secondary);
+}
+
+.Slider {
+	box-sizing: border-box;
+	border-radius: var(--ctl-radius);
+	padding: 0 .25em;
+	outline: 2px solid transparent;
+
+	min-width: 160px;
+	height: 2em;
+
+	background-color: transparent;
+}
+.Slider:focus-visible {
+	outline-color: #FFFC;
+}
+.Slider::-webkit-slider-runnable-track {
+	box-sizing: border-box;
+	border-radius: var(--ctl-radius);
+	outline: 4px solid var(--ctl-bg--disable);
+	height: .666666em;
+	background-color: var(--ctl-bg);
+}
+.Slider[disabled]::-webkit-slider-runnable-track {
+	outline-color: transparent;
+	background-color: var(--ctl-bg--disable);
+}
+.Slider::-webkit-slider-thumb {
+	border-radius: 50%;
+
+	width: .666666em;
+	height: .666666em;
+
+	background-color: var(--ctl-bg-opaque-l2);
+
+	transform: scale(2.25);
+}
+.Slider::-webkit-slider-thumb:hover {
+	background-color: var(--ctl-bg-opaque-l2--hover);
+}
+.Slider[disabled]::-webkit-slider-thumb {
+	background-color: var(--ctl-bg-opaque-l2--disable);
+}
 
 .InputFlex-appendix {
 	flex-shrink: 0;
@@ -131,6 +183,12 @@ input, input::-webkit-file-upload-button, button {
 .InputFlex-appendix:last-child {
 	border-right-width: 1px;
 }
+.InputFlex-appendix-plain {
+	padding: .375em .75em;
+}
+.InputFlex-appendix-plain-narrow {
+	padding: .375em .5em;
+}
 
 .InputFlex {
 	box-sizing: border-box;
@@ -142,16 +200,24 @@ input, input::-webkit-file-upload-button, button {
 .InputFlex > .InputFlex-appendix:not(:first-child),
 .InputFlex > button:not(:first-child),
 .InputFlex > input:not(:first-child) {
+	padding-left: .625em;
+}
+.InputFlex:not(.InputFlex-nofit-corner) > .InputFlex-appendix:not(:first-child),
+.InputFlex:not(.InputFlex-nofit-corner) > button:not(:first-child),
+.InputFlex:not(.InputFlex-nofit-corner) > input:not(:first-child) {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
-	padding-left: .625em;
 }
 .InputFlex > .InputFlex-appendix:not(:last-child),
 .InputFlex > button:not(:last-child),
 .InputFlex > input:not(:last-child) {
+	padding-right: .625em;
+}
+.InputFlex:not(.InputFlex-nofit-corner) > .InputFlex-appendix:not(:last-child),
+.InputFlex:not(.InputFlex-nofit-corner) > button:not(:last-child),
+.InputFlex:not(.InputFlex-nofit-corner) > input:not(:last-child) {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	padding-right: .625em;
 }
 
 /* .InputFlex {

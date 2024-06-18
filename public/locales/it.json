@@ -1,5 +1,10 @@
 {
+	"Dialog.settings": "Impostazioni",
 	"Dialog.openSettings": "Apri impostazioni",
+
+	"Dialog.advanced": "Avanzate",
+	"Dialog.advanced.displayDuration": "Durata di visualizzazione per la sovrapposizione",
+	"Dialog.advanced.displayDurationUnit": "sec",
 
 	"Dialog.data": "Dati",
 	"Dialog.dataSource": "Fonte di dati",
@@ -21,13 +26,13 @@
 	"Dialog.development.broadcastMode.enabled": "Abilitata",
 	"Dialog.development.broadcastSoftware": "Software trasmissione: {software}",
 
-	"Dialog.settings": "Impostazioni",
-	"Dialog.settings.overlay": "Sovrapposizione",
-	"Dialog.settings.autoHide": "Nascondi automaticamente la sovrapposizione",
-	"Dialog.settings.showOverlayOn": "Mostra sovrapposizione su:",
-	"Dialog.settings.showOverlayOn.quotaMet": "Quota OK",
-	"Dialog.settings.showOverlayOn.waveFinished": "Ondata finita",
-	"Dialog.settings.language": "Lingua",
+	"Dialog.general": "Generale",
+	"Dialog.general.overlay": "Sovrapposizione",
+	"Dialog.general.autoHide": "Nascondi automaticamente la sovrapposizione",
+	"Dialog.general.showOverlayOn": "Mostra sovrapposizione su:",
+	"Dialog.general.showOverlayOn.quotaMet": "Quota OK",
+	"Dialog.general.showOverlayOn.waveFinished": "Ondata finita",
+	"Dialog.general.language": "Lingua",
 
 	"EggGraph.quota": "Quota",
 	"EggGraph.wave": "Ondata <big>{wave}</big>",
