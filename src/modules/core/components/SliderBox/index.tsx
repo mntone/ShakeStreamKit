@@ -46,8 +46,8 @@ const SliderBox = (props: SliderBoxProps) => {
 
 	const repeatFraction = step ? -Math.floor(Math.log10(step)) : 0
 	const pattern = repeatFraction >= 0
-		? `[-－]?[\\d０-９]+(?:[\\.．,，][\\d０-９]{0,${repeatFraction}})?`
-		: '[-－]?[\\d０-９]+'
+		? `[\\-－ー]?[\\d０-９]+(?:[\\.．,，][\\d０-９]{0,${repeatFraction}})?`
+		: '[\\-－ー]?[\\d０-９]+'
 
 	const opts: FormatNumberOptions | undefined = repeatFraction > 0
 		? { minimumFractionDigits: repeatFraction }

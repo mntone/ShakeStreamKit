@@ -55,7 +55,7 @@ const AdvancedPage = () => {
 					{intl.formatMessage(DialogMessages.generalShowOverlayOnWaveFinished)}
 				</h4>
 				<SliderBox
-					disabled={!notifyOnWaveFinished}
+					disabled={notifyOnWaveFinished === false}
 					min={0.1}
 					max={15}
 					step={0.1}

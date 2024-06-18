@@ -161,6 +161,9 @@ button {
 .Slider::-webkit-slider-thumb:hover {
 	background-color: var(--ctl-bg-opaque-l2--hover);
 }
+.Slider::-webkit-slider-thumb:active {
+	background-color: var(--ctl-bg-active--hover);
+}
 .Slider[disabled]::-webkit-slider-thumb {
 	background-color: var(--ctl-bg-opaque-l2--disable);
 }
