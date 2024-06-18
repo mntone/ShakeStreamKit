@@ -36,7 +36,7 @@ const App = () => {
 
 			<NotificationController />
 
-			<div className='App-ui App-buttons'>
+			<div className='App-ui'>
 				<SettingsWindow />
 				<OverlayController />
 

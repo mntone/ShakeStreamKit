@@ -1,11 +1,9 @@
-.App-buttons {
+.App-ui {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: end;
 	gap: 8px;
-}
 
-.App-ui {
 	padding: 4px 12px;
 
 	color: #FFF;

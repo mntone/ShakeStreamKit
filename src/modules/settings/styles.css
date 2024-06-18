@@ -30,8 +30,8 @@
 }
 body:not(.env-nonblur) .Dialog-content {
 	background-color: var(--wnd-bg);
-	backdrop-filter: var(--wnd-backdrop);
 	-webkit-backdrop-filter: var(--wnd-backdrop);
+	backdrop-filter: var(--wnd-backdrop);
 }
 
 .Dialog-tab {
