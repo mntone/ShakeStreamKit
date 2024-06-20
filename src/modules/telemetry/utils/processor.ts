@@ -76,16 +76,24 @@ export class TelemetryProcessor {
 			const diffTimestamp = ev.timestamp - this.#waveData.startTimestamp
 			if (diffTimestamp <= this.#baseCount) {
 				currentWave = this.#currentWave  // Restore
-			} else {
+			} else if (currentWave !== undefined) {
 				// The "wave" is clearly strange
 				const nextWave = this.#currentWave + Math.min(5, Math.floor(diffTimestamp / 108))
-				if (ev.wave < this.#currentWave || ev.wave > nextWave) {
+				if (currentWave < this.#currentWave || currentWave > nextWave) {
 					return // DISPOSE!!
 				}
+			} else {
+				return // DISPOSE!!
 			}
+		} else if (currentWave === undefined) {
+			return // DISPOSE!!
 		}
 
 		if (this.#currentWave !== currentWave) {
+			if (ev.count === undefined) {
+				return // DISPOSE!!
+			}
+
 			this.#quotaCounter.reset(ev.quota)
 			this.#baseCount = ev.count
 			this.#currentWave = currentWave
@@ -94,13 +102,13 @@ export class TelemetryProcessor {
 			const newWaveData: ShakeDefaultWave = {
 				wave: currentWave as DefaultWaveType,
 				startTimestamp: ev.timestamp,
-				amount: ev.amount,
+				amount: ev.amount ?? 0 /* MAYBE 0 */,
 				quota: this.#quotaCounter.mode,
 				updates: [
 					{
 						timestamp: ev.timestamp,
 						count: ev.count,
-						amount: ev.amount,
+						amount: ev.amount ?? 0 /* MAYBE 0 */,
 						unstable: ev.unstable,
 					},
 				],
@@ -120,6 +128,8 @@ export class TelemetryProcessor {
 				currentWaveData.endTimestamp = ev.timestamp
 			}
 			break
+		case undefined:
+			break
 		default:
 			if (this.#baseCount >= 100) {
 				this.#baseCount = ev.count
@@ -133,6 +143,10 @@ export class TelemetryProcessor {
 		const lastUpdate = currentWaveData.updates.at(-1)
 		if (lastUpdate === undefined) {
 			throw Error('Wave update is empty.')
+		}
+
+		if (ev.amount === undefined) {
+			return // DISPOSE!!
 		}
 
 		const diffAmount = ev.amount - lastUpdate.amount
@@ -153,7 +167,7 @@ export class TelemetryProcessor {
 		// Create new update data
 		const newUpdateData: ShakeUpdate = {
 			timestamp: ev.timestamp,
-			count: ev.count,
+			count: ev.count ?? Math.floor(currentWaveData.startTimestamp - ev.timestamp + 100),
 			amount: ev.amount,
 			unstable: ev.unstable,
 		} as const

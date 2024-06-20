@@ -23,11 +23,11 @@ export type ShakeGameKingEvent = ShakeBaseEvent & {
 export type ShakeGameUpdateEvent = ShakeBaseEvent & {
 	event: 'game_update'
 	color: ShakeColor
-	count: number
+	count?: number
 	unstable: boolean
 } & ({
-	wave: number
-	amount: number
+	wave?: number
+	amount?: number
 	quota: number
 } | {
 	wave: 'extra'
