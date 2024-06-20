@@ -65,22 +65,25 @@ const mapStateToProps = (state: RootState) => {
 	const wave = state.overlay.wave
 	if (!isDefaultWave(wave)) {
 		return {
+			colorLock: state.config.colorLock,
 			visible: false,
-		} satisfies Pick<OverlayEggGraphProps, 'visible'>
+		} satisfies Pick<OverlayEggGraphProps, 'colorLock' | 'visible'>
 	}
 
 	const telemetry = selectData(state)
 	if (!telemetry) {
 		return {
+			colorLock: state.config.colorLock,
 			visible: false,
-		} satisfies Pick<OverlayEggGraphProps, 'visible'>
+		} satisfies Pick<OverlayEggGraphProps, 'colorLock' | 'visible'>
 	}
 
 	return {
+		colorLock: state.config.colorLock,
 		telemetry,
 		visible: true,
 		wave,
-	} satisfies Pick<OverlayEggGraphProps, 'telemetry' | 'visible' | 'wave'>
+	} satisfies Pick<OverlayEggGraphProps, 'colorLock' | 'telemetry' | 'visible' | 'wave'>
 }
 
 export default connect(

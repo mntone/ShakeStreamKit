@@ -7,6 +7,7 @@
 	"Dialog.advanced.displayDurationUnit": "초",
 	"Dialog.advanced.otherOptions": "기타 옵션",
 	"Dialog.advanced.reduceAnimations": "애니메이션 줄이기",
+	"Dialog.advanced.colorLock": "색각 서포트",
 
 	"Dialog.data": "데이터",
 	"Dialog.dataSource": "데이터 소스",

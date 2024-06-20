@@ -7,6 +7,7 @@
 	"Dialog.advanced.displayDurationUnit": "秒",
 	"Dialog.advanced.otherOptions": "その他のオプション",
 	"Dialog.advanced.reduceAnimations": "アニメーションを減らす",
+	"Dialog.advanced.colorLock": "色覚サポート",
 
 	"Dialog.data": "データ",
 	"Dialog.dataSource": "データソース",

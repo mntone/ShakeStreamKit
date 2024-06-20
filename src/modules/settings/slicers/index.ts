@@ -5,6 +5,7 @@ import storage from 'redux-persist/es/storage'
 // State
 interface ConfigState {
 	autoHide?: boolean
+	colorLock?: boolean
 	cameraId?: string
 	language?: string
 	notifyOnQuotaMet?: boolean
@@ -25,6 +26,9 @@ const configSlice = createSlice({
 	reducers: {
 		setAutoHide(state, action: PayloadAction<boolean>) {
 			state.autoHide = action.payload
+		},
+		setColorLock(state, action: PayloadAction<boolean | undefined>) {
+			state.colorLock = action.payload
 		},
 		setCameraId(state, action: PayloadAction<string | undefined>) {
 			state.cameraId = action.payload
@@ -68,6 +72,7 @@ const persistConfigReducer = persistReducer(persistConfig, configSlice.reducer)
 
 export const {
 	setAutoHide,
+	setColorLock,
 	setCameraId,
 	setLanguage,
 	setNotifyOnQuotaMet,

@@ -10,6 +10,7 @@ import { useAppSelector } from 'app/hooks'
 
 import DialogMessages from '../messages'
 import {
+	setColorLock,
 	setNotifyOnQuotaMetDuration,
 	setNotifyOnWaveFinishedDuration,
 	setReduced,
@@ -32,6 +33,8 @@ const AdvancedPage = () => {
 		}
 	}
 
+	const colorLocked = useAppSelector(state => state.config.colorLock) ?? false
+
 	const dispatch = useDispatch()
 	const handleNotifyOnQuotaMetDuration = useCallback((notifyOnQuotaMetDuration: number) => {
 		dispatch(setNotifyOnQuotaMetDuration(notifyOnQuotaMetDuration))
@@ -41,6 +44,9 @@ const AdvancedPage = () => {
 	}, [dispatch])
 	const handleReduced = useCallback((reduced: boolean) => {
 		dispatch(setReduced(reduced))
+	}, [dispatch])
+	const handleColorLock = useCallback((colorLocked: boolean) => {
+		dispatch(setColorLock(colorLocked))
 	}, [dispatch])
 
 	return (
@@ -89,6 +95,13 @@ const AdvancedPage = () => {
 					onCheckedChange={handleReduced}
 				>
 					{intl.formatMessage(DialogMessages.advancedReduceAnimations)}
+				</CheckBox>
+				<CheckBox
+					id='colorlock'
+					checked={colorLocked}
+					onCheckedChange={handleColorLock}
+				>
+					{intl.formatMessage(DialogMessages.advancedColorLock)}
 				</CheckBox>
 			</section>
 		</>

@@ -30,6 +30,10 @@ const DialogMessages = defineMessages({
 		id: 'Dialog.advanced.reduceAnimations',
 		defaultMessage: 'Reduce Animations',
 	},
+	advancedColorLock: {
+		id: 'Dialog.advanced.colorLock',
+		defaultMessage: 'Color Lock',
+	},
 
 	dataSource: {
 		id: 'Dialog.dataSource',

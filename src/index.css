@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
 :root {
-	--accent: #FF4F4B; /* #FF5033 */
 	--animation-enter: 167ms cubic-bezier(.1, .9, .2, 1);
 
 	--ctl-bg: #FFFFFF26;
@@ -24,6 +23,24 @@
 	--fg-tertiary: #FFF6;
 	--fg-pos: #6AF6CD;
 	--fg-neg: #FF5033;
+
+	--ink-default: #E64414 /* #C95431 */;
+	--ink-blue: #4E66FB /* #435BF3 */;
+	--ink-orange: #DE3E07 /* #C44b21 */;
+	--ink-pink: #EC1B84 /* #C64184 */;
+	--ink-purple: #8F53F8 /* #9361EA */;
+	--ink-sunyellow: #FAAA07 /* #DDA024 */;
+	--ink-yellow: #C3F517 /* #B4D933 */;
+	--ink-support-yellow: #E6D909 /* #DDD112 */;
+
+	--ink-default--neutral: #FBFB3B /* #E7E710 */;
+	--ink-blue--neutral: #FBF03B /* #E9DD14 */;
+	--ink-orange--neutral: #F4FB3B /* #DCE317 */;
+	--ink-pink--neutral: #FBF13B /* #E3D704 */;
+	--ink-purple--neutral: #F1FB3B /* #D3DD1E */;
+	--ink-sunyellow--neutral: #FB3BDF /* #E114C3 */;
+	--ink-yellow--neutral: #F23BFB /* #D611E0 */;
+	--ink-support-yellow--neutral: #FB3BF3 /* #ED12E4 */;
 
 	--wnd-bg: #272727CC;
 	--wnd-bg-nonblur: #272727E6;

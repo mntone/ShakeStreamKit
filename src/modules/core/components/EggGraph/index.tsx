@@ -36,6 +36,7 @@ export interface EggGraphSizeProps {
 }
 
 export interface EggGraphProps {
+	colorLock?: boolean
 	telemetry?: Readonly<ShakeTelemetry>
 	wave?: number
 }
@@ -87,6 +88,7 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 		marginRight,
 		marginBottom,
 
+		colorLock,
 		telemetry,
 		wave,
 	} = props
@@ -134,7 +136,9 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 	const quotaY = amountScale(waveData.quota)
 
 	return (
-		<div className={`EggGraph EggGraph-wave${waveData.wave}`}>
+		<div className={colorLock !== true && telemetry?.color
+			? `EggGraph EggGraph-wave${waveData.wave} EggGraph-ink-${telemetry.color}`
+			: `EggGraph EggGraph-wave${waveData.wave}`}>
 			<header>
 				<span className='EggGraph-wave'>
 					{intl.formatMessage(

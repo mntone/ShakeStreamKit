@@ -36,10 +36,10 @@
 	animation: showStatus 300ms 84ms ease-in-out;
 }
 .EggGraph-clear {
-	color: #6AF6CD;
+	color: var(--fg-pos);
 }
 .EggGraph-failure {
-	color: #FF5033;
+	color: var(--fg-neg);
 }
 
 .EggGraph-quota {
@@ -47,6 +47,40 @@
 	flex-shrink: 0;
 	color: #CCC;
 	text-align: right;
+}
+
+/* Color Assets */
+.EggGraph {
+	--ink: var(--ink-support-yellow);
+	--ink--neutral: var(--ink-support-yellow--neutral);
+}
+.EggGraph-ink-default {
+	--ink: var(--ink-default);
+	--ink--neutral: var(--ink-default--neutral);
+}
+.EggGraph-ink-blue {
+	--ink: var(--ink-blue);
+	--ink--neutral: var(--ink-blue--neutral);
+}
+.EggGraph-ink-orange {
+	--ink: var(--ink-orange);
+	--ink--neutral: var(--ink-orange--neutral);
+}
+.EggGraph-ink-pink {
+	--ink: var(--ink-pink);
+	--ink--neutral: var(--ink-pink--neutral);
+}
+.EggGraph-ink-purple {
+	--ink: var(--ink-purple);
+	--ink--neutral: var(--ink-purple--neutral);
+}
+.EggGraph-ink-sunyellow {
+	--ink: var(--ink-sunyellow);
+	--ink--neutral: var(--ink-sunyellow--neutral);
+}
+.EggGraph-ink-yellow {
+	--ink: var(--ink-yellow);
+	--ink--neutral: var(--ink-yellow--neutral);
 }
 
 /* Base */
@@ -86,12 +120,12 @@
 
 /* Line */
 .EggGraph-lines-quota line {
-	stroke: #EDFB3B;
+	stroke: var(--ink--neutral);
 	stroke-dasharray: 6 3;
 	stroke-width: 2px;
 }
 .EggGraph-lines-quota text {
-	fill: #EDFB3B;
+	fill: var(--ink--neutral);
 	font-size: .8em;
 	font-weight: bold;
 	text-anchor: start;
@@ -99,6 +133,6 @@
 
 /* Item */
 .EggGraph-item-line {
-	stroke: var(--accent);
+	stroke: var(--ink);
 	stroke-width: 3px;
 }
