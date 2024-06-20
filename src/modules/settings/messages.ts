@@ -22,6 +22,14 @@ const DialogMessages = defineMessages({
 		id: 'Dialog.advanced.displayDurationUnit',
 		defaultMessage: 'sec',
 	},
+	advancedOtherOptions: {
+		id: 'Dialog.advanced.otherOptions',
+		defaultMessage: 'Other Options',
+	},
+	advancedReduceAnimations: {
+		id: 'Dialog.advanced.reduceAnimations',
+		defaultMessage: 'Reduce Animations',
+	},
 
 	dataSource: {
 		id: 'Dialog.dataSource',

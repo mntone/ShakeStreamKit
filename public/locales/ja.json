@@ -5,6 +5,8 @@
 	"Dialog.advanced": "詳細",
 	"Dialog.advanced.displayDuration": "オーバーレイの表示時間",
 	"Dialog.advanced.displayDurationUnit": "秒",
+	"Dialog.advanced.otherOptions": "その他のオプション",
+	"Dialog.advanced.reduceAnimations": "アニメーションを減らす",
 
 	"Dialog.data": "データ",
 	"Dialog.dataSource": "データソース",

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
 import { useEnvironment } from '@/core/components/EnvironmentProvider'
+import { useBodyClass } from '@/core/hooks/bodyclass'
 import { loadLocale } from '@/core/utils/language'
 import NotificationController from '@/notification/components/NotificationController'
 import OverlayController from '@/overlay/components/OverlayController'
@@ -15,7 +16,10 @@ import { useAppSelector } from './hooks'
 const App = () => {
 	const [messages, setMessages] = useState(null)
 
-	const userLanguage = useEnvironment()?.lang ?? 'en'
+	useBodyClass()
+
+	const environment = useEnvironment()
+	const userLanguage = environment?.lang ?? 'en'
 	const lang = useAppSelector(state => state.config.language) ?? userLanguage
 	useEffect(() => {
 		const fetchMessages = async () => {
@@ -24,6 +28,7 @@ const App = () => {
 			setMessages(messages)
 		}
 		if (lang === 'en') {
+			document.documentElement.setAttribute('lang', 'en')
 			setMessages(null)
 		} else {
 			fetchMessages()

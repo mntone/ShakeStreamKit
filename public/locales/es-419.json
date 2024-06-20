@@ -5,6 +5,8 @@
 	"Dialog.advanced": "Avanzado",
 	"Dialog.advanced.displayDuration": "DuraciÃ³n de visualizaciÃ³n para la superposiciÃ³n",
 	"Dialog.advanced.displayDurationUnit": "seg",
+	"Dialog.advanced.otherOptions": "Otras opciones",
+	"Dialog.advanced.reduceAnimations": "Reducir animaciones",
 
 	"Dialog.data": "Datos",
 	"Dialog.dataSource": "Fuente de datos",
@@ -37,8 +39,8 @@
 	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Oleada <big>{wave}</big>",
 	"EggGraph.extraWave": "Oleada extra",
-	"EggGraph.clear": "âœ“",
-	"EggGraph.fail": "âœ˜",
+	"EggGraph.clear": "âÿÿ",
+	"EggGraph.fail": "âÿÿ",
 
 	"Dialog.log": "Registro",
 

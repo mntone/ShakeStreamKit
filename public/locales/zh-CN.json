@@ -5,6 +5,8 @@
 	"Dialog.advanced": "高级",
 	"Dialog.advanced.displayDuration": "叠加显示时长",
 	"Dialog.advanced.displayDurationUnit": "秒",
+	"Dialog.advanced.otherOptions": "其他选项",
+	"Dialog.advanced.reduceAnimations": "减少动画",
 
 	"Dialog.data": "数据",
 	"Dialog.dataSource": "数据源",

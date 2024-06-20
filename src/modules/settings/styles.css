@@ -33,6 +33,9 @@ body:not(.env-nonblur) .Dialog-content {
 	-webkit-backdrop-filter: var(--wnd-backdrop);
 	backdrop-filter: var(--wnd-backdrop);
 }
+.ax-reduced .Dialog-content {
+	animation: fadeIn 167ms ease-out;
+}
 
 .Dialog-tab {
 	display: flex;
@@ -95,6 +98,9 @@ body:not(.env-nonblur) .Dialog-content {
 	padding: 20px;
 
 	animation: tabContentShow 167ms ease-in-out;
+}
+.ax-reduced .Dialog-tabcontent {
+	animation: none;
 }
 
 .Form-title {

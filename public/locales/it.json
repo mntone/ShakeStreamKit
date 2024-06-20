@@ -5,6 +5,8 @@
 	"Dialog.advanced": "Avanzate",
 	"Dialog.advanced.displayDuration": "Durata di visualizzazione per la sovrapposizione",
 	"Dialog.advanced.displayDurationUnit": "sec",
+	"Dialog.advanced.otherOptions": "Altre opzioni",
+	"Dialog.advanced.reduceAnimations": "Riduci le animazioni",
 
 	"Dialog.data": "Dati",
 	"Dialog.dataSource": "Fonte di dati",

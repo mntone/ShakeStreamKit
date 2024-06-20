@@ -1,5 +1,6 @@
 import './styles.css'
 
+import { memo } from 'react'
 import { useIntl } from 'react-intl'
 
 import { XMarkIcon } from '@heroicons/react/16/solid'
@@ -76,4 +77,4 @@ const SettingsWindow = () => {
 	)
 }
 
-export default SettingsWindow
+export default memo(SettingsWindow)

@@ -2,6 +2,8 @@ import { useCallback } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch } from 'react-redux'
 
+import CheckBox from '@/core/components/CheckBox'
+import { useEnvironment } from '@/core/components/EnvironmentProvider'
 import SliderBox from '@/core/components/SliderBox'
 
 import { useAppSelector } from 'app/hooks'
@@ -10,6 +12,7 @@ import DialogMessages from '../messages'
 import {
 	setNotifyOnQuotaMetDuration,
 	setNotifyOnWaveFinishedDuration,
+	setReduced,
 } from '../slicers'
 
 const AdvancedPage = () => {
@@ -21,12 +24,23 @@ const AdvancedPage = () => {
 	const notifyOnWaveFinished = useAppSelector(state => state.config.notifyOnWaveFinished)
 	const notifyOnWaveFinishedDuration = useAppSelector(state => state.config.notifyOnWaveFinishedDuration) ?? 12.0
 
+	let reducedEnabled = useAppSelector(state => state.config.reduced)
+	if (reducedEnabled === undefined) {
+		reducedEnabled = useEnvironment()?.reduced
+		if (reducedEnabled === undefined) {
+			reducedEnabled = false
+		}
+	}
+
 	const dispatch = useDispatch()
 	const handleNotifyOnQuotaMetDuration = useCallback((notifyOnQuotaMetDuration: number) => {
 		dispatch(setNotifyOnQuotaMetDuration(notifyOnQuotaMetDuration))
 	}, [dispatch])
 	const handleNotifyOnWaveFinishedDuration = useCallback((notifyOnWaveFinishedDuration: number) => {
 		dispatch(setNotifyOnWaveFinishedDuration(notifyOnWaveFinishedDuration))
+	}, [dispatch])
+	const handleReduced = useCallback((reduced: boolean) => {
+		dispatch(setReduced(reduced))
 	}, [dispatch])
 
 	return (
@@ -63,6 +77,19 @@ const AdvancedPage = () => {
 					unit={unit}
 					onValueChange={handleNotifyOnWaveFinishedDuration}
 				/>
+			</section>
+
+			<section className='Form-group'>
+				<h3>
+					{intl.formatMessage(DialogMessages.advancedOtherOptions)}
+				</h3>
+				<CheckBox
+					id='reduced'
+					checked={reducedEnabled}
+					onCheckedChange={handleReduced}
+				>
+					{intl.formatMessage(DialogMessages.advancedReduceAnimations)}
+				</CheckBox>
 			</section>
 		</>
 	)

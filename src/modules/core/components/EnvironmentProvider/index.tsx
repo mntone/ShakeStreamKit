@@ -7,6 +7,7 @@ import { type BroadcastSoftwareInfo, detectBroadcast } from '../../utils/broadca
 interface EnvrionmentInfo {
 	broadcast?: BroadcastSoftwareInfo
 	lang: string
+	reduced: boolean
 	secure: boolean
 }
 
@@ -15,10 +16,11 @@ const EnvironmentContext = createContext<EnvrionmentInfo | undefined>(undefined)
 const EnvironmentProvider = ({ children }: PropsWithChildren) => {
 	const broadcast = detectBroadcast()
 	const lang = detectLanguage()
+	const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches
 	const secure = window.location.protocol === 'https:'
 	const environment: EnvrionmentInfo = broadcast
-		? { broadcast, lang, secure }
-		: { lang, secure }
+		? { broadcast, lang, reduced, secure }
+		: { lang, reduced, secure }
 
 	return (
 		<EnvironmentContext.Provider value={environment}>

@@ -5,6 +5,8 @@
 	"Dialog.advanced": "고급",
 	"Dialog.advanced.displayDuration": "오버레이 표시 시간",
 	"Dialog.advanced.displayDurationUnit": "초",
+	"Dialog.advanced.otherOptions": "기타 옵션",
+	"Dialog.advanced.reduceAnimations": "애니메이션 줄이기",
 
 	"Dialog.data": "데이터",
 	"Dialog.dataSource": "데이터 소스",

@@ -5,6 +5,8 @@
 	"Dialog.advanced": "Erweitert",
 	"Dialog.advanced.displayDuration": "Anzeigedauer für Overlay",
 	"Dialog.advanced.displayDurationUnit": "Sek.",
+	"Dialog.advanced.otherOptions": "Weitere Optionen",
+	"Dialog.advanced.reduceAnimations": "Animationen reduzieren",
 
 	"Dialog.data": "Daten",
 	"Dialog.dataSource": "Datenquelle",

@@ -11,6 +11,7 @@ interface ConfigState {
 	notifyOnQuotaMetDuration?: number
 	notifyOnWaveFinished?: boolean
 	notifyOnWaveFinishedDuration?: number
+	reduced?: boolean
 	server?: string
 }
 
@@ -43,6 +44,9 @@ const configSlice = createSlice({
 		setNotifyOnWaveFinishedDuration(state, action: PayloadAction<number | undefined>) {
 			state.notifyOnWaveFinishedDuration = action.payload
 		},
+		setReduced(state, action: PayloadAction<boolean | undefined>) {
+			state.reduced = action.payload
+		},
 		setServer(state, action: PayloadAction<string | undefined>) {
 			const server = action.payload
 			if (server && server != import.meta.env.VITE_WS_SERVER) {
@@ -70,6 +74,7 @@ export const {
 	setNotifyOnQuotaMetDuration,
 	setNotifyOnWaveFinished,
 	setNotifyOnWaveFinishedDuration,
+	setReduced,
 	setServer,
 } = configSlice.actions
 export default persistConfigReducer
