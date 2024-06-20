@@ -3,6 +3,7 @@ import { DefaultWaveType } from '@/core/utils/wave'
 import { ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate } from '../models/data'
 import { ShakeEvent, ShakeGameUpdateEvent } from '../models/telemetry'
 
+import { CounterAnomalyDetector } from './CounterAnomalyDetector'
 import { FrequencyCounter } from './frequencyCounter'
 
 export class TelemetryProcessor {
@@ -11,8 +12,9 @@ export class TelemetryProcessor {
 	// New context flag
 	#newContext: boolean = true
 
-	// Quota mode counter
+	// Data processing instances
 	readonly #quotaCounter: FrequencyCounter<number> = new FrequencyCounter()
+	readonly #countAnomalyDetector: CounterAnomalyDetector = new CounterAnomalyDetector()
 
 	// Base count; use this value as base of this.#waveData.startTimestamp
 	#baseCount: number = 110
@@ -45,6 +47,7 @@ export class TelemetryProcessor {
 		// Reset initial state
 		this.#newContext = true
 
+		this.#countAnomalyDetector.reset()
 		this.#quotaCounter.reset()
 		this.#baseCount = 110
 		this.#currentWave = 0
@@ -94,6 +97,7 @@ export class TelemetryProcessor {
 				return // DISPOSE!!
 			}
 
+			this.#countAnomalyDetector.reset()
 			this.#quotaCounter.reset(ev.quota)
 			this.#baseCount = ev.count
 			this.#currentWave = currentWave
@@ -120,23 +124,37 @@ export class TelemetryProcessor {
 
 		// Update wave
 		const currentWaveData = this.#waveData
-		switch (ev.count) {
-		case 0:
-			if (currentWaveData.endTimestamp === undefined) {
-				this.#baseCount = 0
-				currentWaveData.startTimestamp = ev.timestamp - 100
-				currentWaveData.endTimestamp = ev.timestamp
+
+		let count = ev.count
+		if (count === undefined) {
+			// Calc count
+			count = Math.floor(100 + currentWaveData.startTimestamp - ev.timestamp)
+		} else {
+			const isAnomalous = this.#countAnomalyDetector.isAnomalous(count, ev.timestamp)
+			if (isAnomalous) {
+				// Correct count
+				count = Math.floor(100 + currentWaveData.startTimestamp - ev.timestamp)
+			} else {
+				// Update timestamp
+				switch (count) {
+				case 0:
+					if (currentWaveData.endTimestamp === undefined) {
+						this.#baseCount = 0
+						currentWaveData.startTimestamp = ev.timestamp - 100
+						currentWaveData.endTimestamp = ev.timestamp
+					}
+					break
+				default:
+					if (this.#baseCount >= 100) {
+						this.#baseCount = count
+						currentWaveData.startTimestamp = ev.timestamp - (100 - count)
+					}
+					break
+				}
 			}
-			break
-		case undefined:
-			break
-		default:
-			if (this.#baseCount >= 100) {
-				this.#baseCount = ev.count
-				currentWaveData.startTimestamp = ev.timestamp - (100 - ev.count)
-			}
-			break
 		}
+
+		// Update quota
 		currentWaveData.quota = this.#quotaCounter.add(ev.quota).mode
 
 		// Check diff >= 0
@@ -167,7 +185,7 @@ export class TelemetryProcessor {
 		// Create new update data
 		const newUpdateData: ShakeUpdate = {
 			timestamp: ev.timestamp,
-			count: ev.count ?? Math.floor(currentWaveData.startTimestamp - ev.timestamp + 100),
+			count,
 			amount: ev.amount,
 			unstable: ev.unstable,
 		} as const
