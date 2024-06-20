@@ -58,6 +58,17 @@ html:lang(zh-TW) body, span:lang(zh-TW) {
 	font-family: Oswald, 'PingFang TC', STHeitiTC, 'Heiti TC', '黒体-繁', 'Microsoft JhengHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 
+.Message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	color: var(--fg-tertiary);
+	background-color: #000;
+	font-size: 200%;
+	user-select: none;
+}
+
 input,
 input::-webkit-file-upload-button,
 input::-webkit-slider-thumb,

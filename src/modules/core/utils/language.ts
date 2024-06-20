@@ -27,8 +27,14 @@ export const detectLanguage = () => {
 	return language
 }
 
-export const loadLocale = async (locale: string) => {
-	const res = await fetch(`locales/${locale}.json`)
+export const loadLocale = async (locale: string, signal?: AbortSignal) => {
+	const res = await fetch(`locales/${locale}.json`, {
+		signal,
+	})
+	if (!res.ok) {
+		throw Error('Response is not OK')
+	}
+
 	const json = await res.json()
 	return json
 }

@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import EnvironmentProvider from '@/core/components/EnvironmentProvider'
+import IntlLoader from '@/core/components/IntlLoader'
 import WebSocketProvider from '@/telemetry/components/WebSocketProvider'
 
 import App from 'app/App'
@@ -24,7 +25,9 @@ if (element) {
 				>
 					<EnvironmentProvider>
 						<WebSocketProvider>
-							<App />
+							<IntlLoader>
+								<App />
+							</IntlLoader>
 						</WebSocketProvider>
 					</EnvironmentProvider>
 				</PersistGate>
