@@ -37,7 +37,7 @@ export default defineConfig({
 			enforce: 'post',
 			...sri({
 				algorithms: ['sha256'],
-				publicPath: '/',
+				publicPath: '/shake-streamkit/',
 			}),
 		},
 	],
