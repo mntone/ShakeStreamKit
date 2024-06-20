@@ -26,7 +26,7 @@ Shake StreamKitは、Nintendo Switchの人気ゲーム「スプラトゥーン3�
 プロジェクトのリポジトリを複製し、依存関係をインストールします。
 
 ```bash
-git clone https://github.com/mntone/shake-streamkit.git
+git lfs clone https://github.com/mntone/shake-streamkit.git
 cd shake-streamkit
 npm install
 ```

@@ -26,7 +26,7 @@ Shake StreamKit is an overlay tool designed for streamers and video producers to
 Clone the project repository and install dependencies.
 
 ```bash
-git clone https://github.com/mntone/shake-streamkit.git
+git lfs clone https://github.com/mntone/shake-streamkit.git
 cd shake-streamkit
 npm install
 ```
