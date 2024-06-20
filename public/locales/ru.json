@@ -1,0 +1,63 @@
+{
+	"Dialog.settings": "Настройки",
+	"Dialog.openSettings": "Открыть настройки",
+
+	"Dialog.advanced": "Дополнительно",
+	"Dialog.advanced.displayDuration": "Время отображения наложения",
+	"Dialog.advanced.displayDurationUnit": "сек",
+	"Dialog.advanced.otherOptions": "Другие варианты",
+	"Dialog.advanced.reduceAnimations": "Уменьшить анимации",
+	"Dialog.advanced.colorLock": "Ограничение цветов",
+
+	"Dialog.data": "Данные",
+	"Dialog.dataSource": "Источник данных",
+	"Dialog.dataSource.serverAddress": "Адрес сервера",
+	"Dialog.dataSource.save": "Сохранить",
+	"Dialog.dataSource.connected": "Подключено к {url}",
+	"Dialog.dataSource.notConnected": "Не подключено",
+	"Dialog.dataSource.fileInput": "Ввод файла",
+
+	"Dialog.development": "Разработка",
+	"Dialog.development.preview": "Предпросмотр",
+	"Dialog.development.useCameraAsBackground": "Использовать камеру как фон",
+	"Dialog.development.none": "Не выбрано",
+	"Dialog.development.notification": "Уведомление",
+	"Dialog.development.testNotifications": "Тест уведомлений",
+	"Dialog.development.environment": "Среда",
+	"Dialog.development.broadcastMode": "Режим трансляции: {status}",
+	"Dialog.development.broadcastMode.disabled": "Отключено",
+	"Dialog.development.broadcastMode.enabled": "Включено",
+	"Dialog.development.broadcastSoftware": "Программное обеспечение для трансляции: {software}",
+
+	"Dialog.general": "Основные",
+	"Dialog.general.overlay": "Наложение",
+	"Dialog.general.autoHide": "Автоматически скрывать наложение",
+	"Dialog.general.showOverlayOn": "Показать наложение на:",
+	"Dialog.general.showOverlayOn.quotaMet": "Достигнута план",
+	"Dialog.general.showOverlayOn.waveFinished": "Волна завершена",
+	"Dialog.general.language": "Язык",
+
+	"EggGraph.quota": "План",
+	"EggGraph.wave": "Волна <big>{wave}</big>",
+	"EggGraph.extraWave": "ВОЛНА +",
+	"EggGraph.clear": "✓",
+	"EggGraph.fail": "✘",
+
+	"Dialog.log": "Журнал",
+
+	"Notification.notificationTest": "Тестирование уведомления",
+	"Notification.succeedToTestNotification": "Тестовое уведомление было успешно отправлено.",
+	"Notification.webSocketConnected": "Подключено к WebSocket серверу",
+	"Notification.webSocketDisconnected": "Не удалось подключиться к WebSocket серверу",
+
+	"OverlayController.hideOverlay": "Скрыть наложение",
+	"OverlayController.showOverlay": "Показать наложение",
+	"OverlayController.showOverlayWithWave": "Показать волна {wave}",
+
+	"Result.clear": "Успех!",
+	"Result.defeat": "Провал",
+	"Result.timeout": "Время!",
+	"Result.wipeout": "Провал",
+
+	"WaveSelector.selectWave": "Выбрать волна"
+}

@@ -40,8 +40,8 @@
 	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Oleada <big>{wave}</big>",
 	"EggGraph.extraWave": "Oleada extra",
-	"EggGraph.clear": "âÿÿ",
-	"EggGraph.fail": "âÿÿ",
+	"EggGraph.clear": "âœ“",
+	"EggGraph.fail": "âœ˜",
 
 	"Dialog.log": "Registro",
 
@@ -52,7 +52,7 @@
 
 	"OverlayController.hideOverlay": "Cerrar superposiciÃ³n",
 	"OverlayController.showOverlay": "Abrir superposiciÃ³n",
-	"OverlayController.showOverlayWithWave": "Abrir wave {wave}",
+	"OverlayController.showOverlayWithWave": "Abrir oleada {wave}",
 
 	"Result.clear": "Â¡Victoria!",
 	"Result.defeat": "Derrota...",

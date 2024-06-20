@@ -52,12 +52,12 @@
 
 	"OverlayController.hideOverlay": "Nascondi sovrapposizione",
 	"OverlayController.showOverlay": "Mostra sovrapposizione",
-	"OverlayController.showOverlayWithWave": "Mostra Ondata {wave}",
+	"OverlayController.showOverlayWithWave": "Mostra ondata {wave}",
 
 	"Result.clear": "Ce l'hai fatta!",
 	"Result.defeat": "Peccato...",
 	"Result.timeout": "Tempo scaduto!",
 	"Result.wipeout": "Sconfitta...",
 
-	"WaveSelector.selectWave": "Seleziona Ondata"
+	"WaveSelector.selectWave": "Seleziona ondata"
 }
