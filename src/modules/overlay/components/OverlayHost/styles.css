@@ -23,8 +23,7 @@
 
 	user-select: none;
 }
-
-.OverlayHost--broadcast {
+.env-broadcast .OverlayHost {
 	background: transparent;
 }
 

@@ -1,7 +1,5 @@
 import './styles.css'
 
-import { clsx } from 'clsx'
-
 import { useEnvironment } from '@/core/components/EnvironmentProvider'
 
 import CameraPreview from '../CameraPreview'
@@ -13,10 +11,7 @@ const OverlayHost = () => {
 	const broadcastEnabled = environment && 'broadcast' in environment
 
 	return (
-		<div className={clsx(
-			'OverlayHost',
-			broadcastEnabled && 'OverlayHost--broadcast',
-		)}>
+		<div className='OverlayHost'>
 			<OverlayEggGraph />
 			<ProductLogo />
 

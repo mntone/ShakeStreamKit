@@ -18,14 +18,14 @@ export const useBodyClass = () => {
 
 	useLayoutEffect(() => {
 		if (broadcastEnabled) {
-			document.body.classList.add('env-nonblur')
+			document.body.classList.add('env-broadcast', 'env-nonblur')
 		}
 		if (reducedEnabled) {
 			document.body.classList.add('ax-reduced')
 		}
 		return () => {
 			if (broadcastEnabled) {
-				document.body.classList.remove('env-nonblur')
+				document.body.classList.remove('env-broadcast', 'env-nonblur')
 			}
 			if (reducedEnabled) {
 				document.body.classList.remove('ax-reduced')
