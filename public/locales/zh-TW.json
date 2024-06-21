@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "已連接到 {url}",
 	"Dialog.dataSource.notConnected": "未連接",
 	"Dialog.dataSource.fileInput": "文件輸入",
+	"Dialog.dataSource.playbackOptions": "播放選項",
+	"Dialog.dataSource.simulationPlayback": "模擬播放",
+	"Dialog.dataSource.simulationSpeedUnit": "倍速",
 
 	"Dialog.development": "開發",
 	"Dialog.development.preview": "預覽",

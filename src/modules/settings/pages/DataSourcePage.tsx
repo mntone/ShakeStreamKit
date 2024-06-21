@@ -1,17 +1,49 @@
-import { useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import { useIntl } from 'react-intl'
+import { useDispatch } from 'react-redux'
 
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid'
 
+import CheckBox from '@/core/components/CheckBox'
+import SliderBox from '@/core/components/SliderBox'
+import { setMatch } from '@/overlay/slicers'
 import { WebSocketContext } from '@/telemetry/components/WebSocketProvider'
+import { ShakeEvent } from '@/telemetry/models/telemetry'
+import { setTelemetry } from '@/telemetry/slicers'
+import { RealtimeTelemetrySimulator } from '@/telemetry/utils/simulator'
+
+import { useAppSelector } from 'app/hooks'
 
 import FileInput from '../components/FileInput'
 import ServerAddressBox from '../components/ServerAddressBox'
 import DialogMessages from '../messages'
+import { setSimulation, setSpeed } from '../slicers'
 
 const DataSourcePage = () => {
 	const intl = useIntl()
 	const wsConnect = useContext(WebSocketContext)
+
+	const simulationEnabled = useAppSelector(state => state.config.simulation) === true
+	const simulationSpeed = useAppSelector(state => state.config.speed) ?? 2.0
+
+	const dispatch = useDispatch()
+	const simulator = new RealtimeTelemetrySimulator(dispatch, simulationSpeed)
+
+	const handleSimulation = useCallback((simulation: boolean) => {
+		dispatch(setSimulation(simulation))
+	}, [dispatch])
+	const handleSpeed = useCallback((speed: number) => {
+		dispatch(setSpeed(speed))
+	}, [dispatch])
+	const handleFileChange = (telemetry: Readonly<ShakeEvent>[]) => {
+		if (simulationEnabled) {
+			simulator.play(telemetry)
+		} else {
+			dispatch(setTelemetry(telemetry))
+			dispatch(setMatch(telemetry[0].session))
+		}
+	}
+
 	return (
 		<>
 			<h2 className='Form-title'>
@@ -48,7 +80,28 @@ const DataSourcePage = () => {
 				<h3>
 					{intl.formatMessage(DialogMessages.dataSourceFileInput)}
 				</h3>
-				<FileInput />
+				<FileInput onFileChange={handleFileChange} />
+			</section>
+
+			<section className='Form-group'>
+				<h4>
+					{intl.formatMessage(DialogMessages.dataSourcePlaybackOptions)}
+				</h4>
+				<CheckBox
+					id='reduced'
+					checked={simulationEnabled}
+					onCheckedChange={handleSimulation}
+				>
+					{intl.formatMessage(DialogMessages.dataSourceSimulationPlayback)}
+				</CheckBox>
+				<SliderBox
+					min={0.5}
+					max={10}
+					step={0.5}
+					value={simulationSpeed}
+					unit={intl.formatMessage(DialogMessages.dataSourceSimulationSpeedUnit)}
+					onValueChange={handleSpeed}
+				/>
 			</section>
 		</>
 	)

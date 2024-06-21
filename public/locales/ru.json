@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "Подключено к {url}",
 	"Dialog.dataSource.notConnected": "Не подключено",
 	"Dialog.dataSource.fileInput": "Ввод файла",
+	"Dialog.dataSource.playbackOptions": "Настройки воспроизведения",
+	"Dialog.dataSource.simulationPlayback": "Воспроизведение симуляции",
+	"Dialog.dataSource.simulationSpeedUnit": "x",
 
 	"Dialog.development": "Разработка",
 	"Dialog.development.preview": "Предпросмотр",

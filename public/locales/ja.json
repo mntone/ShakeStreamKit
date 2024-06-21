@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "{url}に接続済み",
 	"Dialog.dataSource.notConnected": "未接続",
 	"Dialog.dataSource.fileInput": "ファイル入力",
+	"Dialog.dataSource.playbackOptions": "再生オプション",
+	"Dialog.dataSource.simulationPlayback": "シミュレーション再生を行う",
+	"Dialog.dataSource.simulationSpeedUnit": "倍速",
 
 	"Dialog.development": "開発",
 	"Dialog.development.preview": "プレビュー",

@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "Verbonden met {url}",
 	"Dialog.dataSource.notConnected": "Niet verbonden",
 	"Dialog.dataSource.fileInput": "Bestandsinvoer",
+	"Dialog.dataSource.playbackOptions": "Afspeelopties",
+	"Dialog.dataSource.simulationPlayback": "Simulatie afspelen",
+	"Dialog.dataSource.simulationSpeedUnit": "x",
 
 	"Dialog.development": "Ontwikkeling",
 	"Dialog.development.preview": "Voorbeeld",

@@ -59,6 +59,18 @@ const DialogMessages = defineMessages({
 		id: 'Dialog.dataSource.fileInput',
 		defaultMessage: 'File Input',
 	},
+	dataSourcePlaybackOptions: {
+		id: 'Dialog.dataSource.playbackOptions',
+		defaultMessage: 'Playback Options',
+	},
+	dataSourceSimulationPlayback: {
+		id: 'Dialog.dataSource.simulationPlayback',
+		defaultMessage: 'File Input',
+	},
+	dataSourceSimulationSpeedUnit: {
+		id: 'Dialog.dataSource.simulationSpeedUnit',
+		defaultMessage: 'x',
+	},
 
 	development: {
 		id: 'Dialog.development',

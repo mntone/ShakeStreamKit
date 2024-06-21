@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "Verbunden mit {url}",
 	"Dialog.dataSource.notConnected": "Nicht verbunden",
 	"Dialog.dataSource.fileInput": "Dateieingabe",
+	"Dialog.dataSource.playbackOptions": "Wiedergabeoptionen",
+	"Dialog.dataSource.simulationPlayback": "Simulation abspielen",
+	"Dialog.dataSource.simulationSpeedUnit": "x",
 
 	"Dialog.development": "Entwicklung",
 	"Dialog.development.preview": "Vorschau",

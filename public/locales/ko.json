@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "{url}에 연결됨",
 	"Dialog.dataSource.notConnected": "연결되지 않음",
 	"Dialog.dataSource.fileInput": "파일 입력",
+	"Dialog.dataSource.playbackOptions": "재생 옵션",
+	"Dialog.dataSource.simulationPlayback": "시뮬레이션 재생",
+	"Dialog.dataSource.simulationSpeedUnit": "배속",
 
 	"Dialog.development": "개발",
 	"Dialog.development.preview": "미리보기",

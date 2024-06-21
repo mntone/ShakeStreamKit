@@ -16,6 +16,9 @@
 	"Dialog.dataSource.connected": "Connecté à {url}",
 	"Dialog.dataSource.notConnected": "Non connecté",
 	"Dialog.dataSource.fileInput": "Entrée de fichier",
+	"Dialog.dataSource.playbackOptions": "Options de lecture",
+	"Dialog.dataSource.simulationPlayback": "Lecture de simulation",
+	"Dialog.dataSource.simulationSpeedUnit": "x",
 
 	"Dialog.development": "Développement",
 	"Dialog.development.preview": "Aperçu",

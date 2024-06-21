@@ -14,6 +14,8 @@ interface ConfigState {
 	notifyOnWaveFinishedDuration?: number
 	reduced?: boolean
 	server?: string
+	simulation?: boolean
+	speed?: number
 }
 
 const initialState: ConfigState = {
@@ -59,6 +61,12 @@ const configSlice = createSlice({
 				delete state.server
 			}
 		},
+		setSimulation(state, action: PayloadAction<boolean | undefined>) {
+			state.simulation = action.payload
+		},
+		setSpeed(state, action: PayloadAction<number | undefined>) {
+			state.speed = action.payload
+		},
 	},
 })
 
@@ -81,5 +89,7 @@ export const {
 	setNotifyOnWaveFinishedDuration,
 	setReduced,
 	setServer,
+	setSimulation,
+	setSpeed,
 } = configSlice.actions
 export default persistConfigReducer

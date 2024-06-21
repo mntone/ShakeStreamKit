@@ -1,12 +1,12 @@
 import { ChangeEvent } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { setMatch } from '@/overlay/slicers'
 import { ShakeEvent } from '@/telemetry/models/telemetry'
-import { setTelemetry } from '@/telemetry/slicers'
 
-const FileInput = () => {
-	const dispatch = useDispatch()
+interface FileInputProps {
+	onFileChange?(telemetry: Readonly<ShakeEvent>[]): void
+}
+
+const FileInput = ({ onFileChange }: FileInputProps) => {
 	const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
 		if (file) {
@@ -16,8 +16,7 @@ const FileInput = () => {
 				const lineArray = data.split('\n').filter(line => line.trim() !== '')
 				const events = lineArray.map(line => JSON.parse(line) as ShakeEvent)
 				if (events.length !== 0) {
-					dispatch(setTelemetry(events))
-					dispatch(setMatch(events[0].session))
+					onFileChange!.call(null, events)
 				}
 			}
 			reader.readAsText(file)
@@ -29,6 +28,7 @@ const FileInput = () => {
 			className='File'
 			type='file'
 			accept='.json'
+			disabled={onFileChange === undefined}
 			onChange={handleFileChange}
 		/>
 	)
