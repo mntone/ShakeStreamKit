@@ -22,22 +22,21 @@
 	
 	background-color: var(--ctl-bg);
 	transition: var(--ctl-transition);
-
-	&:hover {
-		background-color: var(--ctl-bg--hover);
-	}
-	&[data-state=checked] {
-		background-color: var(--ctl-bg-active);
-	}
-	&[data-state=checked]:hover {
-		background-color: var(--ctl-bg-active--hover);
-	}
-	&:focus-visible {
-		outline: 2px solid #FFFC;
-	}
-	&[disabled] {
-		background-color: var(--ctl-bg--disable);
-	}
+}
+.CheckBox-mark:hover {
+	background-color: var(--ctl-bg--hover);
+}
+.CheckBox-mark[data-state=checked] {
+	background-color: var(--ctl-bg-active);
+}
+.CheckBox-mark[data-state=checked]:hover {
+	background-color: var(--ctl-bg-active--hover);
+}
+.CheckBox-mark:focus-visible {
+	outline: 2px solid #FFFC;
+}
+.CheckBox-mark[disabled] {
+	background-color: var(--ctl-bg--disable);
 }
 
 .CheckBox-icon {

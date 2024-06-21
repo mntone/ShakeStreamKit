@@ -16,17 +16,16 @@
 	transition: var(--ctl-transition);
 
 	user-select: none;
-
-	&:hover {
-		background-color: var(--ctl-bg--hover);
-	}
-	&:focus-visible {
-		outline: 2px solid #FFFC;
-	}
-	&[disabled] {
-		color: #FFF9;
-		background-color: var(--ctl-bg--disable);
-	}
+}
+.Select:hover {
+	background-color: var(--ctl-bg--hover);
+}
+.Select:focus-visible {
+	outline: 2px solid #FFFC;
+}
+.Select[disabled] {
+	color: #FFF9;
+	background-color: var(--ctl-bg--disable);
 }
 
 .Select-icon {
@@ -69,15 +68,13 @@ body:not(.env-nonblur) .Select-content {
 	border-radius: 6px;
 
 	user-select: none;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-
-	&[data-highlighted] {
-		color: #000;
-		background-color: #F8E1DD;
-	}
+}
+.SelectItem:last-child {
+	margin-bottom: 0;
+}
+.SelectItem[data-highlighted] {
+	color: #000;
+	background-color: #F8E1DD;
 }
 
 @media (any-pointer: coarse) {

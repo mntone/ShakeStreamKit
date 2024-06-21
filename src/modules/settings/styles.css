@@ -76,13 +76,12 @@ body:not(.env-nonblur) .Dialog-content {
 	color: inherit;
 	background-color: transparent;
 	transition: var(--ctl-transition);
-
-	&[data-state=active] {
+}
+.Dialog-tabitem[data-state=active] {
 		background-color: var(--ctl-bg);
 	}
-	&:hover {
+.Dialog-tabitem:hover {
 		background-color: var(--ctl-bg--hover);
-	}
 }
 
 @keyframes tabContentShow {
