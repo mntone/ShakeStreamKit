@@ -1,7 +1,10 @@
 .OverlayEggGraph {
 	contain: strict;
+	position: absolute;
 	top: 16.5em;
 	right: -.75em;
-	width: 24em;
+	width: 20em;
 	height: 12em;
+
+	padding-right: 2.25em;
 }

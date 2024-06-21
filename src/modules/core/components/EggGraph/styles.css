@@ -3,7 +3,7 @@
 	align-items: baseline;
 	gap: .25em;
 
-	margin: .25em 3.5em 0 1.25em;
+	margin: .25em 1.25em 0;
 	line-height: 2.5em;
 	color: #FFF;
 }
@@ -134,5 +134,12 @@
 /* Item */
 .EggGraph-item-line {
 	stroke: var(--ink);
+	stroke-linecap: butt;
 	stroke-width: 3px;
+}
+.EggGraph-item-line-bg {
+	stroke: var(--ink);
+	stroke-linecap: round;
+	stroke-opacity: .25;
+	stroke-width: 7.5px;
 }

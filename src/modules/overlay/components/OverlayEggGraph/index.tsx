@@ -5,40 +5,32 @@ import { connect } from 'react-redux'
 
 import { createSelector } from '@reduxjs/toolkit'
 
-import EggGraph, { type EggGraphProps, type EggGraphSizeProps } from '@/core/components/EggGraph'
+import EggGraph, { type EggGraphProps } from '@/core/components/EggGraph'
+import type { GraphLayoutProps } from '@/core/models/graph'
 import { isDefaultWave } from '@/core/utils/wave'
 
 import { RootState } from 'app/store'
 
 import { RightSlideAnimation } from '../SlideAnimation'
 
-const rem = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('font-size'), 10)
+const preferredGraphLayout = Object.freeze({
+	containerWidth: '100%',
+	containerHeight: '100%',
+	graphWidth: 320,
+	graphHeight: 192,
+	marginTop: 48,     // 3.0em  in 720p (1em = 16px @ 720p, 1em = 24px @ 1080p)
+	marginLeft: 48,    // 3.0em  in 720p
+	marginRight: 20,   // 1.25em in 720p, with 2.25em padding
+	marginBottom: 32,  // 2.0em  in 720p
+} satisfies GraphLayoutProps)
 
-const getPreferredGraphSize = (): EggGraphSizeProps => {
-	const olWidth = Math.min(window.innerWidth, 16 * (window.innerHeight - 2.25 * rem - 8) / 9)
-	const em = 0.0125 * olWidth
-	const width = 24 * em
-	const height = (2 + 10) * em
-	return {
-		containerWidth: width,
-		containerHeight: height,
-		graphWidth: 384,
-		graphHeight: 192,
-		marginTop: 48,     // 3.0em in 720p
-		marginLeft: 48,    // 3.0em in 720p
-		marginRight: 56,   // 3.5em in 720p
-		marginBottom: 32,  // 2.0em in 720p
-	}
-}
-
-export interface OverlayEggGraphProps extends EggGraphProps {
-	visible: boolean
-}
+type OverlayEggGraphProps =
+	& { readonly visible: boolean }
+	& Omit<EggGraphProps, keyof GraphLayoutProps>
 
 export const OverlayEggGraph = (props: OverlayEggGraphProps) => {
 	const { visible, ...nextProps } = props
 	const ref = useRef<HTMLDivElement>(null)
-	const size = getPreferredGraphSize()
 	return (
 		<RightSlideAnimation
 			nodeRef={ref}
@@ -46,7 +38,7 @@ export const OverlayEggGraph = (props: OverlayEggGraphProps) => {
 			visible={visible}
 		>
 			<div className='Overlay Overlay-right OverlayEggGraph' ref={ref}>
-				<EggGraph {...nextProps} {...size} />
+				<EggGraph {...nextProps} {...preferredGraphLayout} />
 			</div>
 		</RightSlideAnimation>
 	)
@@ -83,7 +75,7 @@ const mapStateToProps = (state: RootState) => {
 		telemetry,
 		visible: true,
 		wave,
-	} satisfies Pick<OverlayEggGraphProps, 'colorLock' | 'telemetry' | 'visible' | 'wave'>
+	} satisfies OverlayEggGraphProps
 }
 
 export default connect(

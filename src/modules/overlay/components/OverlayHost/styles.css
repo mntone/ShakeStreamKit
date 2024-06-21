@@ -29,9 +29,6 @@
 }
 
 .Overlay {
-	contain: content;
-	position: absolute;
-
 	background-color: var(--ol-bg);
 	transition: transform var(--animation-enter);
 }

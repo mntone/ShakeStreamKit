@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;800&display=swap');
 
 .ProductLogo {
+	contain: content;
+	position: absolute;
 	bottom: .5em;
 	right: -.5em;
 

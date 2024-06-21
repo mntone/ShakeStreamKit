@@ -10,6 +10,7 @@ import { Group } from '@visx/group'
 import { scaleLinear, type ScaleInput } from '@visx/scale'
 import { LinePath } from '@visx/shape'
 
+import { getSvgProps, type GraphLayoutProps } from '@/core/models/graph'
 import { forceLast } from '@/core/utils/collection'
 import type { ShakeDefaultWave, ShakeTelemetry } from '@/telemetry/models/data'
 
@@ -23,22 +24,10 @@ const getLargeTextNode = (chunks: ReactNode[]) => {
 	)
 }
 
-export interface EggGraphSizeProps {
-	containerWidth: number
-	containerHeight: number
-	graphWidth?: number
-	graphHeight?: number
-
-	marginTop: number
-	marginLeft: number
-	marginRight: number
-	marginBottom: number
-}
-
-export interface EggGraphProps {
-	colorLock?: boolean
-	telemetry?: Readonly<ShakeTelemetry>
-	wave?: number
+export interface EggGraphProps extends GraphLayoutProps {
+	readonly colorLock?: boolean
+	readonly telemetry?: Readonly<ShakeTelemetry>
+	readonly wave?: number
 }
 
 const amountLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, never>>> = {
@@ -55,34 +44,11 @@ const countLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, nev
 	fill: undefined,
 }
 
-const getSvgProps = (props: {
-	containerWidth: number
-	containerHeight: number
-	graphWidth?: number
-	graphHeight?: number
-}): {
-	width: number | string
-	height: number | string
-	viewBox?: string
-	preserveAspectRatio?: string
-} => {
-	if (!props.graphWidth || !props.graphHeight) {
-		return {
-			width: props.containerWidth,
-			height: props.containerHeight,
-		}
-	}
-
-	return {
-		width: '100%',
-		height: '100%',
-		preserveAspectRatio: 'xMinYMax meet',
-		viewBox: `0 0 ${props.graphWidth} ${props.graphHeight}`,
-	}
-}
-
-const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
+const EggGraph = (props: EggGraphProps) => {
 	const {
+		graphWidth,
+		graphHeight,
+
 		marginTop,
 		marginLeft,
 		marginRight,
@@ -108,8 +74,8 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 	}
 
 	const svgProps = getSvgProps(props)
-	const width = (props.graphWidth ?? props.containerWidth) - marginLeft - marginRight
-	const height = (props.graphHeight ?? props.containerHeight) - marginTop - marginBottom
+	const width = graphWidth - marginLeft - marginRight
+	const height = graphHeight - marginTop - marginBottom
 	const positionProps = {
 		left: marginLeft,
 		top: marginTop,
@@ -123,13 +89,14 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 			: telemetry?.closed
 				? false
 				: undefined
+	const maxY = Math.max(5 * Math.ceil(0.2 * waveData.quota), lastUpdate.amount)
 	const amountScale = scaleLinear<number>({
-		domain: [Math.max(5 * Math.ceil(0.2 * waveData.quota), lastUpdate.amount), 0],
+		domain: [maxY, 0],
 		range: [0, height],
 		nice: true,
 	})
 	const countScale = scaleLinear<number>({
-		domain: [0, 100],
+		domain: [100, 0],
 		range: [0, width],
 		clamp: true,
 	})
@@ -196,7 +163,7 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 					<text
 						y={quotaY}
 						dx='.2em'
-						dy='-.333em'
+						dy={waveData.quota + 3 > maxY ? '1.2em' : '-.333em'}
 					>
 						{intl.formatMessage(EggGraphMessages.quota)}
 					</text>
@@ -223,11 +190,20 @@ const EggGraph = (props: EggGraphProps & EggGraphSizeProps) => {
 
 				<Group {...positionProps}>
 					<LinePath
-						className='EggGraph-item EggGraph-item-line EggGraph-item-amount'
+						className='EggGraph-item-line-bg'
 						data={waveData.updates}
 						curve={curveLinear}
+						strokeLinecap={undefined}
 						y={d => amountScale(d.amount)}
-						x={d => countScale(d.timestamp - waveData.startTimestamp)}
+						x={d => countScale(100 + waveData.startTimestamp - d.timestamp)}
+					/>
+					<LinePath
+						className='EggGraph-item EggGraph-item-line'
+						data={waveData.updates}
+						curve={curveLinear}
+						strokeLinecap={undefined}
+						y={d => amountScale(d.amount)}
+						x={d => countScale(100 + waveData.startTimestamp - d.timestamp)}
 					/>
 				</Group>
 			</svg>

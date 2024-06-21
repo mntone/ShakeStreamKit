@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 export interface SlideAnimationProps {
 	nodeRef?: Ref<HTMLElement | undefined>
 	rich?: boolean
-	visible: boolean
+	visible?: boolean
 }
 
 export const LeftSlideAnimation = ({ children, nodeRef, rich, visible }: PropsWithChildren<SlideAnimationProps>) => {
