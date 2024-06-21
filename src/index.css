@@ -89,6 +89,11 @@ html:lang(zh-TW) body, span:lang(zh-TW) {
 	font-size: 200%;
 	user-select: none;
 }
+@supports (height: 100svh) {
+	.Message {
+		height: 100svh;
+	}
+}
 
 input,
 input::-webkit-file-upload-button,

@@ -1,12 +1,17 @@
 :root {
 	--ol-bg: #1A1A1A;
-	--ol-width: calc(min(100vw, 16 * (100vh - 2.25rem - 8px) / 9));
+	--ol-width: min(100vw, 16 * (100vh - 2.25rem - 8px) / 9);
 	--ol-height: calc(9 * var(--ol-width) / 16);
+}
+@supports (height: 100svh) {
+	:root {
+		--ol-width: min(100vw, 16 * (100svh - 2.25rem - 8px) / 9);
+		--ol-height: calc(9 * var(--ol-width) / 16);
+	}
 }
 
 .OverlayHost {
 	contain: strict;
-	position: relative;
 	overflow: clip;
 	width: var(--ol-width);
 	height: var(--ol-height);

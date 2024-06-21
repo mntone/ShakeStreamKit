@@ -28,6 +28,11 @@
 
 	animation: contentShow 167ms ease-in-out;
 }
+@supports (height: 100svh) {
+	.Dialog-content {
+		max-height: calc(90svh - 24px);
+	}
+}
 body:not(.env-nonblur) .Dialog-content {
 	background-color: var(--wnd-bg);
 	-webkit-backdrop-filter: var(--wnd-backdrop);

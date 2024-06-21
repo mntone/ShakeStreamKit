@@ -22,6 +22,11 @@
 
 	font-size: 14px;
 }
+@supports (height: 100svh) {
+	.NotificationHost {
+		bottom: calc(100svh - var(--ol-height));
+	}
+}
 
 @keyframes slideIn {
 	from {
