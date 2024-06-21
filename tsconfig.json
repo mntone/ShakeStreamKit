@@ -33,11 +33,16 @@
 			"vite/client",
 			"vitest/globals"
 		],
+		"typeRoots": [
+			"types",
+			"node_modules/@types",
+		],
 		"paths": {
 			"@/*": ["./modules/*"]
 		}
 	},
 	"include": [
-		"src"
+		"src",
+		"types"
 	]
 }
