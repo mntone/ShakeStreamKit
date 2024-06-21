@@ -6,9 +6,13 @@
 	bottom: .5em;
 	right: -.5em;
 
+	border-radius: 1.5em 0 0 1.5em;
 	padding: 1em 3em 1em 1.5em;
 
-	border-radius: 1.5em 0 0 1.5em;
+	font-family: Kanit, sans-serif;
+	line-height: .9;
+
+	color: #FFF;
 }
 
 .ProductLogo p {
@@ -16,19 +20,10 @@
 }
 
 .ProductLogo-poweredby {
-	font-family: Kanit, sans-serif !important;
 	font-size: .75em;
-	line-height: 1;
-
-	color: #FFFFFF;
 }
 
-.ProductLogo-shake,
-.ProductLogo-streamkit {
-	font-family: Kanit, sans-serif !important;
+.ProductLogo-logo {
 	font-size: 1.5em;
 	font-weight: bold;
-	line-height: .9;
-
-	color: #FFFFFF;
 }

@@ -12,9 +12,13 @@ const ProductLogo = () => {
 	return (
 		<RightSlideAnimation nodeRef={ref} visible={poweredby}>
 			<div className='Overlay Overlay-right ProductLogo' ref={ref}>
-				<p className='ProductLogo-poweredby'>Powered By</p>
-				<p className='ProductLogo-shake'>Shake</p>
-				<p className='ProductLogo-streamkit'>StreamKit</p>
+				<span className='ProductLogo-poweredby'>Powered By</span>
+				<br />
+				<span className='ProductLogo-logo'>
+					Shake
+					<br />
+					StreamKit
+				</span>
 			</div>
 		</RightSlideAnimation>
 	)

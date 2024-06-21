@@ -64,18 +64,16 @@ body.env-broadcast {
 	background: transparent;
 }
 
-html:lang(ja) body, span:lang(ja) {
+html:lang(ja) body, .SelectItem:lang(ja) {
 	font-family: Oswald, 'BIZ UDPゴシック',Gulim, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
-html:lang(ko) body, span:lang(ko) {
+html:lang(ko) body, .SelectItem:lang(ko) {
 	font-family: Oswald, 'Apple SD Gothic Neo', 'Malgun Gothic', Gulim, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
-
-html:lang(zh-CN) body, span:lang(zh-CN) {
+html:lang(zh-CN) body, .SelectItem:lang(zh-CN) {
 	font-family: Oswald, 'PingFang SC', STHeitiSC, 'Heiti SC', '黒体-簡', 'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
-
-html:lang(zh-TW) body, span:lang(zh-TW) {
+html:lang(zh-TW) body, .SelectItem:lang(zh-TW) {
 	font-family: Oswald, 'PingFang TC', STHeitiTC, 'Heiti TC', '黒体-繁', 'Microsoft JhengHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 
