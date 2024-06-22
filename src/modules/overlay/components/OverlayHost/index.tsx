@@ -12,12 +12,12 @@ const OverlayHost = () => {
 
 	return (
 		<div className='OverlayHost'>
-			<OverlayEggGraph />
-			<ProductLogo />
-
 			{!broadcastEnabled && (
 				<CameraPreview />
 			)}
+
+			<OverlayEggGraph />
+			<ProductLogo />
 		</div>
 	)
 }
