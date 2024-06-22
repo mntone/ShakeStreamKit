@@ -16,7 +16,7 @@ import store, { persistor } from 'app/store'
 
 initCollection()
 
-const element = document.getElementById('root')
+const element = document.getElementById('r')
 if (element) {
 	const root = createRoot(element)
 	root.render(
