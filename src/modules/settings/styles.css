@@ -13,7 +13,7 @@
 	box-sizing: border-box;
 	position: fixed;
 	left: 12px;
-	bottom: min(12px, calc(var(--ol-height) - 12px));
+	top: max(12px, var(--ol-height) - 412px);
 	z-index: 999;
 
 	border: 1px solid var(--wnd-st);
@@ -78,10 +78,10 @@ body:not(.env-nonblur) .Dialog-content {
 	transition: var(--ctl-transition);
 }
 .Dialog-tabitem[data-state=active] {
-		background-color: var(--ctl-bg);
-	}
+	background-color: var(--ctl-bg);
+}
 .Dialog-tabitem:hover {
-		background-color: var(--ctl-bg--hover);
+	background-color: var(--ctl-bg--hover);
 }
 
 @keyframes tabContentShow {
