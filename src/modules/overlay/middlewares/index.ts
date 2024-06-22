@@ -8,20 +8,19 @@ import { addTelemetry } from '@/telemetry/slicers'
 import type { RootState } from 'app/store'
 
 const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) => (action: UnknownAction) => {
-	next(action)
-
+	const result = next(action)
 	const state = store.getState()
 
 	// Return when match is not selected
 	const matchId = state.overlay.match
 	if (matchId === undefined) {
-		return
+		return result
 	}
 
 	// Return when match is not found
-	const currentSession = state.telemetry[matchId]
+	const currentSession = state.telemetry.entities[matchId]
 	if (currentSession === undefined) {
-		return
+		return result
 	}
 
 	// Show powered-by and return if closed when realtime,
@@ -31,7 +30,7 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 		if (inAddTelemetry) {
 			store.dispatch(showPoweredby() as any)
 		}
-		return
+		return result
 	}
 
 	if (!state.overlay.wave) {
@@ -43,8 +42,9 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 
 		const notify = notifyOnQuotaMet || notifyOnWaveFinished
 		if (notify && inAddTelemetry) {
-			const latestWave = currentSession?.waves.findLast((w): w is ShakeDefaultWave => w.wave !== 'extra')
-			if (latestWave) {
+			const latestWaveKey = currentSession.waveKeys.findLast(waveKey => waveKey !== 'extra')
+			if (latestWaveKey) {
+				const latestWave = currentSession.waves[latestWaveKey] as ShakeDefaultWave
 				const latestUpdate = forceLast(latestWave.updates)
 
 				// Notify upon quota met or wave finished
@@ -80,6 +80,7 @@ const overlay = (store: MiddlewareAPI<Dispatch, RootState>) => (next: Dispatch) 
 			}
 		}
 	}
+	return result
 }
 
 export default overlay
