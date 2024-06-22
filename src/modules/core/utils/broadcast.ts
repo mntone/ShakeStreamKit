@@ -16,7 +16,7 @@ const dict: Readonly<Record<string, readonly [BroadcastSoftware, string]>> = Obj
 	TwitchStudio: Object.freeze(['twitch', 'Twitch Studio']),
 } satisfies Readonly<Record<string, readonly [BroadcastSoftware, string]>>)
 
-export const detectBroadcast = (): BroadcastSoftwareInfo | undefined => {
+export function detectBroadcast(): BroadcastSoftwareInfo | undefined {
 	const match = pattern.exec(navigator.userAgent)
 	if (match !== null) {
 		const [name, friendlyName] = dict[match[1]]

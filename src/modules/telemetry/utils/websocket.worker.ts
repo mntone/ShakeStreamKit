@@ -18,16 +18,18 @@ export type WebSocketWorkerEvent<T> =
 
 const worker: Worker = self as any
 
-const postMessage = (event: WebSocketWorkerEvent<any>) => {
+function postMessage(event: WebSocketWorkerEvent<any>) {
 	worker.postMessage(event)
 }
 
-const handleOpen = (_: Event) => postMessage({
-	type: 'connect',
-	timestamp: Date.now(),
-})
+function handleOpen(_: Event) {
+	postMessage({
+		type: 'connect',
+		timestamp: Date.now(),
+	})
+}
 
-const handleClose = (e: CloseEvent) => {
+function handleClose(e: CloseEvent) {
 	const socket = e.target as ReconnectingWebSocket
 	postMessage({
 		type: 'disconnect',
@@ -36,7 +38,7 @@ const handleClose = (e: CloseEvent) => {
 	})
 }
 
-const handleMessage = (e: MessageEvent) => {
+function handleMessage(e: MessageEvent) {
 	const json = JSON.parse(e.data)
 	postMessage({
 		type: 'message',
@@ -46,7 +48,7 @@ const handleMessage = (e: MessageEvent) => {
 }
 
 let socket: ReconnectingWebSocket | undefined = undefined
-const closeWebSocket = () => {
+function closeWebSocket() {
 	const ws = socket
 	if (ws) {
 		ws.close()

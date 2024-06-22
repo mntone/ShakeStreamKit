@@ -18,7 +18,7 @@ export type GraphSvgSizeProps =
 	& Required<Pick<SVGProps<SVGSVGElement>, 'width' | 'height'>>
 	& Pick<SVGProps<SVGSVGElement>, 'preserveAspectRatio' | 'viewBox'>
 
-export const getSvgProps = (props: GraphSizeProps): GraphSvgSizeProps => {
+export function getSvgProps(props: GraphSizeProps): GraphSvgSizeProps {
 	if (!props.containerWidth || !props.containerHeight) {
 		return Object.freeze({
 			width: props.graphWidth,

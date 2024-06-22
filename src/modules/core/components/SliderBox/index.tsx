@@ -13,7 +13,7 @@ interface SliderBoxProps {
 
 const fullwidthNumber = /[．０-９]/
 
-const normalizeNumber = (value: string): number => {
+function normalizeNumber(value: string): number {
 	let temp = ''
 	for (const c of value) {
 		if (c.match(fullwidthNumber)) {
