@@ -1,4 +1,4 @@
-import { DefaultWaveType } from '@/core/utils/wave'
+import { DefaultWaveType, isDefaultWave } from '@/core/utils/wave'
 
 import { ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate } from '../models/data'
 import { ShakeEvent, ShakeGameUpdateEvent } from '../models/telemetry'
@@ -20,7 +20,7 @@ export class TelemetryProcessor {
 	#baseCount: number = 110
 
 	// Current wave
-	#currentWave: number = 0
+	#currentWave: DefaultWaveType | undefined = undefined
 
 	// Raw event storage
 	readonly #storage: ShakeEvent[] = []
@@ -50,13 +50,14 @@ export class TelemetryProcessor {
 		this.#countAnomalyDetector.reset()
 		this.#quotaCounter.reset()
 		this.#baseCount = 110
-		this.#currentWave = 0
+		this.#currentWave = undefined
 
 		this.#storage.length = 0
 		this.#data = {
 			id: ev.session,
 			timestamp: ev.timestamp,
-			waves: [],
+			waveKeys: [],
+			waves: {},
 		}
 		this.#waveData = undefined as any
 	}
@@ -68,27 +69,30 @@ export class TelemetryProcessor {
 		}
 
 		// Set color
-		if (this.#currentWave === 0) {
+		if (this.#currentWave === undefined) {
 			this.#data.color = ev.color
 		}
 
 		// Detect new wave from telemetry
-		let currentWave = ev.wave
-		if (this.#currentWave !== currentWave && this.#waveData !== undefined) {
+		let currentWave = this.#currentWave
+		if (this.#currentWave !== ev.wave && this.#waveData !== undefined) {
 			// N sec have not elapsed since base time
 			const diffTimestamp = ev.timestamp - this.#waveData.startTimestamp
 			if (diffTimestamp <= this.#baseCount) {
 				currentWave = this.#currentWave  // Restore
-			} else if (currentWave !== undefined) {
+			} else if (isDefaultWave(ev.wave)) {
 				// The "wave" is clearly strange
-				const nextWave = this.#currentWave + Math.min(5, Math.floor(diffTimestamp / 108))
-				if (currentWave < this.#currentWave || currentWave > nextWave) {
+				const nextWave = this.#currentWave! + Math.min(5, Math.floor(diffTimestamp / 108))
+				if (ev.wave < this.#currentWave! || ev.wave > nextWave) {
 					return // DISPOSE!!
 				}
+				currentWave = ev.wave
 			} else {
 				return // DISPOSE!!
 			}
-		} else if (currentWave === undefined) {
+		} else if (isDefaultWave(ev.wave)) {
+			currentWave = ev.wave
+		} else {
 			return // DISPOSE!!
 		}
 
@@ -104,20 +108,21 @@ export class TelemetryProcessor {
 
 			// Create new wave data
 			const newWaveData: ShakeDefaultWave = {
-				wave: currentWave as DefaultWaveType,
+				wave: currentWave!,
 				startTimestamp: ev.timestamp,
 				amount: ev.amount ?? 0 /* MAYBE 0 */,
 				quota: this.#quotaCounter.mode,
 				updates: [
-					{
+					Object.freeze({
 						timestamp: ev.timestamp,
 						count: ev.count,
 						amount: ev.amount ?? 0 /* MAYBE 0 */,
 						unstable: ev.unstable,
-					},
+					}),
 				],
 			} as const
-			this.#data.waves.push(newWaveData)
+			this.#data.waveKeys.push(currentWave!)
+			this.#data.waves[currentWave!] = newWaveData
 			this.#waveData = newWaveData
 			return
 		}
@@ -183,12 +188,12 @@ export class TelemetryProcessor {
 		currentWaveData.amount = ev.amount
 
 		// Create new update data
-		const newUpdateData: ShakeUpdate = {
+		const newUpdateData: ShakeUpdate = Object.freeze({
 			timestamp: ev.timestamp,
 			count,
 			amount: ev.amount,
 			unstable: ev.unstable,
-		} as const
+		})
 		currentWaveData.updates.push(newUpdateData)
 	}
 
@@ -221,12 +226,13 @@ export class TelemetryProcessor {
 			this.#data.stage = ev.stage
 			break
 		case 'game_king': {
-			const newExtraWaveData: ShakeExtraWave = {
+			const newExtraWaveData: ShakeExtraWave = Object.freeze({
 				wave: 'extra',
 				startTimestamp: ev.timestamp,
 				king: ev.king,
-			}
-			this.#data.waves.push(newExtraWaveData)
+			})
+			this.#data.waveKeys.push('extra')
+			this.#data.waves['extra'] = newExtraWaveData
 			break
 		}
 		}

@@ -27,7 +27,7 @@ const getLargeTextNode = (chunks: ReactNode[]) => {
 export interface EggGraphProps extends GraphLayoutProps {
 	readonly colorLock?: boolean
 	readonly telemetry?: Readonly<ShakeTelemetry>
-	readonly wave?: number
+	readonly wave?: Readonly<ShakeDefaultWave>
 }
 
 const amountLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, never>>> = {
@@ -56,22 +56,13 @@ const EggGraph = (props: EggGraphProps) => {
 
 		colorLock,
 		telemetry,
-		wave,
+		wave: waveData,
 	} = props
-
-	const intl = useIntl()
-
-	const waveData: ShakeDefaultWave | undefined = useMemo(() => {
-		const targetWave = telemetry?.waves.find(w => w.wave === wave)
-		if (!targetWave || targetWave.wave === 'extra') {
-			return undefined
-		}
-
-		return targetWave
-	}, [telemetry, wave])
 	if (waveData === undefined) {
 		return null
 	}
+
+	const intl = useIntl()
 
 	const svgProps = getSvgProps(props)
 	const width = graphWidth - marginLeft - marginRight

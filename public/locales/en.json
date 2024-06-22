@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "Connected to WebSocket Server",
 	"Notification.webSocketDisconnected": "Failed to Connect to WebSocket Server",
 
-	"OverlayController.hideOverlay": "Hide Overlay",
-	"OverlayController.showOverlay": "Show Overlay",
-	"OverlayController.showOverlayWithWave": "Show Wave {wave}",
+	"overlay.noData": "No Data",
+	"overlay.hideOverlay": "Hide Overlay",
+	"overlay.showOverlay": "Show Overlay",
+	"overlay.showOverlayWithWave": "Show Wave {wave}",
 
 	"Result.clear": "Clear!!",
 	"Result.defeat": "Defeat",

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import { WaveType } from '@/core/utils/wave'
 
-import OverlayControllerMessages from './messages'
+import OverlayMessages from '../messages'
 
 interface WaveButtonProps {
 	disabled: boolean
@@ -33,7 +33,7 @@ const WaveButton = ({ wave, disabled, onWaveChange }: WaveButtonProps) => {
 			onClick={handleClick}
 		>
 			{intl.formatMessage(
-				OverlayControllerMessages.showOverlayWithWave,
+				OverlayMessages.showOverlayWithWave,
 				{ wave },
 			)}
 		</button>

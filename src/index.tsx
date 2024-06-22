@@ -8,10 +8,13 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import EnvironmentProvider from '@/core/components/EnvironmentProvider'
 import IntlLoader from '@/core/components/IntlLoader'
+import initCollection from '@/core/utils/collection'
 import WebSocketProvider from '@/telemetry/components/WebSocketProvider'
 
 import App from 'app/App'
 import store, { persistor } from 'app/store'
+
+initCollection()
 
 const element = document.getElementById('root')
 if (element) {

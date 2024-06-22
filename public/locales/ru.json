@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "Подключено к WebSocket серверу",
 	"Notification.webSocketDisconnected": "Не удалось подключиться к WebSocket серверу",
 
-	"OverlayController.hideOverlay": "Скрыть наложение",
-	"OverlayController.showOverlay": "Показать наложение",
-	"OverlayController.showOverlayWithWave": "Показать волна {wave}",
+	"overlay.noData": "Нет данных",
+	"overlay.hideOverlay": "Скрыть наложение",
+	"overlay.showOverlay": "Показать наложение",
+	"overlay.showOverlayWithWave": "Показать волна {wave}",
 
 	"Result.clear": "Успех!",
 	"Result.defeat": "Провал",

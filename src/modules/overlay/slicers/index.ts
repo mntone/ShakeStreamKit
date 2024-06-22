@@ -60,16 +60,14 @@ const overlaySlice = createSlice({
 		setServer(state, action: PayloadAction<string | undefined>) {
 			state.server = action.payload
 		},
-		hideEggGraph(state) {
-			if (state.wave !== undefined) {
-				clearTimer()
-				delete state.wave
-			}
-		},
 		showEggGraph(state, action: PayloadAction<WaveType | undefined>) {
 			if (state.wave !== action.payload) {
 				clearTimer()
-				state.wave = action.payload
+				if (action.payload !== undefined) {
+					state.wave = action.payload
+				} else {
+					delete state.wave
+				}
 			}
 		},
 	},
@@ -89,7 +87,6 @@ const overlaySlice = createSlice({
 
 export const {
 	setMatch,
-	hideEggGraph,
 	showEggGraph,
 	setServer,
 } = overlaySlice.actions

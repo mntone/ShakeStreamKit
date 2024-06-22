@@ -30,12 +30,9 @@
 			"react",
 			"react-dom",
 			"react-redux",
+			"type-fest",
 			"vite/client",
 			"vitest/globals"
-		],
-		"typeRoots": [
-			"types",
-			"node_modules/@types",
 		],
 		"paths": {
 			"@/*": ["./modules/*"]

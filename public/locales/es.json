@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "Conectado al servidor WebSocket",
 	"Notification.webSocketDisconnected": "No se pudo conectar al servidor WebSocket",
 
-	"OverlayController.hideOverlay": "Cerrar superposición",
-	"OverlayController.showOverlay": "Abrir superposición",
-	"OverlayController.showOverlayWithWave": "Abrir ofensiva {wave}",
+	"overlay.noData": "Sin datos",
+	"overlay.hideOverlay": "Cerrar superposición",
+	"overlay.showOverlay": "Abrir superposición",
+	"overlay.showOverlayWithWave": "Abrir ofensiva {wave}",
 
 	"Result.clear": "¡Bravo!",
 	"Result.defeat": "Lástima...",

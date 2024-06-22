@@ -1,14 +1,23 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { WritableDraft, produce } from 'immer'
 
-import { ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate } from '../models/data'
-import { ShakeEvent } from '../models/telemetry'
+import { getMatchFromTelemetry } from '../utils/getMatchFromTelemetry'
 import { TelemetryProcessor } from '../utils/processor'
 
-// State
-type TelemetryState = Record<string, Readonly<ShakeTelemetry>>
+import type { ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate, ShakeWaveRecord } from '../models/data'
+import type { ShakeMatch } from '../models/match'
+import type { ShakeEvent } from '../models/telemetry'
 
-const initialState: TelemetryState = {}
+// State
+export type TelemetryState = {
+	readonly matches: ShakeMatch[]
+	readonly entities: Record<string, Readonly<ShakeTelemetry>>
+}
+
+const initialState: TelemetryState = {
+	matches: [],
+	entities: {},
+}
 
 // Filters
 const processor = new TelemetryProcessor(4)
@@ -28,50 +37,45 @@ const produceUpdates = (
 	}
 }
 
-const produceWave = (
-	draft: (WritableDraft<Readonly<ShakeDefaultWave> | Readonly<ShakeExtraWave>>),
-	payload: (Readonly<ShakeDefaultWave | ShakeExtraWave>),
-) => {
-	if (payload.wave === 'extra') {
-		return Object.assign(draft, payload)
-	}
-
+function produceWave(
+	draft: WritableDraft<Readonly<ShakeDefaultWave>>,
+	payload: Readonly<ShakeDefaultWave>,
+) {
 	const { updates, ...props } = payload
 	produceUpdates((draft as WritableDraft<Readonly<ShakeDefaultWave>>).updates, updates)
-	return Object.assign(draft, props)
+	Object.assign(draft, props)
 }
 
-const produceWaves = (
-	draft: (WritableDraft<Readonly<ShakeDefaultWave> | Readonly<ShakeExtraWave>>)[],
-	payload: (Readonly<ShakeDefaultWave> | Readonly<ShakeExtraWave>)[],
-) => {
-	let i = 0
-	for (; i < draft.length; ++i) {
-		draft[i] = produceWave(draft[i], payload[i])
-	}
-	for (; i < payload.length; ++i) {
-		const childPayload = payload[i]
-		if (childPayload.wave === 'extra') {
-			const clonePayload = Object.assign({}, childPayload)
-			draft.push(clonePayload)
-		} else {
-			const { updates, ...props } = childPayload
-			const clonePayload = {
-				...props,
-				updates: updates.map(u => Object.assign({}, u)),
+function produceWaves(draft: WritableDraft<ShakeWaveRecord>, payload: Readonly<ShakeWaveRecord>) {
+	for (const [waveKey, wavePayload] of Object.entries(payload)) {
+		if (Object.hasOwn(draft, waveKey)) {
+			if (waveKey !== 'extra') {
+				produceWave(draft[waveKey]!, wavePayload as Readonly<ShakeDefaultWave>)
 			}
-			draft.push(clonePayload)
+		} else {
+			if (waveKey === 'extra') {
+				draft['extra'] = wavePayload as Readonly<ShakeExtraWave>
+			} else {
+				const { updates, ...props } = wavePayload as Readonly<ShakeDefaultWave>
+				draft[waveKey] = {
+					...props,
+					updates: updates.map(u => Object.assign({}, u)),
+				}
+			}
 		}
 	}
 }
 
-const produceMatch = (
+function produceMatch(
 	draft: (WritableDraft<Readonly<ShakeTelemetry>>),
 	payload: (Readonly<ShakeTelemetry>),
-) => {
-	const { waves, ...props } = payload
+) {
+	const { waveKeys, waves, ...props } = payload
+	if (!waveKeys.equals(draft.waveKeys)) {
+		draft.waveKeys = waveKeys.slice(0)
+	}
 	produceWaves(draft.waves, waves)
-	return Object.assign(draft, props)
+	Object.assign(draft, props)
 }
 
 // Slice
@@ -81,33 +85,51 @@ const telemetrySlice = createSlice({
 	reducers: {
 		addTelemetry(state, action: PayloadAction<ShakeEvent>) {
 			processor.process(action.payload)
-			return produce(state, draftState => {
-				const newMatch = processor.current
-				const newMatchId = newMatch.id
-				if (newMatchId in draftState) {
-					const draftMatchState = draftState[newMatchId]
-					produceMatch(draftMatchState, newMatch)
-				} else {
-					const { waves, ...props } = newMatch
-					draftState[newMatchId] = {
-						...props,
-						waves: waves.map(w => {
-							if (w.wave === 'extra') {
-								return Object.assign({}, w)
-							}
 
-							const { updates, ...props } = w
-							return {
-								...props,
-								updates: updates.map(u => Object.assign({}, u)),
+			return produce(state, draft => {
+				const newTelemetry = processor.current
+				const newTelemetryId = newTelemetry.id
+				if (Object.hasOwn(draft.entities, newTelemetryId)) {
+					const draftMatchState = draft.entities[newTelemetryId]
+					produceMatch(draftMatchState, newTelemetry)
+				} else {
+					const { waveKeys, waves, ...props } = newTelemetry
+					draft.entities[newTelemetryId] = {
+						...props,
+						waveKeys: waveKeys.slice(0),
+						waves: Object.entries(waves).reduce((draftWaves, pair) => {
+							const [waveKey, wave] = pair
+							if (waveKey === 'extra') {
+								draftWaves['extra'] = wave as ShakeExtraWave
+							} else {
+								const { updates, ...props } = wave as ShakeDefaultWave
+								draftWaves[waveKey] = {
+									...props,
+									updates: updates.map(u => Object.assign({}, u)),
+								}
 							}
-						}),
+							return draftWaves
+						}, {} as ShakeWaveRecord),
 					}
+
+					const match = getMatchFromTelemetry(newTelemetry)
+					draft.matches.push(match)
 				}
+				return draft
 			})
 		},
-		resetTelemetry() {
-			return {}
+		removeTelemetry(state, action: PayloadAction<string>) {
+			const matchId = action.payload
+			if (Object.hasOwn(state.entities, matchId)) {
+				delete state.entities[matchId]
+
+				const index = state.matches.findIndex(match => match.id === matchId)
+				state.matches.splice(index, 1)
+			}
+		},
+		resetTelemetry(state) {
+			state.matches.length = 0
+			state.entities = {}
 		},
 
 		setTelemetry(state, action: PayloadAction<ShakeEvent[]>) {
@@ -116,8 +138,11 @@ const telemetrySlice = createSlice({
 				temporary.process(ev)
 
 				if (temporary.isNewContext()) {
-					const match = temporary.current
-					state[match.id] = match
+					const telemetry = temporary.current
+					state.entities[telemetry.id] = telemetry
+
+					const match = getMatchFromTelemetry(telemetry)
+					state.matches.push(match)
 				}
 			})
 

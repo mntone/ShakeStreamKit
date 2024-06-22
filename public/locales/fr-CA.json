@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "Connecté au serveur WebSocket",
 	"Notification.webSocketDisconnected": "Échec de la connexion au serveur WebSocket",
 
-	"OverlayController.hideOverlay": "Masquer la superposition",
-	"OverlayController.showOverlay": "Afficher la superposition",
-	"OverlayController.showOverlayWithWave": "Afficher la Vague {wave}",
+	"overlay.noData": "Aucune donnée",
+	"overlay.hideOverlay": "Masquer la superposition",
+	"overlay.showOverlay": "Afficher la superposition",
+	"overlay.showOverlayWithWave": "Afficher la Vague {wave}",
 
 	"Result.clear": "Réussite!",
 	"Result.defeat": "Échec...",

@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "Verbonden met WebSocket-server",
 	"Notification.webSocketDisconnected": "Verbinding met WebSocket-server mislukt",
 
-	"OverlayController.hideOverlay": "Verberg overlay",
-	"OverlayController.showOverlay": "Toon overlay",
-	"OverlayController.showOverlayWithWave": "Toon {wave}e golf",
+	"overlay.noData": "Geen gegevens",
+	"overlay.hideOverlay": "Verberg overlay",
+	"overlay.showOverlay": "Toon overlay",
+	"overlay.showOverlayWithWave": "Toon {wave}e golf",
 
 	"Result.clear": "Gelukt!!",
 	"Result.defeat": "Helaas...",

@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "已連接到WebSocket伺服器",
 	"Notification.webSocketDisconnected": "連接WebSocket伺服器失敗",
 
-	"OverlayController.hideOverlay": "隱藏疊加",
-	"OverlayController.showOverlay": "顯示疊加",
-	"OverlayController.showOverlayWithWave": "顯示WAVE {wave}",
+	"overlay.noData": "沒有資料",
+	"overlay.hideOverlay": "隱藏疊加",
+	"overlay.showOverlay": "顯示疊加",
+	"overlay.showOverlayWithWave": "顯示WAVE {wave}",
 
 	"Result.clear": "Clear！！",
 	"Result.defeat": "Failure",

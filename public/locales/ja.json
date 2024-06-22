@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "WebSocketサーバーに接続しました",
 	"Notification.webSocketDisconnected": "WebSocketサーバーに接続できませんでした",
 
-	"OverlayController.hideOverlay": "オーバーレイを非表示",
-	"OverlayController.showOverlay": "オーバーレイを表示",
-	"OverlayController.showOverlayWithWave": "WAVE{wave}を表示",
+	"overlay.noData": "データなし",
+	"overlay.hideOverlay": "オーバーレイを非表示",
+	"overlay.showOverlay": "オーバーレイを表示",
+	"overlay.showOverlayWithWave": "WAVE{wave}を表示",
 
 	"Result.clear": "Clear!!",
 	"Result.defeat": "Failure",

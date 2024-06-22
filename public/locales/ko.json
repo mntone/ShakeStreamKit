@@ -53,9 +53,10 @@
 	"Notification.webSocketConnected": "WebSocket 서버에 연결됨",
 	"Notification.webSocketDisconnected": "WebSocket 서버에 연결 실패",
 
-	"OverlayController.hideOverlay": "오버레이 끄기",
-	"OverlayController.showOverlay": "오버레이 켜기",
-	"OverlayController.showOverlayWithWave": "WAVE {wave} 켜기",
+	"overlay.noData": "데이터 없음",
+	"overlay.hideOverlay": "오버레이 끄기",
+	"overlay.showOverlay": "오버레이 켜기",
+	"overlay.showOverlayWithWave": "WAVE {wave} 켜기",
 
 	"Result.clear": "Clear!!",
 	"Result.defeat": "Failure",

@@ -3,14 +3,12 @@ import './styles.css'
 import { useRef } from 'react'
 import { connect } from 'react-redux'
 
-import { createSelector } from '@reduxjs/toolkit'
-
 import EggGraph, { type EggGraphProps } from '@/core/components/EggGraph'
 import type { GraphLayoutProps } from '@/core/models/graph'
-import { isDefaultWave } from '@/core/utils/wave'
 
 import { RootState } from 'app/store'
 
+import { getCurrentTelemetry, getCurrentWaveFromTelemetry } from '../../selector'
 import { RightSlideAnimation } from '../SlideAnimation'
 
 const preferredGraphLayout = Object.freeze({
@@ -44,36 +42,16 @@ export const OverlayEggGraph = (props: OverlayEggGraphProps) => {
 	)
 }
 
-const selectData = createSelector(
-	(state: RootState) => state.overlay.match,
-	(state: RootState) => state.telemetry,
-	(matchId, telemetry) => {
-		const data = matchId ? telemetry[matchId] : undefined
-		return data
-	},
-)
-
-const mapStateToProps = (state: RootState) => {
-	const wave = state.overlay.wave
-	if (!isDefaultWave(wave)) {
-		return {
-			colorLock: state.config.colorLock,
-			visible: false,
-		} satisfies Pick<OverlayEggGraphProps, 'colorLock' | 'visible'>
+function mapStateToProps(state: RootState) {
+	const telemetry = getCurrentTelemetry(state)
+	let wave = getCurrentWaveFromTelemetry(state, telemetry)
+	if (wave?.wave === 'extra') {
+		wave = undefined
 	}
-
-	const telemetry = selectData(state)
-	if (!telemetry) {
-		return {
-			colorLock: state.config.colorLock,
-			visible: false,
-		} satisfies Pick<OverlayEggGraphProps, 'colorLock' | 'visible'>
-	}
-
 	return {
 		colorLock: state.config.colorLock,
 		telemetry,
-		visible: true,
+		visible: telemetry !== undefined && wave !== undefined,
 		wave,
 	} satisfies OverlayEggGraphProps
 }

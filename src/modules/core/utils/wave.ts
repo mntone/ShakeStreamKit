@@ -2,7 +2,13 @@ export type FlexibleWaveType = undefined | null | number | string
 
 export type DefaultWaveType = 1 | 2 | 3 | 4 | 5
 
+type NumberToString<N extends number> = `${N}`
+
+export type DefaultWaveStringType = NumberToString<DefaultWaveType>
+
 export type WaveType = DefaultWaveType | 'extra'
+
+export type WaveStringType = DefaultWaveStringType | 'extra'
 
 export const isDefaultWave = (val: FlexibleWaveType): val is DefaultWaveType => {
 	return typeof val === 'number' && 1 <= val && val <= 5
