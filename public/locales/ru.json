@@ -40,9 +40,10 @@
 	"Dialog.general.showOverlayOn.waveFinished": "Волна завершена",
 	"Dialog.general.language": "Язык",
 
-	"EggGraph.quota": "План",
 	"EggGraph.wave": "Волна <big>{wave}</big>",
 	"EggGraph.extraWave": "ВОЛНА +",
+	"EggGraph.quota": "План",
+	"EggGraph.quotaFormat": "{amount}/{quota}",
 	"EggGraph.clear": "✓",
 	"EggGraph.fail": "✘",
 

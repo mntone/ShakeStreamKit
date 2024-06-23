@@ -40,9 +40,10 @@
 	"Dialog.general.showOverlayOn.waveFinished": "WAVE结束",
 	"Dialog.general.language": "语言",
 
-	"EggGraph.quota": "目标配额",
 	"EggGraph.wave": "WAVE<big>{wave}</big> ",
 	"EggGraph.extraWave": "EXTRA WAVE",
+	"EggGraph.quota": "目标配额",
+	"EggGraph.quotaFormat": "{amount}/{quota}",
 	"EggGraph.clear": "GJ!",
 	"EggGraph.fail": "NG",
 

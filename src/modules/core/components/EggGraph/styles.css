@@ -35,10 +35,10 @@
 	transform-origin: center;
 	animation: showStatus 300ms 84ms ease-in-out;
 }
-.EggGraph-clear {
+.EggGraph-status-clear {
 	color: var(--fg-pos);
 }
-.EggGraph-failure {
+.EggGraph-status-fail {
 	color: var(--fg-neg);
 }
 
@@ -117,14 +117,17 @@
 .EggGraph-axis text {
 	fill: #CCC;
 }
+.EggGraph-axis-y text {
+	text-anchor: end;
+}
 
-/* Line */
-.EggGraph-lines-quota line {
+/* HLine */
+.EggGraph-hline-quota line {
 	stroke: var(--ink--neutral);
 	stroke-dasharray: 6 3;
 	stroke-width: 2px;
 }
-.EggGraph-lines-quota text {
+.EggGraph-hline-quota text {
 	fill: var(--ink--neutral);
 	font-size: .8em;
 	font-weight: bold;

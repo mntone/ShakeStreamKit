@@ -137,7 +137,6 @@ export default ts.config(
 			...react.configs.recommended.rules,
 			...react.configs['jsx-runtime'].rules,
 			'react/button-has-type': ['error', { button: true }],
-			'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
 			'react/void-dom-elements-no-children': 'error',
 		},
 	},

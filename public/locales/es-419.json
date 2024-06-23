@@ -40,9 +40,10 @@
 	"Dialog.general.showOverlayOn.waveFinished": "Oleada finalizada",
 	"Dialog.general.language": "Idioma",
 
-	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Oleada <big>{wave}</big>",
 	"EggGraph.extraWave": "Oleada extra",
+	"EggGraph.quota": "Cupo",
+	"EggGraph.quotaFormat": "{amount}/{quota}",
 	"EggGraph.clear": "✓",
 	"EggGraph.fail": "✘",
 

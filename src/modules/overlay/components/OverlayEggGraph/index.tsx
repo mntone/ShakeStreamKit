@@ -12,21 +12,22 @@ import { getCurrentTelemetry, getCurrentWaveFromTelemetry } from '../../selector
 import { RightSlideAnimation } from '../SlideAnimation'
 
 const preferredGraphLayout = Object.freeze({
+	marginTop: 48,     // 3.0em  in 720p (1em = 16px @ 720p, 1em = 24px @ 1080p)
+	marginLeft: 44,    // 2.75em in 720p
+	marginRight: 16,   // 1.0em  in 720p, with 2.25em padding
+	marginBottom: 32,  // 2.0em  in 720p
+
+	width: 320 - 44 - 20,
+	height: 192 - 48 - 32,
 	containerWidth: '100%',
 	containerHeight: '100%',
-	graphWidth: 320,
-	graphHeight: 192,
-	marginTop: 48,     // 3.0em  in 720p (1em = 16px @ 720p, 1em = 24px @ 1080p)
-	marginLeft: 48,    // 3.0em  in 720p
-	marginRight: 20,   // 1.25em in 720p, with 2.25em padding
-	marginBottom: 32,  // 2.0em  in 720p
 } satisfies GraphLayoutProps)
 
 type OverlayEggGraphProps =
 	& { readonly visible: boolean }
 	& Omit<EggGraphProps, keyof GraphLayoutProps>
 
-export const OverlayEggGraph = (props: OverlayEggGraphProps) => {
+export const OverlayEggGraph = function (props: OverlayEggGraphProps) {
 	const { visible, ...nextProps } = props
 	const ref = useRef<HTMLDivElement>(null)
 	return (

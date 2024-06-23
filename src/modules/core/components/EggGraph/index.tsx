@@ -1,28 +1,21 @@
 import './styles.css'
 
-import { ReactNode, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
-import { AxisBottom, AxisLeft, type TickLabelProps } from '@visx/axis'
 import { curveLinear } from '@visx/curve'
-import { GridRows } from '@visx/grid'
-import { Group } from '@visx/group'
-import { scaleLinear, type ScaleInput } from '@visx/scale'
+import { scaleLinear } from '@visx/scale'
 import { LinePath } from '@visx/shape'
 
 import { getSvgProps, type GraphLayoutProps } from '@/core/models/graph'
 import { forceLast } from '@/core/utils/collection'
 import type { ShakeDefaultWave, ShakeTelemetry } from '@/telemetry/models/data'
 
+import HLine from './HLine'
+import Header from './Header'
+import XAxis from './XAxis'
+import YAxis from './YAxis'
 import EggGraphMessages from './messages'
-
-import type { ScaleLinear } from 'd3-scale'
-
-const getLargeTextNode = (chunks: ReactNode[]) => {
-	return (
-		<span style={{ fontSize: '1.25em' }}>{chunks}</span>
-	)
-}
 
 export interface EggGraphProps extends GraphLayoutProps {
 	readonly colorLock?: boolean
@@ -30,29 +23,12 @@ export interface EggGraphProps extends GraphLayoutProps {
 	readonly wave?: Readonly<ShakeDefaultWave>
 }
 
-const amountLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, never>>> = {
-	dy: '.4em',
-	fontFamily: undefined,
-	fontSize: undefined,
-	fill: undefined,
-}
-
-const countLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, never>>> = {
-	dy: '.6em',
-	fontFamily: undefined,
-	fontSize: undefined,
-	fill: undefined,
-}
-
-const EggGraph = (props: EggGraphProps) => {
+const EggGraph = function (props: EggGraphProps) {
 	const {
-		graphWidth,
-		graphHeight,
-
-		marginTop,
-		marginLeft,
-		marginRight,
-		marginBottom,
+		marginTop: y,
+		marginLeft: x,
+		width,
+		height,
 
 		colorLock,
 		telemetry,
@@ -65,12 +41,7 @@ const EggGraph = (props: EggGraphProps) => {
 	const intl = useIntl()
 
 	const svgProps = getSvgProps(props)
-	const width = graphWidth - marginLeft - marginRight
-	const height = graphHeight - marginTop - marginBottom
-	const positionProps = {
-		left: marginLeft,
-		top: marginTop,
-	}
+	const transform = `translate(${x},${y})`
 
 	const lastUpdate = forceLast(waveData.updates)
 	const status = waveData.quota <= lastUpdate.amount
@@ -81,105 +52,61 @@ const EggGraph = (props: EggGraphProps) => {
 				? false
 				: undefined
 	const maxY = Math.max(5 * Math.ceil(0.2 * waveData.quota), lastUpdate.amount)
-	const amountScale = scaleLinear<number>({
+	const amountScale = useMemo(() => scaleLinear<number>({
 		domain: [maxY, 0],
 		range: [0, height],
 		nice: true,
-	})
-	const countScale = scaleLinear<number>({
+	}), [height, maxY])
+	const countScale = useMemo(() => scaleLinear<number>({
 		domain: [100, 0],
 		range: [0, width],
 		clamp: true,
-	})
-	const quotaY = amountScale(waveData.quota)
+	}), [width])
 
 	return (
 		<div className={colorLock !== true && telemetry?.color
-			? `EggGraph EggGraph-wave${waveData.wave} EggGraph-ink-${telemetry.color}`
-			: `EggGraph EggGraph-wave${waveData.wave}`}>
-			<header>
-				<span className='EggGraph-wave'>
-					{intl.formatMessage(
-						EggGraphMessages.wave,
-						{
-							big: getLargeTextNode,
-							wave: waveData.wave,
-						},
-					)}
-				</span>
-				{
-					status
-						? (
-							<span className='EggGraph-status EggGraph-clear'>
-								{intl.formatMessage(EggGraphMessages.clear)}
-							</span>
-						)
-						: status === false
-							? (
-								<span className='EggGraph-status EggGraph-failure'>
-									{intl.formatMessage(EggGraphMessages.fail)}
-								</span>
-							)
-							: null
-				}
-				<span className='EggGraph-quota'>
-					{`${waveData.amount}/${waveData.quota}`}
-				</span>
-			</header>
+			? `EggGraph EggGraph-ink-${telemetry.color}`
+			: `EggGraph`}>
+			<Header
+				wave={waveData.wave}
+				status={status}
+				amount={waveData.amount}
+				quota={waveData.quota}
+			/>
 
 			<svg {...svgProps}>
 				<rect
 					className='EggGraph-background'
-					x={marginLeft}
-					y={marginTop}
+					x={x}
+					y={y}
 					width={width}
 					height={height}
 				/>
 
-				<GridRows
-					className='EggGraph-grid EggGraph-grid-y'
+				<YAxis
+					x={x}
+					y={y}
+					width={width}
+					height={height}
 					scale={amountScale}
-					numTicks={2}
-					{...positionProps}
-					width={width}
-					height={height}
+				/>
+				<XAxis
+					x={x}
+					y={y + height}
+					scale={countScale}
 				/>
 
-				<Group className='EggGraph-lines-quota' {...positionProps}>
-					<line
-						x2={width}
-						y1={quotaY}
-						y2={quotaY}
-					/>
-					<text
-						y={quotaY}
-						dx='.2em'
-						dy={waveData.quota + 3 > maxY ? '1.2em' : '-.333em'}
+				<g className='EggGraph-hline-quota' transform={transform}>
+					<HLine
+						y={amountScale(waveData.quota)}
+						width={width}
+						labelPosition={waveData.quota + 3 > maxY ? 'bottomLeft' : 'topLeft'}
 					>
 						{intl.formatMessage(EggGraphMessages.quota)}
-					</text>
-				</Group>
+					</HLine>
+				</g>
 
-				<AxisLeft
-					axisClassName='EggGraph-axis EggGraph-axis-y'
-					scale={amountScale}
-					numTicks={4}
-					tickLength={4}
-					hideZero
-					tickLabelProps={amountLabelProps}
-					{...positionProps}
-				/>
-				<AxisBottom
-					axisClassName='EggGraph-axis EggGraph-axis-x'
-					scale={countScale}
-					numTicks={4}
-					tickLength={4}
-					tickLabelProps={countLabelProps}
-					left={marginLeft}
-					top={marginTop + height}
-				/>
-
-				<Group {...positionProps}>
+				<g transform={transform}>
 					<LinePath
 						className='EggGraph-item-line-bg'
 						data={waveData.updates}
@@ -196,7 +123,7 @@ const EggGraph = (props: EggGraphProps) => {
 						y={d => amountScale(d.amount)}
 						x={d => countScale(100 + waveData.startTimestamp - d.timestamp)}
 					/>
-				</Group>
+				</g>
 			</svg>
 		</div>
 	)

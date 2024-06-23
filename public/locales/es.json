@@ -40,9 +40,10 @@
 	"Dialog.general.showOverlayOn.waveFinished": "Ofensiva finalizada",
 	"Dialog.general.language": "Idioma",
 
-	"EggGraph.quota": "Cupo",
 	"EggGraph.wave": "Ofensiva <big>{wave}</big>",
 	"EggGraph.extraWave": "Ofensiva extra",
+	"EggGraph.quota": "Cupo",
+	"EggGraph.quotaFormat": "{amount}/{quota}",
 	"EggGraph.clear": "✓",
 	"EggGraph.fail": "✘",
 

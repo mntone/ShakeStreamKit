@@ -1,10 +1,6 @@
 import { defineMessages } from 'react-intl'
 
 const EggGraphMessages = defineMessages({
-	quota: {
-		id: 'EggGraph.quota',
-		defaultMessage: 'Quota',
-	},
 	wave: {
 		id: 'EggGraph.wave',
 		defaultMessage: 'Wave <big>{wave}</big>',
@@ -12,6 +8,14 @@ const EggGraphMessages = defineMessages({
 	extraWave: {
 		id: 'EggGraph.extraWave',
 		defaultMessage: 'XTRAWAVE',
+	},
+	quota: {
+		id: 'EggGraph.quota',
+		defaultMessage: 'Quota',
+	},
+	quotaFormat: {
+		id: 'EggGraph.quotaFormat',
+		defaultMessage: '{amount}/{quota}',
 	},
 	clear: {
 		id: 'EggGraph.clear',
