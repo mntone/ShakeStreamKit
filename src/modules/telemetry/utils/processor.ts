@@ -1,10 +1,11 @@
-import { DefaultWaveType, isDefaultWave } from '@/core/utils/wave'
-
-import { ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate } from '../models/data'
-import { ShakeEvent, ShakeGameUpdateEvent } from '../models/telemetry'
+import { type WaveType, isDefaultWave } from '@/core/utils/wave'
 
 import { CounterAnomalyDetector } from './CounterAnomalyDetector'
+import { IntervalProcessor } from './IntervalProcessor'
 import { FrequencyCounter } from './frequencyCounter'
+
+import type { ShakeBaseWave, ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate } from '../models/data'
+import type { ShakeEvent, ShakeGameKingEvent, ShakeGameUpdateEvent } from '../models/telemetry'
 
 export class TelemetryProcessor {
 	readonly #maxIncreaseAmountInSeconds: number
@@ -15,19 +16,25 @@ export class TelemetryProcessor {
 	// Data processing instances
 	readonly #quotaCounter: FrequencyCounter<number> = new FrequencyCounter()
 	readonly #countAnomalyDetector: CounterAnomalyDetector = new CounterAnomalyDetector()
+	readonly #players: readonly [IntervalProcessor, IntervalProcessor][] = [
+		[new IntervalProcessor(), new IntervalProcessor()],
+		[new IntervalProcessor(), new IntervalProcessor()],
+		[new IntervalProcessor(), new IntervalProcessor()],
+		[new IntervalProcessor(), new IntervalProcessor()],
+	]
 
 	// Base count; use this value as base of this.#waveData.startTimestamp
 	#baseCount: number = 110
 
 	// Current wave
-	#currentWave: DefaultWaveType | undefined = undefined
+	#currentWave: WaveType | undefined = undefined
 
 	// Raw event storage
 	readonly #storage: ShakeEvent[] = []
 
 	// Telemetry data
 	#data: ShakeTelemetry = undefined as any
-	#waveData: ShakeDefaultWave = undefined as any
+	#waveData: ShakeBaseWave = undefined as any
 
 	constructor(maxIncreaseAmountInSeconds: number) {
 		this.#maxIncreaseAmountInSeconds = maxIncreaseAmountInSeconds
@@ -49,6 +56,10 @@ export class TelemetryProcessor {
 
 		this.#countAnomalyDetector.reset()
 		this.#quotaCounter.reset()
+		this.#players.forEach(function ([alive, gegg]) {
+			alive.reset()
+			gegg.reset()
+		})
 		this.#baseCount = 110
 		this.#currentWave = undefined
 
@@ -62,10 +73,56 @@ export class TelemetryProcessor {
 		this.#waveData = undefined as any
 	}
 
+	#processInitExtra(ev: Readonly<ShakeGameKingEvent>) {
+		this.#countAnomalyDetector.reset()
+		this.#baseCount = 100
+		this.#currentWave = 'extra'
+
+		// Create new wave data
+		const newWaveData: ShakeExtraWave = {
+			wave: 'extra',
+			king: ev.king,
+			startTimestamp: ev.timestamp,
+			players: this.#players.map(function ([alive, gegg], index) {
+				return {
+					index,
+					alives: alive.reset().add(ev.timestamp, true).get(ev.timestamp),
+					geggs: gegg.reset().add(ev.timestamp, false).get(ev.timestamp),
+				}
+			}),
+		} as const
+		this.#data.waveKeys.push('extra')
+		this.#data.waves['extra'] = newWaveData
+		this.#waveData = newWaveData
+	}
+
+	#processUpdateExtra(ev: Readonly<ShakeGameUpdateEvent>) {
+		if (ev.count === undefined) {
+			return // DISPOSE!!
+		}
+
+		// Update wave
+		const currentWaveData = this.#waveData as ShakeExtraWave
+
+		// Update quota and status
+		this.#players.forEach(function ([alive, gegg], index) {
+			const pev = ev.players[index]
+			currentWaveData.players[index] = {
+				index,
+				alives: alive.add(ev.timestamp, pev.alive).get(ev.timestamp),
+				geggs: gegg.add(ev.timestamp, pev.gegg).get(ev.timestamp),
+			}
+		})
+	}
+
 	#processUpdate(ev: Readonly<ShakeGameUpdateEvent>) {
 		// Extra wave
 		if (ev.wave === 'extra') {
+			this.#processUpdateExtra(ev)
 			return
+		}
+		if (this.#currentWave === 'extra') {
+			throw Error('Current wave is extra.')
 		}
 
 		// Set color
@@ -117,9 +174,18 @@ export class TelemetryProcessor {
 						timestamp: ev.timestamp,
 						count: ev.count,
 						amount: ev.amount ?? 0 /* MAYBE 0 */,
+						players: ev.players,
 						unstable: ev.unstable,
 					}),
 				],
+				players: this.#players.map(function ([alive, gegg], index) {
+					const pev = ev.players[index]
+					return {
+						index,
+						alives: alive.reset().add(ev.timestamp, pev.alive).get(ev.timestamp),
+						geggs: gegg.reset().add(ev.timestamp, pev.gegg).get(ev.timestamp),
+					}
+				}),
 			} as const
 			this.#data.waveKeys.push(currentWave!)
 			this.#data.waves[currentWave!] = newWaveData
@@ -128,7 +194,7 @@ export class TelemetryProcessor {
 		}
 
 		// Update wave
-		const currentWaveData = this.#waveData
+		const currentWaveData = this.#waveData as ShakeDefaultWave
 
 		let count = ev.count
 		if (count === undefined) {
@@ -159,8 +225,16 @@ export class TelemetryProcessor {
 			}
 		}
 
-		// Update quota
+		// Update quota and status
 		currentWaveData.quota = this.#quotaCounter.add(ev.quota).mode
+		this.#players.forEach(function ([alive, gegg], index) {
+			const pev = ev.players[index]
+			currentWaveData.players[index] = {
+				index,
+				alives: alive.add(ev.timestamp, pev.alive).get(ev.timestamp),
+				geggs: gegg.add(ev.timestamp, pev.gegg).get(ev.timestamp),
+			}
+		})
 
 		// Check diff >= 0
 		const lastUpdate = currentWaveData.updates.at(-1)
@@ -192,6 +266,7 @@ export class TelemetryProcessor {
 			timestamp: ev.timestamp,
 			count,
 			amount: ev.amount,
+			players: ev.players,
 			unstable: ev.unstable,
 		})
 		currentWaveData.updates.push(newUpdateData)
@@ -225,16 +300,9 @@ export class TelemetryProcessor {
 		case 'game_stage':
 			this.#data.stage = ev.stage
 			break
-		case 'game_king': {
-			const newExtraWaveData: ShakeExtraWave = Object.freeze({
-				wave: 'extra',
-				startTimestamp: ev.timestamp,
-				king: ev.king,
-			})
-			this.#data.waveKeys.push('extra')
-			this.#data.waves['extra'] = newExtraWaveData
+		case 'game_king':
+			this.#processInitExtra(ev)
 			break
-		}
 		}
 	}
 

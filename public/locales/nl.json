@@ -6,6 +6,7 @@
 	"Dialog.advanced.displayDuration": "Weergaveduur voor overlay",
 	"Dialog.advanced.displayDurationUnit": "sec",
 	"Dialog.advanced.otherOptions": "Andere Opties",
+	"Dialog.advanced.playerStatus": "Toon spelersstatus",
 	"Dialog.advanced.reduceAnimations": "Animaties verminderen",
 	"Dialog.advanced.colorLock": "Vaste kleuren",
 

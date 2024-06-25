@@ -34,6 +34,10 @@ const DialogMessages = defineMessages({
 		id: 'Dialog.advanced.colorLock',
 		defaultMessage: 'Color Lock',
 	},
+	advancedPlayerStatus: {
+		id: 'Dialog.advanced.playerStatus',
+		defaultMessage: 'Show Player Status',
+	},
 
 	dataSource: {
 		id: 'Dialog.dataSource',

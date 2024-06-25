@@ -6,6 +6,7 @@
 	"Dialog.advanced.displayDuration": "Display Duration for Overlay",
 	"Dialog.advanced.displayDurationUnit": "sec",
 	"Dialog.advanced.otherOptions": "Other Options",
+	"Dialog.advanced.playerStatus": "Show Player Status",
 	"Dialog.advanced.reduceAnimations": "Reduce Animations",
 	"Dialog.advanced.colorLock": "Color Lock",
 

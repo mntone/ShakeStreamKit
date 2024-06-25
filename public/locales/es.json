@@ -6,6 +6,7 @@
 	"Dialog.advanced.displayDuration": "Duración de visualización para la superposición",
 	"Dialog.advanced.displayDurationUnit": "seg",
 	"Dialog.advanced.otherOptions": "Otras opciones",
+	"Dialog.advanced.playerStatus": "Mostrar estado de los jugadores",
 	"Dialog.advanced.reduceAnimations": "Reducir animaciones",
 	"Dialog.advanced.colorLock": "Ayuda de colores",
 

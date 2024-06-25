@@ -6,6 +6,7 @@
 	"Dialog.advanced.displayDuration": "Время отображения наложения",
 	"Dialog.advanced.displayDurationUnit": "сек",
 	"Dialog.advanced.otherOptions": "Другие варианты",
+	"Dialog.advanced.playerStatus": "Показать статус игроков",
 	"Dialog.advanced.reduceAnimations": "Уменьшить анимации",
 	"Dialog.advanced.colorLock": "Ограничение цветов",
 

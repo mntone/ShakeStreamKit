@@ -3,7 +3,7 @@
 	align-items: baseline;
 	gap: .25em;
 
-	margin: .25em 1.25em 0;
+	margin: .25em .75em 0 1.25em;
 	line-height: 2.5em;
 	color: #FFF;
 }
@@ -110,14 +110,17 @@
 .EggGraph-axis {
 	font-size: .8em;
 }
-.EggGraph-axis line {
+.EggGraph-axis line,
+.EggGraph-axis-line {
 	stroke: #808080;
 	stroke-width: 2px;
 }
-.EggGraph-axis text {
+.EggGraph-axis text,
+.EggGraph-axis-text {
 	fill: #CCC;
 }
-.EggGraph-axis-y text {
+.EggGraph-axis-y text,
+.EggGraph-axis-y-text {
 	text-anchor: end;
 }
 
@@ -145,4 +148,20 @@
 	stroke-linecap: round;
 	stroke-opacity: .25;
 	stroke-width: 7.5px;
+}
+
+/* Player Item */
+.EggGraph-player-item-alive {
+	stroke: var(--ink);
+	stroke-width: 3px;
+}
+.EggGraph-player-item-alive-bg {
+	stroke: var(--ink);
+	stroke-linecap: round;
+	stroke-opacity: .25;
+	stroke-width: 7.5px;
+}
+.EggGraph-player-item-gegg {
+	stroke: var(--ink--neutral);
+	stroke-width: 3px;
 }

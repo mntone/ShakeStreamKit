@@ -34,21 +34,18 @@
 
 .Overlay {
 	background-color: var(--ol-bg);
-	transition: transform var(--animation-enter);
 }
 
 .Overlay-left {
 	border-radius: 0 1.5em 1.5em 0;
+	transform: rotate(-3deg);
 }
-.Overlay-left,
 .Overlay-left--slide-enter {
 	transform: rotate(-3deg) translateX(-100%);
 }
+.Overlay-left--slide-exit,
 .Overlay-left--slide-enter-active,
 .Overlay-left--slide-enter-done {
-	transform: rotate(-3deg);
-}
-.Overlay-left--slide-exit {
 	transform: rotate(-3deg);
 }
 .Overlay-left--slide-exit-active,
@@ -58,19 +55,24 @@
 
 .Overlay-right {
 	border-radius: 1.5em 0 0 1.5em;
+	transform: rotate(3deg);
 }
-.Overlay-right,
 .Overlay-right--slide-enter {
 	transform: rotate(3deg) translateX(100%);
 }
+.Overlay-right--slide-exit,
 .Overlay-right--slide-enter-active,
 .Overlay-right--slide-enter-done {
-	transform: rotate(3deg);
-}
-.Overlay-right--slide-exit {
 	transform: rotate(3deg);
 }
 .Overlay-right--slide-exit-active,
 .Overlay-right--slide-exit-done {
 	transform: rotate(3deg) translateX(100%);
+}
+
+.Overlay-left--slide-enter-active,
+.Overlay-left--slide-exit-active,
+.Overlay-right--slide-enter-active,
+.Overlay-right--slide-exit-active {
+	transition: transform var(--animation-enter);
 }

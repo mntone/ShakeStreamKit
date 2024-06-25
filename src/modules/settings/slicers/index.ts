@@ -16,6 +16,7 @@ interface ConfigState {
 	server?: string
 	simulation?: boolean
 	speed?: number
+	status?: boolean
 }
 
 const initialState: ConfigState = {
@@ -67,6 +68,9 @@ const configSlice = createSlice({
 		setSpeed(state, action: PayloadAction<number | undefined>) {
 			state.speed = action.payload
 		},
+		setStatus(state, action: PayloadAction<boolean | undefined>) {
+			state.status = action.payload
+		},
 	},
 })
 
@@ -91,5 +95,6 @@ export const {
 	setServer,
 	setSimulation,
 	setSpeed,
+	setStatus,
 } = configSlice.actions
 export default persistConfigReducer

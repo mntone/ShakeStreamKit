@@ -4,7 +4,7 @@ import { WritableDraft, produce } from 'immer'
 import { getMatchFromTelemetry } from '../utils/getMatchFromTelemetry'
 import { TelemetryProcessor } from '../utils/processor'
 
-import type { ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate, ShakeWaveRecord } from '../models/data'
+import type { ShakeBaseWave, ShakeDefaultWave, ShakeExtraWave, ShakeTelemetry, ShakeUpdate, ShakeWaveRecord } from '../models/data'
 import type { ShakeMatch } from '../models/match'
 import type { ShakeEvent } from '../models/telemetry'
 
@@ -37,29 +37,76 @@ const produceUpdates = (
 	}
 }
 
+function produceStatus(
+	draft: WritableDraft<[number, number][]>,
+	payload: readonly (readonly [number, number])[],
+) {
+	let i = 0
+	for (; i < draft.length; ++i) {
+		if (!payload[i].equals(draft[i])) {
+			draft[i] = payload[i].slice(0) as [number, number]
+		}
+	}
+	for (; i < payload.length; ++i) {
+		draft[i] = payload[i].slice(0) as [number, number]
+	}
+}
+
 function produceWave(
+	draft: WritableDraft<Readonly<ShakeBaseWave>>,
+	payload: Readonly<ShakeBaseWave>,
+) {
+	const { players } = payload
+	for (let i = 0; i < 4; ++i) {
+		draft.players[i].index = players[i].index
+		produceStatus(draft.players[i].alives, players[i].alives)
+		produceStatus(draft.players[i].geggs, players[i].geggs)
+	}
+}
+
+function produceDefaultWave(
 	draft: WritableDraft<Readonly<ShakeDefaultWave>>,
 	payload: Readonly<ShakeDefaultWave>,
 ) {
-	const { updates, ...props } = payload
-	produceUpdates((draft as WritableDraft<Readonly<ShakeDefaultWave>>).updates, updates)
+	const { updates, players, ...props } = payload
+	produceUpdates(draft.updates, updates)
+	produceWave(draft, payload)
 	Object.assign(draft, props)
 }
 
 function produceWaves(draft: WritableDraft<ShakeWaveRecord>, payload: Readonly<ShakeWaveRecord>) {
 	for (const [waveKey, wavePayload] of Object.entries(payload)) {
 		if (Object.hasOwn(draft, waveKey)) {
-			if (waveKey !== 'extra') {
-				produceWave(draft[waveKey]!, wavePayload as Readonly<ShakeDefaultWave>)
+			if (waveKey === 'extra') {
+				produceWave(draft['extra']!, wavePayload as Readonly<ShakeExtraWave>)
+			} else {
+				produceDefaultWave(draft[waveKey]!, wavePayload as Readonly<ShakeDefaultWave>)
 			}
 		} else {
 			if (waveKey === 'extra') {
-				draft['extra'] = wavePayload as Readonly<ShakeExtraWave>
+				const { players, ...props } = wavePayload as Readonly<ShakeExtraWave>
+				draft['extra'] = {
+					...props,
+					players: players.map(function (p) {
+						return {
+							index: p.index,
+							alives: p.alives.slice(0) as [number, number][],
+							geggs: p.geggs.slice(0) as [number, number][],
+						}
+					}),
+				}
 			} else {
-				const { updates, ...props } = wavePayload as Readonly<ShakeDefaultWave>
+				const { updates, players, ...props } = wavePayload as Readonly<ShakeDefaultWave>
 				draft[waveKey] = {
 					...props,
 					updates: updates.map(u => Object.assign({}, u)),
+					players: players.map(function (p) {
+						return {
+							index: p.index,
+							alives: p.alives.slice(0) as [number, number][],
+							geggs: p.geggs.slice(0) as [number, number][],
+						}
+					}),
 				}
 			}
 		}
@@ -100,16 +147,16 @@ const telemetrySlice = createSlice({
 						waves: Object.entries(waves).reduce((draftWaves, pair) => {
 							const [waveKey, wave] = pair
 							if (waveKey === 'extra') {
-								draftWaves['extra'] = wave as ShakeExtraWave
+								draftWaves['extra'] = wave as WritableDraft<ShakeExtraWave>
 							} else {
 								const { updates, ...props } = wave as ShakeDefaultWave
 								draftWaves[waveKey] = {
 									...props,
 									updates: updates.map(u => Object.assign({}, u)),
-								}
+								} as WritableDraft<ShakeDefaultWave>
 							}
 							return draftWaves
-						}, {} as ShakeWaveRecord),
+						}, {} as WritableDraft<ShakeWaveRecord>),
 					}
 
 					const match = getMatchFromTelemetry(newTelemetry)
@@ -139,7 +186,7 @@ const telemetrySlice = createSlice({
 
 				if (temporary.isNewContext()) {
 					const telemetry = temporary.current
-					state.entities[telemetry.id] = telemetry
+					state.entities[telemetry.id] = telemetry as WritableDraft<ShakeTelemetry>
 
 					const match = getMatchFromTelemetry(telemetry)
 					state.matches.push(match)

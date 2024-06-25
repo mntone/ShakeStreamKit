@@ -2,17 +2,30 @@ import { DefaultWaveStringType, DefaultWaveType, WaveType } from '@/core/utils/w
 
 import { ShakeCloseReason, ShakeColor, ShakeKing, ShakeStage } from './constant'
 
+export interface ShakePlayerStatus {
+	readonly alive: boolean
+	readonly gegg: boolean
+}
+
 export interface ShakeUpdate {
 	readonly timestamp: number
 	readonly count: number
 	readonly amount: number
+	readonly players: ShakePlayerStatus[]
 	readonly unstable: boolean
 }
 
-interface ShakeBaseWave {
+export interface ShakePlayerWave {
+	readonly index: number
+	readonly alives: readonly (readonly [number, number])[]
+	readonly geggs: readonly (readonly [number, number])[]
+}
+
+export interface ShakeBaseWave {
 	readonly wave: WaveType
 	startTimestamp: number
 	endTimestamp?: number
+	readonly players: ShakePlayerWave[]
 }
 
 export interface ShakeDefaultWave extends ShakeBaseWave {

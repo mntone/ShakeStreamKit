@@ -14,6 +14,7 @@ import {
 	setNotifyOnQuotaMetDuration,
 	setNotifyOnWaveFinishedDuration,
 	setReduced,
+	setStatus,
 } from '../slicers'
 
 const AdvancedPage = () => {
@@ -34,6 +35,7 @@ const AdvancedPage = () => {
 	}
 
 	const colorLocked = useAppSelector(state => state.config.colorLock) ?? false
+	const playerStatusEnabled = useAppSelector(state => state.config.status) ?? false
 
 	const dispatch = useDispatch()
 	const handleNotifyOnQuotaMetDuration = useCallback((notifyOnQuotaMetDuration: number) => {
@@ -47,6 +49,9 @@ const AdvancedPage = () => {
 	}, [dispatch])
 	const handleColorLock = useCallback((colorLocked: boolean) => {
 		dispatch(setColorLock(colorLocked))
+	}, [dispatch])
+	const handlePlayerStatus = useCallback((playerStatusEnabled: boolean) => {
+		dispatch(setStatus(playerStatusEnabled))
 	}, [dispatch])
 
 	return (
@@ -89,6 +94,13 @@ const AdvancedPage = () => {
 				<h3>
 					{intl.formatMessage(DialogMessages.advancedOtherOptions)}
 				</h3>
+				<CheckBox
+					id='playerstatus'
+					checked={playerStatusEnabled}
+					onCheckedChange={handlePlayerStatus}
+				>
+					{intl.formatMessage(DialogMessages.advancedPlayerStatus)}
+				</CheckBox>
 				<CheckBox
 					id='reduced'
 					checked={reducedEnabled}

@@ -6,6 +6,7 @@
 	"Dialog.advanced.displayDuration": "オーバーレイの表示時間",
 	"Dialog.advanced.displayDurationUnit": "秒",
 	"Dialog.advanced.otherOptions": "その他のオプション",
+	"Dialog.advanced.playerStatus": "プレイヤー状況を表示する",
 	"Dialog.advanced.reduceAnimations": "アニメーションを減らす",
 	"Dialog.advanced.colorLock": "色覚サポート",
 

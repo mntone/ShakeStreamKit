@@ -11,7 +11,7 @@ const ProductLogo = () => {
 	const ref = useRef<HTMLDivElement>(null)
 	return (
 		<RightSlideAnimation nodeRef={ref} visible={poweredby}>
-			<div className='Overlay Overlay-right ProductLogo' ref={ref}>
+			<div className='Overlay Overlay-right Overlay-right--slide-exit-done ProductLogo' ref={ref}>
 				<span className='ProductLogo-poweredby'>Powered By</span>
 				<br />
 				<span className='ProductLogo-logo'>

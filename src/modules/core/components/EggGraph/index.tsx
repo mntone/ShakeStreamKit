@@ -7,9 +7,11 @@ import { curveLinear } from '@visx/curve'
 import { scaleLinear } from '@visx/scale'
 import { LinePath } from '@visx/shape'
 
-import { getSvgProps, type GraphLayoutProps } from '@/core/models/graph'
+import { getSvgProps, type GraphRootProps } from '@/core/models/graph'
 import { forceLast } from '@/core/utils/collection'
 import type { ShakeDefaultWave, ShakeTelemetry } from '@/telemetry/models/data'
+
+import PlayerStatus, { PlayerStatusGraphHeight } from '../PlayerStatus'
 
 import HLine from './HLine'
 import Header from './Header'
@@ -17,8 +19,9 @@ import XAxis from './XAxis'
 import YAxis from './YAxis'
 import EggGraphMessages from './messages'
 
-export interface EggGraphProps extends GraphLayoutProps {
+export interface EggGraphProps extends GraphRootProps {
 	readonly colorLock?: boolean
+	readonly status?: boolean
 	readonly telemetry?: Readonly<ShakeTelemetry>
 	readonly wave?: Readonly<ShakeDefaultWave>
 }
@@ -27,10 +30,12 @@ const EggGraph = function (props: EggGraphProps) {
 	const {
 		marginTop: y,
 		marginLeft: x,
+		marginRight,
 		width,
 		height,
 
 		colorLock,
+		status: statusVisible,
 		telemetry,
 		wave: waveData,
 	} = props
@@ -40,8 +45,9 @@ const EggGraph = function (props: EggGraphProps) {
 
 	const intl = useIntl()
 
+	const offsetY = statusVisible ? PlayerStatusGraphHeight + 16 : 0
 	const svgProps = getSvgProps(props)
-	const transform = `translate(${x},${y})`
+	const transform = `translate(${x},${y + offsetY})`
 
 	const lastUpdate = forceLast(waveData.updates)
 	const status = waveData.quota <= lastUpdate.amount
@@ -52,11 +58,12 @@ const EggGraph = function (props: EggGraphProps) {
 				? false
 				: undefined
 	const maxY = Math.max(5 * Math.ceil(0.2 * waveData.quota), lastUpdate.amount)
+	const graphHeight = height - offsetY
 	const amountScale = useMemo(() => scaleLinear<number>({
 		domain: [maxY, 0],
-		range: [0, height],
+		range: [0, graphHeight],
 		nice: true,
-	}), [height, maxY])
+	}), [graphHeight, maxY])
 	const countScale = useMemo(() => scaleLinear<number>({
 		domain: [100, 0],
 		range: [0, width],
@@ -75,19 +82,29 @@ const EggGraph = function (props: EggGraphProps) {
 			/>
 
 			<svg {...svgProps}>
+				<PlayerStatus
+					marginTop={y}
+					marginLeft={x}
+					marginRight={marginRight}
+					width={width}
+					data={waveData}
+					scale={countScale}
+					visible={statusVisible}
+				/>
+
 				<rect
 					className='EggGraph-background'
 					x={x}
-					y={y}
+					y={y + offsetY}
 					width={width}
-					height={height}
+					height={graphHeight}
 				/>
 
 				<YAxis
 					x={x}
-					y={y}
+					y={y + offsetY}
 					width={width}
-					height={height}
+					height={graphHeight}
 					scale={amountScale}
 				/>
 				<XAxis

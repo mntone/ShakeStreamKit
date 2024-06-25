@@ -1,46 +1,52 @@
 import { ShakeColor, ShakeKing, ShakeStage } from './constant'
 
 export interface ShakeBaseEvent {
-	session: string
-	event: string
-	timestamp: number
+	readonly session: string
+	readonly event: string
+	readonly timestamp: number
 }
 
 export type ShakeMatchmakingEvent = ShakeBaseEvent & {
-	event: 'matchmaking'
+	readonly event: 'matchmaking'
 }
 
 export type ShakeGameStageEvent = ShakeBaseEvent & {
-	event: 'game_stage'
-	stage: ShakeStage
+	readonly event: 'game_stage'
+	readonly stage: ShakeStage
 }
 
 export type ShakeGameKingEvent = ShakeBaseEvent & {
-	event: 'game_king'
-	king: ShakeKing
+	readonly event: 'game_king'
+	readonly king: ShakeKing
+}
+
+export interface ShakeGamePlayerUpdateEvent {
+	readonly alive: boolean
+	readonly gegg: boolean
 }
 
 export type ShakeGameUpdateEvent = ShakeBaseEvent & {
-	event: 'game_update'
-	color: ShakeColor
-	count?: number
-	unstable: boolean
+	readonly event: 'game_update'
+	readonly color: ShakeColor
+	readonly count?: number
+	readonly players: ShakeGamePlayerUpdateEvent[]
+	readonly unstable: boolean
 } & ({
-	wave?: number
-	amount?: number
-	quota: number
+	readonly wave?: number
+	readonly amount?: number
+	readonly quota: number
 } | {
-	wave: 'extra'
+	readonly wave: 'extra'
 })
 
 export type ShakeGameResultEvent = ShakeBaseEvent & {
-	event: 'game_result'
-	golden: number
-	power: number
+	readonly event: 'game_result'
+	readonly golden: number
+	readonly power: number
 }
 
 export type ShakeGameErrorEvent = ShakeBaseEvent & {
-	event: 'game_error'
+	readonly event: 'game_error'
 }
 
 export type ShakeEvent =

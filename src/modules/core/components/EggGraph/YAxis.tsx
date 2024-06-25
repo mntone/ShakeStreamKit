@@ -15,7 +15,7 @@ interface YAxisProps {
 }
 
 const amountLabelProps: TickLabelProps<ScaleInput<ScaleLinear<number, number, never>>> = Object.freeze({
-	dx: '-.25em',
+	dx: -4,
 	dy: '.4em',
 	fontFamily: undefined,
 	fontSize: undefined,

@@ -1,10 +1,15 @@
 .OverlayEggGraph {
+	--oleg-height: 12em;
 	contain: strict;
 	position: absolute;
-	top: 16.5em;
+	top: calc(28.5em - var(--oleg-height));
 	right: -.75em;
 	width: 20em;
-	height: 12em;
+	height: var(--oleg-height);
 
-	padding-right: 2.25em;
+	padding-right: 3em;
+}
+.OverlayEggGraph-status {
+	--oleg-height: 18em;
+	width: 22em;
 }
