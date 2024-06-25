@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { connect } from 'react-redux'
 
 import EggGraph, { type EggGraphProps } from '@/core/components/EggGraph'
-import type { GraphLayoutProps } from '@/core/models/graph'
+import type { GraphRootProps } from '@/core/models/graph'
 
 import { RootState } from 'app/store'
 
@@ -21,7 +21,7 @@ const preferredGraphLayout = Object.freeze({
 	height: 192 - 48 - 32,
 	containerWidth: '100%',
 	containerHeight: '100%',
-} satisfies GraphLayoutProps)
+} satisfies GraphRootProps)
 
 const preferredGraphLayoutWithStatus = Object.freeze({
 	marginTop: 48,     // 3.0em  in 720p (1em = 16px @ 720p, 1em = 24px @ 1080p)
@@ -33,11 +33,11 @@ const preferredGraphLayoutWithStatus = Object.freeze({
 	height: 288 - 48 - 32,
 	containerWidth: '100%',
 	containerHeight: '100%',
-} satisfies GraphLayoutProps)
+} satisfies GraphRootProps)
 
 type OverlayEggGraphProps =
 	& { readonly visible: boolean }
-	& Omit<EggGraphProps, keyof GraphLayoutProps>
+	& Omit<EggGraphProps, keyof GraphRootProps>
 
 export const OverlayEggGraph = function (props: OverlayEggGraphProps) {
 	const { status, visible, ...nextProps } = props
@@ -69,7 +69,7 @@ function mapStateToProps(state: RootState) {
 	return {
 		colorLock: state.config.colorLock,
 		telemetry,
-		status: state.config.status ?? true,
+		status: state.config.status ?? false,
 		visible: telemetry !== undefined && wave !== undefined,
 		wave,
 	} satisfies OverlayEggGraphProps
