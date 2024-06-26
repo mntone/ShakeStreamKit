@@ -109,7 +109,9 @@ button {
 	vertical-align: middle;
 }
 
-.Button, .File::-webkit-file-upload-button {
+.Button,
+.File::-webkit-file-upload-button,
+.File::file-selector-button {
 	box-sizing: border-box;
 	border-radius: var(--ctl-radius);
 	border-width: 0;
@@ -120,13 +122,17 @@ button {
 	background-color: var(--ctl-bg);
 	transition: var(--ctl-transition);
 }
-.Button:hover, .File::-webkit-file-upload-button:hover {
+.Button:hover,
+.File:hover::-webkit-file-upload-button,
+.File:hover::file-selector-button {
 	background-color: var(--ctl-bg--hover);
 }
 .Button:focus-visible {
 	outline-color: #FFFC;
 }
-.Button[disabled], .File[disabled]::-webkit-file-upload-button {
+.Button[disabled],
+.File[disabled]::-webkit-file-upload-button,
+.File[disabled]::file-selector-button {
 	color: var(--fg-secondary);
 	background-color: var(--ctl-bg--disable);
 }
@@ -200,6 +206,38 @@ button {
 	background-color: var(--ctl-bg-active--hover);
 }
 .Slider[disabled]::-webkit-slider-thumb {
+	background-color: var(--ctl-bg-opaque-l2--disable);
+}
+
+.Slider::-moz-range-track {
+	box-sizing: border-box;
+	border-radius: var(--ctl-radius);
+	outline: 4px solid var(--ctl-bg--disable);
+	height: .666666em;
+	background-color: var(--ctl-bg);
+}
+.Slider[disabled]::-moz-range-track {
+	outline-color: transparent;
+	background-color: var(--ctl-bg--disable);
+}
+.Slider::-moz-range-thumb {
+	border: 0 none transparent;
+	border-radius: 50%;
+
+	width: .666666em;
+	height: .666666em;
+
+	background-color: var(--ctl-bg-opaque-l2);
+
+	transform: scale(2.25);
+}
+.Slider::-moz-range-thumb:hover {
+	background-color: var(--ctl-bg-opaque-l2--hover);
+}
+.Slider::-moz-range-thumb:active {
+	background-color: var(--ctl-bg-active--hover);
+}
+.Slider[disabled]::-moz-range-thumb {
 	background-color: var(--ctl-bg-opaque-l2--disable);
 }
 
