@@ -55,6 +55,8 @@
 	"Notification.webSocketConnected": "Conectado al servidor WebSocket",
 	"Notification.webSocketDisconnected": "No se pudo conectar al servidor WebSocket",
 
+	"overlay.connected": "Conectado",
+	"overlay.notConnected": "No conectado",
 	"overlay.noData": "Sin datos",
 	"overlay.hideOverlay": "Cerrar superposición",
 	"overlay.showOverlay": "Abrir superposición",

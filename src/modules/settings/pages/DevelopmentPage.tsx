@@ -31,7 +31,7 @@ const DevelopmentPage = () => {
 					<h3>
 						{intl.formatMessage(DialogMessages.developmentPreview)}
 					</h3>
-					<p>
+					<p className='Form-description'>
 						{intl.formatMessage(DialogMessages.developmentUseCamera)}
 					</p>
 					<CameraSelector />

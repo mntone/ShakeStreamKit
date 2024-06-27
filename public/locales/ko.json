@@ -55,6 +55,8 @@
 	"Notification.webSocketConnected": "WebSocket 서버에 연결됨",
 	"Notification.webSocketDisconnected": "WebSocket 서버에 연결 실패",
 
+	"overlay.connected": "연결됨",
+	"overlay.notConnected": "연결되지 않음",
 	"overlay.noData": "데이터 없음",
 	"overlay.hideOverlay": "오버레이 끄기",
 	"overlay.showOverlay": "오버레이 켜기",

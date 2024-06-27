@@ -93,6 +93,10 @@ html:lang(zh-TW) body, .SelectItem:lang(zh-TW) {
 	}
 }
 
+p {
+	margin: 0;
+}
+
 input,
 input::-webkit-file-upload-button,
 input::-webkit-slider-thumb,
@@ -316,6 +320,19 @@ button {
 .File:focus-visible {
 	border-radius: var(--ctl-radius);
 	outline: 2px solid #FFFC;
+}
+
+.StatusText {
+	vertical-align: middle;
+}
+.StatusText-positive {
+	color: var(--fg-pos);
+}
+.StatusText-negative {
+	color: var(--fg-neg);
+}
+.StatusText > .Icon16:first-child {
+	margin-right: .125em;
 }
 
 @keyframes fadeIn {

@@ -55,6 +55,8 @@
 	"Notification.webSocketConnected": "已连接到WebSocket服务器",
 	"Notification.webSocketDisconnected": "连接WebSocket服务器失败",
 
+	"overlay.connected": "已连接",
+	"overlay.notConnected": "未连接",
 	"overlay.noData": "没有数据",
 	"overlay.hideOverlay": "隐藏叠加",
 	"overlay.showOverlay": "显示叠加",

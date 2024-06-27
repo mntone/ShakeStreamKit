@@ -1,0 +1,9 @@
+.Overlay-last {
+	margin-left: auto;
+
+	font-size: 80%;
+	line-height: 1.25;
+	text-align: right;
+
+	color: var(--fg-secondary);
+}

@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react'
+import { useCallback } from 'react'
 import { useIntl } from 'react-intl'
 import { useDispatch } from 'react-redux'
 
@@ -7,7 +7,7 @@ import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import CheckBox from '@/core/components/CheckBox'
 import SliderBox from '@/core/components/SliderBox'
 import { setMatch } from '@/overlay/slicers'
-import { WebSocketContext } from '@/telemetry/components/WebSocketProvider'
+import WebSocketStatus from '@/telemetry/components/WebSocketStatus'
 import { ShakeEvent } from '@/telemetry/models/telemetry'
 import { setTelemetry } from '@/telemetry/slicers'
 import { RealtimeTelemetrySimulator } from '@/telemetry/utils/simulator'
@@ -21,10 +21,21 @@ import { setSimulation, setSpeed } from '../slicers'
 
 const DataSourcePage = () => {
 	const intl = useIntl()
-	const wsConnect = useContext(WebSocketContext)
 
 	const simulationEnabled = useAppSelector(state => state.config.simulation) === true
 	const simulationSpeed = useAppSelector(state => state.config.speed) ?? 2.0
+
+	const websocketStatusPositive = useCallback(function (url: string) {
+		return (
+			<>
+				<CheckIcon className='Icon16' />
+				{intl.formatMessage(
+					DialogMessages.dataSourceConnected,
+					{ url },
+				)}
+			</>
+		)
+	}, [intl])
 
 	const dispatch = useDispatch()
 	const simulator = new RealtimeTelemetrySimulator(dispatch, simulationSpeed)
@@ -55,25 +66,17 @@ const DataSourcePage = () => {
 					{intl.formatMessage(DialogMessages.dataSourceServerAddress)}
 				</h3>
 				<ServerAddressBox />
-
-				{
-					wsConnect && wsConnect.isConnect === true
-						? (
-							<span className='StatusText StatusText-positive'>
-								<CheckIcon className='Icon16' />
-								{intl.formatMessage(
-									DialogMessages.dataSourceConnected,
-									{ url: wsConnect.url },
-								)}
-							</span>
-						)
-						: (
-							<span className='StatusText StatusText-negative'>
+				<p>
+					<WebSocketStatus
+						positiveChildren={websocketStatusPositive}
+						negativeChildren={(
+							<>
 								<XMarkIcon className='Icon16' />
 								{intl.formatMessage(DialogMessages.dataSourceNotConnected)}
-							</span>
-						)
-				}
+							</>
+						)}
+					/>
+				</p>
 			</section>
 
 			<section className='Form-group'>

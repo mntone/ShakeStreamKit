@@ -55,6 +55,8 @@
 	"Notification.webSocketConnected": "WebSocketサーバーに接続しました",
 	"Notification.webSocketDisconnected": "WebSocketサーバーに接続できませんでした",
 
+	"overlay.connected": "接続済み",
+	"overlay.notConnected": "未接続",
 	"overlay.noData": "データなし",
 	"overlay.hideOverlay": "オーバーレイを非表示",
 	"overlay.showOverlay": "オーバーレイを表示",

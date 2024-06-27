@@ -9,13 +9,3 @@
 	color: #FFF;
 	background: linear-gradient(120deg, #4B0024, #4B2800);
 }
-
-.App-footer {
-	display: inline;
-	margin-left: auto;
-
-	font-size: 75%;
-	text-align: right;
-
-	color: var(--fg-secondary);
-}

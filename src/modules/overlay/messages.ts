@@ -1,6 +1,14 @@
 import { defineMessages } from 'react-intl'
 
 const OverlayMessages = defineMessages({
+	connected: {
+		id: 'overlay.connected',
+		defaultMessage: 'Connected',
+	},
+	notConnected: {
+		id: 'overlay.notConnected',
+		defaultMessage: 'Not Connected',
+	},
 	noData: {
 		id: 'overlay.noData',
 		defaultMessage: 'No Data',

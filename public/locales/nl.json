@@ -55,6 +55,8 @@
 	"Notification.webSocketConnected": "Verbonden met WebSocket-server",
 	"Notification.webSocketDisconnected": "Verbinding met WebSocket-server mislukt",
 
+	"overlay.connected": "Verbonden",
+	"overlay.notConnected": "Niet verbonden",
 	"overlay.noData": "Geen gegevens",
 	"overlay.hideOverlay": "Verberg overlay",
 	"overlay.showOverlay": "Toon overlay",
