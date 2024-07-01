@@ -18,31 +18,13 @@
 	max-height: var(--ol-height);
 
 	margin: 0 auto;
-	padding: 8px 12px 8px 8px;
+	padding: 8px 12px 8px 4px;
 
 	font-size: 14px;
 }
 @supports (height: 100svh) {
 	.NotificationHost {
 		bottom: calc(100svh - var(--ol-height));
-	}
-}
-
-@keyframes slideIn {
-	from {
-		transform: translateX(100%);
-	}
-	to {
-		transform: translateX(0);
-	}
-}
-
-@keyframes slideRight {
-	from {
-		transform: translateX(var(--radix-toast-swipe-end-x));
-	}
-	to {
-		transform: translateX(100%);
 	}
 }
 
@@ -59,38 +41,36 @@
 	background-color: var(--wnd-bg-nonblur);
 
 	list-style: none;
+}
+body:not(.env-nonblur) .Notification {
+	background-color: var(--wnd-bg);
+	-webkit-backdrop-filter: var(--wnd-backdrop);
+	backdrop-filter: var(--wnd-backdrop);
+}
+.Notification:focus-visible {
+	outline: 2px solid #FFFC;
+}
 
-	body:not(.env-nonblur) & {
-		background-color: var(--wnd-bg);
-		-webkit-backdrop-filter: var(--wnd-backdrop);
-		backdrop-filter: var(--wnd-backdrop);
-	}
+.Notification[data-state=open] {
+	animation: notificationSlideIn var(--animation-enter);
 
-	&[data-state=open] {
-		animation: slideIn var(--animation-enter);
+	.ax-reduced & {
+		animation: fadeIn 167ms ease-out;
+	}
+}
+.Notification[data-state=closed] {
+	animation: fadeOut 100ms ease-in;
+}
 
-		.ax-reduced & {
-			animation: fadeIn 167ms ease-out;
-		}
-	}
-	&[data-state=closed] {
-		animation: fadeOut 100ms ease-in;
-	}
-
-	&[data-swipe=move] {
-		transform: translateX(var(--radix-toast-swipe-move-x));
-	}
-	&[data-swipe=cancel] {
-		transform: unset;
-		transition: transform var(--animation-enter);
-	}
-	&[data-swipe=end] {
-		animation: slideRight var(--animation-enter);
-	}
-
-	&:focus-visible {
-		outline: 2px solid #FFFC;
-	}
+.Notification[data-swipe=move] {
+	transform: translateX(var(--radix-toast-swipe-move-x));
+}
+.Notification[data-swipe=cancel] {
+	transform: unset;
+	transition: transform var(--animation-enter);
+}
+.Notification[data-swipe=end] {
+	animation: notificationSlideRight var(--animation-enter);
 }
 
 .Notification-description {
@@ -111,19 +91,34 @@
 	background-color: transparent;
 	opacity: 0;
 	transition: opacity 67ms ease-in-out;
+}
+.Notification:hover > .Notification-close {
+	opacity: 1;
+}
+.Notification-close:hover {
+	background-color: var(--ctl-bg);
+}
+.Notification-close:focus-visible {
+	outline: 2px solid #FFFC;
+}
+.Notification-close[disabled] {
+	color: var(--fg-secondary);
+	background-color: var(--ctl-bg--disable);
+}
 
-	.Notification:hover > & {
-		opacity: 1;
+@keyframes notificationSlideIn {
+	from {
+		transform: translateX(100%);
 	}
-
-	&:hover {
-		background-color: var(--ctl-bg);
+	to {
+		transform: translateX(0);
 	}
-	&:focus-visible {
-		outline: 2px solid #FFFC;
+}
+@keyframes notificationSlideRight {
+	from {
+		transform: translateX(var(--radix-toast-swipe-end-x));
 	}
-	&[disabled] {
-		color: var(--fg-secondary);
-		background-color: var(--ctl-bg--disable);
+	to {
+		transform: translateX(100%);
 	}
 }

@@ -1,11 +1,13 @@
+import { memo } from 'react'
+
 import { XMarkIcon } from '@heroicons/react/16/solid'
 import * as ToastPrimitive from '@radix-ui/react-toast'
 
 interface NotificationProps {
-	timestamp: number
-	title: string
-	description?: string
-	duration?: number
+	readonly timestamp: number
+	readonly title: string
+	readonly description?: string
+	readonly duration?: number
 	onClose?(timestamp: number): void
 }
 
@@ -47,4 +49,4 @@ const Notification = (props: NotificationProps) => {
 	)
 }
 
-export default Notification
+export default memo(Notification)

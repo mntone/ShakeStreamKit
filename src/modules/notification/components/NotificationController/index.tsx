@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import type { WebSocketLog } from '@/telemetry/hooks/websocket'
@@ -11,10 +11,10 @@ import NotificationMessages from './messages'
 
 const SUPPRESS_DISCONNECT_DURATION = 2 * 60 * 1000
 
-const NotificationController = () => {
+const NotificationController = function () {
 	const intl = useIntl()
 	const logs = useAppSelector(state => state.log.logs)
-	const [previousLogLength, setPreviousLogLength] = useState(0)
+	const [previousTimestamp, setPreviousTimestamp] = useState(Date.now())
 	const [previousDisconnectedTimestamp, setPreviousDisconnectedTimestamp] = useState(0)
 	const savedRef = useRef<NotificationHandle>(null)
 
@@ -24,7 +24,14 @@ const NotificationController = () => {
 			return
 		}
 
-		for (let i = previousLogLength; i < logs.length; ++i) {
+		const targetIndex = logs.findIndex(function (log) {
+			return log.timestamp > previousTimestamp
+		})
+		if (targetIndex === -1) {
+			return
+		}
+
+		for (let i = targetIndex; i >= 0; --i) {
 			const log = logs[i]
 
 			let message: NotificationMessage
@@ -63,10 +70,10 @@ const NotificationController = () => {
 			}
 			handler.publish(message)
 		}
-		setPreviousLogLength(logs.length)
+		setPreviousTimestamp(logs[0].timestamp)
 	}, [logs])
 
-	return <NotificationHost ref={savedRef} maxCount={5} />
+	return <NotificationHost ref={savedRef} maxCount={3} />
 }
 
-export default NotificationController
+export default memo(NotificationController)

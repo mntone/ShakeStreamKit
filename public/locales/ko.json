@@ -49,6 +49,7 @@
 	"EggGraph.failure": "NG",
 
 	"Dialog.log": "로그",
+	"Dialog.noLogs": "로그 없음",
 
 	"Notification.notificationTest": "테스트 알림",
 	"Notification.succeedToTestNotification": "테스트 알림이 성공적으로 전송되었습니다.",

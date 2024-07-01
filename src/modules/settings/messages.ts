@@ -127,6 +127,10 @@ const DialogMessages = defineMessages({
 		id: 'Dialog.log',
 		defaultMessage: 'Log',
 	},
+	logNologs: {
+		id: 'Dialog.noLogs',
+		defaultMessage: 'No Logs',
+	},
 
 	general: {
 		id: 'Dialog.general',

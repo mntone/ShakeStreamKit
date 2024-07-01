@@ -49,6 +49,7 @@
 	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Protokoll",
+	"Dialog.noLogs": "Keine Protokolle",
 
 	"Notification.notificationTest": "Testbenachrichtigung",
 	"Notification.succeedToTestNotification": "Die Testbenachrichtigung wurde erfolgreich gesendet.",

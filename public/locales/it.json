@@ -49,6 +49,7 @@
 	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Registro",
+	"Dialog.noLogs": "Nessun registro",
 
 	"Notification.notificationTest": "Notifica di prova",
 	"Notification.succeedToTestNotification": "La notifica di prova è stata inviata con successo.",

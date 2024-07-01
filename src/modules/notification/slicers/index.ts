@@ -1,5 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+// Constant
+const MAX_LOG_ENTRIES = 63
+const LOG_EXPIRATION_HOURS = 3
+
 // State
 export type LogType =
 	| 'test'
@@ -7,8 +11,8 @@ export type LogType =
 	| 'websocket_disconnect'
 
 export interface Log {
-	type: LogType
-	timestamp: number
+	readonly type: LogType
+	readonly timestamp: number
 }
 
 export interface LogState {
@@ -25,12 +29,29 @@ const logSlice = createSlice({
 	initialState,
 	reducers: {
 		addLog(state, action: PayloadAction<Log>) {
-			state.logs.push(action.payload)
+			state.logs.unshift(action.payload)
+		},
+		cleanupLogs(state) {
+			const current = Date.now()
+			const expirationTime = LOG_EXPIRATION_HOURS * 60 * 60 * 1000
+
+			const newLogs: Log[] = []
+			for (let i = 0; i < state.logs.length; ++i) {
+				const log = state.logs[i]
+				if ((current - log.timestamp) <= expirationTime) {
+					newLogs.push(log)
+					if (newLogs.length >= MAX_LOG_ENTRIES) {
+						break
+					}
+				}
+			}
+			state.logs = newLogs
 		},
 	},
 })
 
 export const {
 	addLog,
+	cleanupLogs,
 } = logSlice.actions
 export default logSlice.reducer

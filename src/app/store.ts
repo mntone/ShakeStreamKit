@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
 import persistStore from 'redux-persist/es/persistStore'
 
+import autoCleanupLogs from '@/notification/middlewares/autoCleanupLogs'
 import log from '@/notification/slicers'
 import overlay from '@/overlay/slicers'
 import config from '@/settings/slicers'
@@ -25,7 +26,7 @@ const store = configureStore({
 		serializableCheck: {
 			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 		},
-	}).concat(overlayMiddleware as any),
+	}).concat(overlayMiddleware as any, autoCleanupLogs),
 })
 
 export const persistor = persistStore(store)

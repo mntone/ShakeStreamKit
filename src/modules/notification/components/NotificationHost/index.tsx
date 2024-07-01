@@ -11,10 +11,10 @@ export interface NotificationHandle {
 }
 
 export interface NotificationMessage {
-	timestamp: number
-	title: string
-	description?: string
-	duration?: number
+	readonly timestamp: number
+	readonly title: string
+	readonly description?: string
+	readonly duration?: number
 }
 
 export interface NotificationHostProps {
@@ -26,41 +26,50 @@ export const NotificationHost = forwardRef<NotificationHandle, NotificationHostP
 	const [isBottom, setIsBottom] = useState(true)
 	const [notifications, setNotifications] = useState<NotificationMessage[]>([])
 
-	useImperativeHandle(forwardedRef, () => ({
-		publish: (notification: NotificationMessage) => {
-			const length = notifications.length + 1
-			if (maxCount && length > maxCount) {
-				const newNotifications = notifications.slice(length - maxCount)
-				newNotifications.push(notification)
-				setNotifications(newNotifications)
-			} else {
-				const newNotifications = [...notifications, notification]
-				setNotifications(newNotifications)
-			}
-		},
-	}))
+	useImperativeHandle(forwardedRef, function () {
+		return {
+			publish(notification: NotificationMessage) {
+				const length = notifications.length + 1
+				if (maxCount && length > maxCount) {
+					const newNotifications = notifications.slice(length - maxCount)
+					newNotifications.push(notification)
+					setNotifications(newNotifications)
+				} else {
+					const newNotifications = [...notifications, notification]
+					setNotifications(newNotifications)
+				}
+			},
+		} satisfies NotificationHandle
+	})
 
-	useEffect(() => {
+	useEffect(function () {
 		if (isBottom && ref.current) {
 			ref.current.scrollTop = ref.current.scrollHeight
 		}
 	}, [notifications])
 
-	const handleScroll = (e: UIEvent) => {
+	const handleScroll = function (e: UIEvent) {
 		const target = e.currentTarget
 		const availableTop = target.scrollHeight - target.clientHeight
 		setIsBottom(target.scrollTop === availableTop)
 	}
 
-	const handleClose = useCallback((timestamp: number) => {
+	const handleClose = useCallback(function (timestamp: number) {
+		setNotifications(function (notifications) {
 		const index = notifications.findIndex(n => n.timestamp === timestamp)
-		notifications.splice(index, 1)
-	}, [])
+			if (index !== -1) {
+				const newNotifications = notifications.slice(0)
+				newNotifications.splice(index, 1)
+				return newNotifications
+			}
+			return notifications
+		})
+	}, [setNotifications])
 
 	return (
 		<ToastPrimitive.Provider swipeDirection='right'>
 			<>
-				{notifications.map(notification => {
+				{notifications.map(function (notification) {
 					return (
 						<Notification
 							key={notification.timestamp}

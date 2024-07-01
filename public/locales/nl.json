@@ -49,6 +49,7 @@
 	"EggGraph.fail": "✘",
 
 	"Dialog.log": "Logboek",
+	"Dialog.noLogs": "Geen logboeken",
 
 	"Notification.notificationTest": "Testmelding",
 	"Notification.succeedToTestNotification": "De testmelding is succesvol verzonden.",

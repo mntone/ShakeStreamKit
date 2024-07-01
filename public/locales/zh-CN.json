@@ -49,6 +49,7 @@
 	"EggGraph.fail": "NG",
 
 	"Dialog.log": "日志",
+	"Dialog.noLogs": "没有日志",
 
 	"Notification.notificationTest": "测试通知",
 	"Notification.succeedToTestNotification": "测试通知已成功发送。",

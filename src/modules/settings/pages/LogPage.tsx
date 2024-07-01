@@ -22,15 +22,23 @@ const LogPage = () => {
 				{intl.formatMessage(DialogMessages.log)}
 			</h2>
 
-			<ul>
-				{logs.map((log, index) => {
-					return (
-						<li key={index}>
-							{`${intl.formatDate(log.timestamp, opts)}: ${log.type}`}
-						</li>
-					)
-				})}
-			</ul>
+			{logs.length === 0
+				? (
+					<section className='Form-group'>
+						<p>{intl.formatMessage(DialogMessages.logNologs)}</p>
+					</section>
+				)
+				: (
+					<ul>
+						{logs.map((log, index) => {
+							return (
+								<li key={index}>
+									{`${intl.formatDate(log.timestamp, opts)}: ${log.type}`}
+								</li>
+							)
+						})}
+					</ul>
+				)}
 		</>
 	)
 }
