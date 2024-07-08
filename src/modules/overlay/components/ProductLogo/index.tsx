@@ -6,7 +6,7 @@ import { useAppSelector } from 'app/hooks'
 
 import { RightSlideAnimation } from '../SlideAnimation'
 
-const ProductLogo = () => {
+const ProductLogo = function () {
 	const poweredby = useAppSelector(state => state.overlay.poweredby)
 	const ref = useRef<HTMLDivElement>(null)
 	return (

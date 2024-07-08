@@ -12,7 +12,7 @@ const opts: FormatDateOptions = Object.freeze({
 	second: '2-digit',
 })
 
-const LogPage = () => {
+const LogPage = function () {
 	const intl = useIntl()
 	const logs = useAppSelector(state => state.log.logs)
 
@@ -30,7 +30,7 @@ const LogPage = () => {
 				)
 				: (
 					<ul>
-						{logs.map((log, index) => {
+						{logs.map(function (log, index) {
 							return (
 								<li key={index}>
 									{`${intl.formatDate(log.timestamp, opts)}: ${log.type}`}

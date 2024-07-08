@@ -19,7 +19,7 @@ interface WaveSelectorProps {
 	selectWave(wave?: WaveType): void
 }
 
-export const WaveSelector = (props: WaveSelectorProps) => {
+export const WaveSelector = function (props: WaveSelectorProps) {
 	const {
 		waves,
 		selectedWave,

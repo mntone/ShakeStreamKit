@@ -11,10 +11,10 @@ interface WaveButtonProps {
 	onWaveChange(value: WaveType): void
 }
 
-const WaveButton = ({ wave, disabled, onWaveChange }: WaveButtonProps) => {
+const WaveButton = function ({ wave, disabled, onWaveChange }: WaveButtonProps) {
 	const intl = useIntl()
 
-	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+	const handleClick = function (e: MouseEvent<HTMLButtonElement>) {
 		const waveText = e.currentTarget.value
 		if (waveText === 'extra') {
 			onWaveChange(waveText)

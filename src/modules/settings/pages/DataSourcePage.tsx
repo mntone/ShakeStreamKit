@@ -19,7 +19,7 @@ import ServerAddressBox from '../components/ServerAddressBox'
 import DialogMessages from '../messages'
 import { setSimulation, setSpeed } from '../slicers'
 
-const DataSourcePage = () => {
+const DataSourcePage = function () {
 	const intl = useIntl()
 
 	const simulationEnabled = useAppSelector(state => state.config.simulation) === true
@@ -40,13 +40,13 @@ const DataSourcePage = () => {
 	const dispatch = useDispatch()
 	const simulator = new RealtimeTelemetrySimulator(dispatch, simulationSpeed)
 
-	const handleSimulation = useCallback((simulation: boolean) => {
+	const handleSimulation = useCallback(function (simulation: boolean) {
 		dispatch(setSimulation(simulation))
 	}, [dispatch])
-	const handleSpeed = useCallback((speed: number) => {
+	const handleSpeed = useCallback(function (speed: number) {
 		dispatch(setSpeed(speed))
 	}, [dispatch])
-	const handleFileChange = (telemetry: Readonly<ShakeEvent>[]) => {
+	const handleFileChange = function (telemetry: Readonly<ShakeEvent>[]) {
 		if (simulationEnabled) {
 			simulator.play(telemetry)
 		} else {

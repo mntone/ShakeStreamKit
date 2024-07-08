@@ -27,7 +27,7 @@ interface MatchSelectorProps {
 	changeMatch(id: string): void
 }
 
-export const MatchSelector = (props: MatchSelectorProps) => {
+export const MatchSelector = function (props: MatchSelectorProps) {
 	const {
 		matches,
 		matchId,

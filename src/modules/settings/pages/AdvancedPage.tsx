@@ -17,7 +17,7 @@ import {
 	setStatus,
 } from '../slicers'
 
-const AdvancedPage = () => {
+const AdvancedPage = function () {
 	const intl = useIntl()
 	const unit = intl.formatMessage(DialogMessages.advancedDisplayDurationUnit)
 
@@ -38,19 +38,19 @@ const AdvancedPage = () => {
 	const playerStatusEnabled = useAppSelector(state => state.config.status) ?? false
 
 	const dispatch = useDispatch()
-	const handleNotifyOnQuotaMetDuration = useCallback((notifyOnQuotaMetDuration: number) => {
+	const handleNotifyOnQuotaMetDuration = useCallback(function (notifyOnQuotaMetDuration: number) {
 		dispatch(setNotifyOnQuotaMetDuration(notifyOnQuotaMetDuration))
 	}, [dispatch])
-	const handleNotifyOnWaveFinishedDuration = useCallback((notifyOnWaveFinishedDuration: number) => {
+	const handleNotifyOnWaveFinishedDuration = useCallback(function (notifyOnWaveFinishedDuration: number) {
 		dispatch(setNotifyOnWaveFinishedDuration(notifyOnWaveFinishedDuration))
 	}, [dispatch])
-	const handleReduced = useCallback((reduced: boolean) => {
+	const handleReduced = useCallback(function (reduced: boolean) {
 		dispatch(setReduced(reduced))
 	}, [dispatch])
-	const handleColorLock = useCallback((colorLocked: boolean) => {
+	const handleColorLock = useCallback(function (colorLocked: boolean) {
 		dispatch(setColorLock(colorLocked))
 	}, [dispatch])
-	const handlePlayerStatus = useCallback((playerStatusEnabled: boolean) => {
+	const handlePlayerStatus = useCallback(function (playerStatusEnabled: boolean) {
 		dispatch(setStatus(playerStatusEnabled))
 	}, [dispatch])
 

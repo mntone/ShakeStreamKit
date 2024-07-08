@@ -7,13 +7,13 @@ import { addLog } from '@/notification/slicers'
 import CameraSelector from '../components/CameraSelector'
 import DialogMessages from '../messages'
 
-const DevelopmentPage = () => {
+const DevelopmentPage = function () {
 	const intl = useIntl()
 	const environment = useEnvironment()
 	const broadcastEnabled = environment && 'broadcast' in environment
 
 	const dispatch = useDispatch()
-	const notifyTest = () => {
+	const notifyTest = function () {
 		dispatch(addLog({
 			type: 'test',
 			timestamp: Date.now(),

@@ -9,7 +9,7 @@ export interface CameraPreviewProps {
 	cameraId?: string
 }
 
-export const CameraPreview = ({ cameraId }: CameraPreviewProps) => {
+export const CameraPreview = function ({ cameraId }: CameraPreviewProps) {
 	const refVideo = useRef<HTMLVideoElement>(null)
 
 	useEffect(() => {
@@ -41,7 +41,7 @@ export const CameraPreview = ({ cameraId }: CameraPreviewProps) => {
 	)
 }
 
-const mapStateToProps: ((state: RootState) => CameraPreviewProps) = state => {
+function mapStateToProps(state: RootState): CameraPreviewProps {
 	const cameraId = state.config.cameraId
 	if (cameraId) {
 		return {
