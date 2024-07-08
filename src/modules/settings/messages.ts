@@ -10,6 +10,19 @@ const DialogMessages = defineMessages({
 		defaultMessage: 'Open Settings',
 	},
 
+	about: {
+		id: 'Dialog.about',
+		defaultMessage: 'About App',
+	},
+	aboutLicense: {
+		id: 'Dialog.about.license',
+		defaultMessage: 'GPLv3 License',
+	},
+	aboutVersion: {
+		id: 'Dialog.about.version',
+		defaultMessage: 'Version {version}',
+	},
+
 	advanced: {
 		id: 'Dialog.advanced',
 		defaultMessage: 'Advanced',

@@ -2,6 +2,10 @@
 	"Dialog.settings": "設定",
 	"Dialog.openSettings": "設定を開く",
 
+	"Dialog.about": "アプリ情報",
+	"Dialog.about.license": "GPLv3 ライセンス",
+	"Dialog.about.version": "バージョン {version}",
+
 	"Dialog.advanced": "詳細",
 	"Dialog.advanced.displayDuration": "オーバーレイの表示時間",
 	"Dialog.advanced.displayDurationUnit": "秒",

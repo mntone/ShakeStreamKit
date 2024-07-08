@@ -2,6 +2,10 @@
 	"Dialog.settings": "Impostazioni",
 	"Dialog.openSettings": "Apri impostazioni",
 
+	"Dialog.about": "Info sull'app",
+	"Dialog.about.license": "Licenza GPLv3",
+	"Dialog.about.version": "Versione {version}",
+
 	"Dialog.advanced": "Avanzate",
 	"Dialog.advanced.displayDuration": "Durata di visualizzazione per la sovrapposizione",
 	"Dialog.advanced.displayDurationUnit": "sec",

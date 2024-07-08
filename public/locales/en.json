@@ -2,6 +2,10 @@
 	"Dialog.settings": "Settings",
 	"Dialog.openSettings": "Open Settings",
 
+	"Dialog.about": "About App",
+	"Dialog.about.license": "GPLv3 License",
+	"Dialog.about.version": "Version {version}",
+
 	"Dialog.advanced": "Advanced",
 	"Dialog.advanced.displayDuration": "Display Duration for Overlay",
 	"Dialog.advanced.displayDurationUnit": "sec",

@@ -2,6 +2,10 @@
 	"Dialog.settings": "设置",
 	"Dialog.openSettings": "打开设置",
 
+	"Dialog.about": "关于App",
+	"Dialog.about.license": "GPLv3 许可证",
+	"Dialog.about.version": "版本 {version}",
+
 	"Dialog.advanced": "高级",
 	"Dialog.advanced.displayDuration": "叠加显示时长",
 	"Dialog.advanced.displayDurationUnit": "秒",

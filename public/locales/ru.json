@@ -2,6 +2,10 @@
 	"Dialog.settings": "Настройки",
 	"Dialog.openSettings": "Открыть настройки",
 
+	"Dialog.about": "О приложении",
+	"Dialog.about.license": "Лицензия GPLv3",
+	"Dialog.about.version": "Версия {version}",
+
 	"Dialog.advanced": "Дополнительно",
 	"Dialog.advanced.displayDuration": "Время отображения наложения",
 	"Dialog.advanced.displayDurationUnit": "сек",

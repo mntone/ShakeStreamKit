@@ -8,6 +8,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as Tabs from '@radix-ui/react-tabs'
 
 import DialogMessages from './messages'
+import AboutPage from './pages/AboutPage'
 import AdvancedPage from './pages/AdvancedPage'
 import DataSourcePage from './pages/DataSourcePage'
 import DevelopmentPage from './pages/DevelopmentPage'
@@ -43,6 +44,9 @@ const SettingsWindow = () => {
 							<Tabs.Trigger className='Dialog-tabitem' value='development'>
 								{intl.formatMessage(DialogMessages.development)}
 							</Tabs.Trigger>
+							<Tabs.Trigger className='Dialog-tabitem' value='about'>
+								{intl.formatMessage(DialogMessages.about)}
+							</Tabs.Trigger>
 						</Tabs.List>
 						<Tabs.Content className='Dialog-tabcontent' value='general'>
 							<GeneralPage />
@@ -58,6 +62,9 @@ const SettingsWindow = () => {
 						</Tabs.Content>
 						<Tabs.Content className='Dialog-tabcontent' value='development'>
 							<DevelopmentPage />
+						</Tabs.Content>
+						<Tabs.Content className='Dialog-tabcontent' value='about'>
+							<AboutPage />
 						</Tabs.Content>
 					</Tabs.Root>
 

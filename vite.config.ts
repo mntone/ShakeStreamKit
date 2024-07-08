@@ -8,6 +8,8 @@ import { createHtmlPlugin as html } from 'vite-plugin-html'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
+import packageJson from './package.json'
+
 config()
 config({ path: '.env.local', override: true })
 
@@ -26,6 +28,9 @@ export default defineConfig({
 				},
 			},
 		},
+	},
+	define: {
+		'import.meta.env.APP_VERSION': JSON.stringify(packageJson.version),
 	},
 	plugins: [
 		tsconfigPaths(),

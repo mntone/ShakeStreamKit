@@ -123,8 +123,8 @@ body:not(.env-nonblur) .Dialog-content {
 	user-select: none;
 }
 
-.Form-group {
-	display: block;
+.Form-group,
+.About-group {
 	margin: 20px 0 0;
 
 	user-select: none;
@@ -160,4 +160,35 @@ body:not(.env-nonblur) .Dialog-content {
 	height: 36px;
 
 	border-radius: 0 var(--ctl-radius) 0 0 !important;
+}
+
+.About-group {
+	text-align: center;
+}
+
+.About-name {
+	display: inline-block;
+
+	font-family: Kanit, sans-serif;
+	font-size: 32px;
+	font-weight: bold;
+	line-height: .9;
+
+	color: transparent;
+	background-image: linear-gradient(120deg, #FF6589, #FF8F65);
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+
+.About-version,
+.About-license,
+.About-copyright {
+	font-size: 14px;
+
+	color: var(--fg-secondary);
+}
+
+.About-version,
+.About-license {
+	margin-top: .5em;
 }
