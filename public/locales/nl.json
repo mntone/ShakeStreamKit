@@ -1,5 +1,6 @@
 {
 	"Dialog.settings": "Instellingen",
+	"Dialog.settingsDescription": "U kunt de overlay-instellingen wijzigen en eerdere gegevens laden.",
 	"Dialog.openSettings": "Open instellingen",
 
 	"Dialog.about": "App Info",

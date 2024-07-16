@@ -1,5 +1,6 @@
 {
 	"Dialog.settings": "Настройки",
+	"Dialog.settingsDescription": "Вы можете изменить настройки наложения и загрузить прошлые данные.",
 	"Dialog.openSettings": "Открыть настройки",
 
 	"Dialog.about": "О приложении",

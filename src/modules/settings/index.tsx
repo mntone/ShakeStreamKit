@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import { XMarkIcon } from '@heroicons/react/16/solid'
 import * as Dialog from '@radix-ui/react-dialog'
 import * as Tabs from '@radix-ui/react-tabs'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
 import DialogMessages from './messages'
 import AboutPage from './pages/AboutPage'
@@ -27,6 +28,17 @@ const SettingsWindow = () => {
 			<Dialog.Portal>
 				<Dialog.Overlay className='Dialog-overlay' />
 				<Dialog.Content className='Dialog-content'>
+					<VisuallyHidden.Root asChild>
+						<Dialog.Title>
+							{intl.formatMessage(DialogMessages.settings)}
+						</Dialog.Title>
+					</VisuallyHidden.Root>
+					<VisuallyHidden.Root asChild>
+						<Dialog.Description>
+							{intl.formatMessage(DialogMessages.settingsDescription)}
+						</Dialog.Description>
+					</VisuallyHidden.Root>
+
 					<Tabs.Root className='Dialog-tab' defaultValue='general'>
 						<Tabs.List className='Dialog-tablist'>
 							<Tabs.Trigger className='Dialog-tabitem' value='general'>

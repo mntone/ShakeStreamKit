@@ -5,6 +5,10 @@ const DialogMessages = defineMessages({
 		id: 'Dialog.settings',
 		defaultMessage: 'Settings',
 	},
+	settingsDescription: {
+		id: 'Dialog.settingsDescription',
+		defaultMessage: 'You can change the overlay settings and load past data.',
+	},
 	openSettings: {
 		id: 'Dialog.openSettings',
 		defaultMessage: 'Open Settings',

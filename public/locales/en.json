@@ -1,5 +1,6 @@
 {
 	"Dialog.settings": "Settings",
+	"Dialog.settingsDescription": "You can change the overlay settings and load past data.",
 	"Dialog.openSettings": "Open Settings",
 
 	"Dialog.about": "About App",

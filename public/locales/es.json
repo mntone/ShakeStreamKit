@@ -1,5 +1,6 @@
 {
 	"Dialog.settings": "Ajustes",
+	"Dialog.settingsDescription": "Puede cambiar la configuración de la superposición y cargar datos pasados.",
 	"Dialog.openSettings": "Abrir ajustes",
 
 	"Dialog.about": "Info de la app",

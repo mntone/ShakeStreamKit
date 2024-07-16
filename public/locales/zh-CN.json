@@ -1,5 +1,6 @@
 {
 	"Dialog.settings": "设置",
+	"Dialog.settingsDescription": "您可以更改覆盖设置并加载过去的数据。",
 	"Dialog.openSettings": "打开设置",
 
 	"Dialog.about": "关于App",

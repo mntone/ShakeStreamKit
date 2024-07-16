@@ -1,5 +1,6 @@
 {
 	"Dialog.settings": "設定",
+	"Dialog.settingsDescription": "オーバーレイに関する設定を変更することや、過去のデータを読み込むことができます",
 	"Dialog.openSettings": "設定を開く",
 
 	"Dialog.about": "アプリ情報",
