@@ -1,4 +1,5 @@
 import './index.css'
+import './wdyr'
 
 import React from 'react'
 import { Provider } from 'react-redux'

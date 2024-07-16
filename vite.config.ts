@@ -13,6 +13,8 @@ import packageJson from './package.json'
 config()
 config({ path: '.env.local', override: true })
 
+const isDevelopment = env.NODE_ENV === 'development'
+
 export default defineConfig({
 	base: '/shake-streamkit/',
 	build: {
@@ -34,7 +36,10 @@ export default defineConfig({
 	},
 	plugins: [
 		tsconfigPaths(),
-		react({ devTarget: 'esnext' }),
+		react({
+			devTarget: 'esnext',
+			jsxImportSource: isDevelopment ? '@welldone-software/why-did-you-render' : undefined,
+		}),
 		html({
 			minify: true,
 		}),
