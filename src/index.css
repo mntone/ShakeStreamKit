@@ -58,23 +58,23 @@ body {
 	margin: 0;
 	color: var(--fg);
 	background-color: #4C4C4C;
-	font-family: Oswald, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+	font-family: Oswald, 'Segoe UI Emoji', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 body.env-broadcast {
 	background: transparent;
 }
 
 html:lang(ja) body, .SelectItem:lang(ja) {
-	font-family: Oswald, 'BIZ UDPゴシック',Gulim, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+	font-family: Oswald, 'Hiragino Maru Gothic Pro', 'BIZ UDPゴシック', Gulim, 'Segoe UI Emoji', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 html:lang(ko) body, .SelectItem:lang(ko) {
-	font-family: Oswald, 'Apple SD Gothic Neo', 'Malgun Gothic', Gulim, sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+	font-family: Oswald, 'Apple SD Gothic Neo', 'Malgun Gothic', Gulim, 'Segoe UI Emoji', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 html:lang(zh-CN) body, .SelectItem:lang(zh-CN) {
-	font-family: Oswald, 'PingFang SC', STHeitiSC, 'Heiti SC', '黒体-簡', 'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+	font-family: Oswald, 'PingFang SC', STHeitiSC, 'Heiti SC', '黒体-簡', 'Microsoft YaHei', 'Segoe UI Emoji', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 html:lang(zh-TW) body, .SelectItem:lang(zh-TW) {
-	font-family: Oswald, 'PingFang TC', STHeitiTC, 'Heiti TC', '黒体-繁', 'Microsoft JhengHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
+	font-family: Oswald, 'PingFang TC', STHeitiTC, 'Heiti TC', '黒体-繁', 'Microsoft JhengHei', 'Segoe UI Emoji', sans-serif, 'Apple Color Emoji', 'Segoe UI Symbol';
 }
 
 .Message {
